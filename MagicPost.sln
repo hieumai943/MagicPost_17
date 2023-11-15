@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost_WebApp", "MagicPost_WebApp\MagicPost_WebApp.csproj", "{9B9A306C-CC31-48ED-875B-94123E695906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPost_WebApp", "MagicPost_WebApp\MagicPost_WebApp.csproj", "{9B9A306C-CC31-48ED-875B-94123E695906}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost__Data", "MagicPost__Data\MagicPost__Data.csproj", "{DB8991C0-1A64-4011-A31A-FEDDDC7F6D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPost__Data", "MagicPost__Data\MagicPost__Data.csproj", "{DB8991C0-1A64-4011-A31A-FEDDDC7F6D1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost_BackendAPI", "MagicPost_BackendAPI\MagicPost_BackendAPI.csproj", "{786DB3A8-509F-4D7B-BDDF-5ADD0168F441}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost_Application", "MagicPost_Application\MagicPost_Application.csproj", "{02EA2032-A4DE-4C83-B88F-E15AD34BB20C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost_ViewModel", "MagicPost_ViewModel\MagicPost_ViewModel.csproj", "{B4E40446-E2A6-4489-B2F1-513A6D7D511A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{DB8991C0-1A64-4011-A31A-FEDDDC7F6D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB8991C0-1A64-4011-A31A-FEDDDC7F6D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB8991C0-1A64-4011-A31A-FEDDDC7F6D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{786DB3A8-509F-4D7B-BDDF-5ADD0168F441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{786DB3A8-509F-4D7B-BDDF-5ADD0168F441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{786DB3A8-509F-4D7B-BDDF-5ADD0168F441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{786DB3A8-509F-4D7B-BDDF-5ADD0168F441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02EA2032-A4DE-4C83-B88F-E15AD34BB20C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02EA2032-A4DE-4C83-B88F-E15AD34BB20C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02EA2032-A4DE-4C83-B88F-E15AD34BB20C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02EA2032-A4DE-4C83-B88F-E15AD34BB20C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E40446-E2A6-4489-B2F1-513A6D7D511A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E40446-E2A6-4489-B2F1-513A6D7D511A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E40446-E2A6-4489-B2F1-513A6D7D511A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E40446-E2A6-4489-B2F1-513A6D7D511A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

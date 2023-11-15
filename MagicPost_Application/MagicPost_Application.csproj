@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MagicPost_ViewModel\MagicPost_ViewModel.csproj" />
+    <ProjectReference Include="..\MagicPost__Data\MagicPost__Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -23,5 +23,6 @@ namespace MagicPost__Data.Entities
         public int SortOrder { get; set; }
 
         public long FileSize { get; set; }
+        public Order Order { get; set; }
     }
 }
