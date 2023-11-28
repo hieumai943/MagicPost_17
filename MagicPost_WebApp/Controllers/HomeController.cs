@@ -1,32 +1,67 @@
-﻿using MagicPost_WebApp.Models;
+﻿using LazZiya.ExpressLocalization;
+using MagicPost_ApiIntergration;
+using MagicPost_ViewModel.Orders;
+using MagicPost_WebApp.Models;
+using MagicPostUtilities.Constants;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace MagicPost_WebApp.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+		private readonly ISharedCultureLocalizer _loc;
+        private readonly ISlideApiClient _slideApiClient;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
+        private readonly IOrderApiClient _orderApiClient;
+
+		public HomeController(ILogger<HomeController> logger, ISharedCultureLocalizer loc, ISlideApiClient slideApiClient, IOrderApiClient orderApiClient)
+        {
+            _logger = logger;
+			_loc = loc;
+            _slideApiClient = slideApiClient;
+
+            _orderApiClient = orderApiClient;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
-		}
+
+            var viewModel = new HomeViewModel
+            {
+                Slides = await _slideApiClient.GetAll()
+               
+            };
+
+            return View(viewModel);
+        }
 
 		public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+		public IActionResult SetCultureCookie(string cltr, string returnUrl)
 		{
-			return View();
+			Response.Cookies.Append(
+				CookieRequestCultureProvider.DefaultCookieName,
+				CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cltr)),
+				new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+				);
+
+			return LocalRedirect(returnUrl);
 		}
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
 	}
 }

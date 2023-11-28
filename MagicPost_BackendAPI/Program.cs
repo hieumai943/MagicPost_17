@@ -2,6 +2,8 @@ using FluentValidation.AspNetCore;
 using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
 using MagicPost_Application.Order;
+using MagicPost_Application.Utilities.Slides;
+using MagicPost_ViewModel.System.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<MagicPostDbContext>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("eShopSolutionDb"));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("MagicPostDb"));
 });
 
 builder.Services.AddIdentity<AppUser, AppRole>()
@@ -31,14 +33,16 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IStorageService, FileStorageService>();*/
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddTransient<ISlideService, SlideService>();
+
 /*builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<ISlideService, SlideService>();*/
 
 
 // ----------------------------------------------------------------------------Cau hinh cho buider------------------------------------
-/*builder.Services.AddControllers()
-				.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());*/
+builder.Services.AddControllers()
+				.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

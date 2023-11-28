@@ -81,7 +81,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "d5add88e-4ff9-4f5f-bc5c-6584b50ee9fa",
+                            ConcurrencyStamp = "491d810e-fcd3-4e01-8cd4-684ad2ffd77c",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -158,7 +158,7 @@ namespace MagicPost__Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e19d08e-9071-48af-a0c5-861c0b8997a4",
+                            ConcurrencyStamp = "7ac74355-c550-472d-88ef-514f8fa90dcb",
                             Dob = new DateTime(2003, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hieumai09042003@gmail.com",
                             EmailConfirmed = true,
@@ -167,7 +167,7 @@ namespace MagicPost__Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hieumai09042003@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG55t0zLpN9m/rpsrwRMXGhGFa1dCSoiA5NhIAyYR1wEN1GtN4jd0Fo/av/jx3JC2Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEVhpRgkaI05wvmMtQry7s70Ufk4J0FLNAxjF4hye54IbSM/3Mge/wFaRDxHOrVhIA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -300,6 +300,24 @@ namespace MagicPost__Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "MAX123",
+                            Cuoc = 100000m,
+                            KhoiLuong = 1.2,
+                            OrderDate = new DateTime(2023, 11, 27, 22, 12, 52, 556, DateTimeKind.Local).AddTicks(4026),
+                            ReceiveAddress = "Xuan Thuy",
+                            ReceiveName = "Hung",
+                            ReceivePhoneNumber = "088965072",
+                            SendAddress = "Cau giay",
+                            SendName = "Hieu",
+                            SendPhoneNumber = "0827259403",
+                            Status = 0,
+                            UserId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de")
+                        });
                 });
 
             modelBuilder.Entity("MagicPost__Data.Entities.OrderDetail", b =>
@@ -348,6 +366,9 @@ namespace MagicPost__Data.Migrations
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -355,6 +376,8 @@ namespace MagicPost__Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("ProductImages", (string)null);
                 });
@@ -676,6 +699,17 @@ namespace MagicPost__Data.Migrations
                 {
                     b.HasOne("MagicPost__Data.Entities.Order", "Order")
                         .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MagicPost__Data.Entities.OrderImage", b =>
+                {
+                    b.HasOne("MagicPost__Data.Entities.Order", "Order")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

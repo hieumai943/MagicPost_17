@@ -53,7 +53,23 @@ namespace MagicPost_Data.Extensions
                 RoleId = roleId,
                 UserId = adminId
             });
-	
+			modelBuilder.Entity<Order>().HasData(new Order
+			{
+			    Id =1,
+                OrderDate = DateTime.Now,
+                UserId = adminId,
+                Code = "MAX123",
+                SendName ="Hieu",
+                ReceiveName ="Hung",
+                SendAddress ="Cau giay",
+				ReceiveAddress ="Xuan Thuy",
+                SendPhoneNumber ="0827259403",
+				ReceivePhoneNumber ="088965072",
+                Cuoc = 100000,
+                KhoiLuong = 1.2
+
+
+			});
 			modelBuilder.Entity<Slide>().HasData(
 			  new Slide() { Id = 1, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 1, Url = "#", Image = "/themes/images/carousel/1.png", Status = Status.Active },
 			  new Slide() { Id = 2, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 2, Url = "#", Image = "/themes/images/carousel/2.png", Status = Status.Active },

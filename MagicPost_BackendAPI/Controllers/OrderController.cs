@@ -26,9 +26,9 @@ namespace MagicPost_BackendAPI.Controllers
         //https://localhost:port/product/{id}
         [HttpGet("{orderId}/{languageId}")]
 
-        public async Task<IActionResult> GetById(int productId)
+        public async Task<IActionResult> GetById(int orderId)
         {
-            var product = await _OrderService.GetById(productId);
+            var product = await _OrderService.GetById(orderId);
             if (product == null)
                 return BadRequest("Cannot find product");
             return Ok(product);
