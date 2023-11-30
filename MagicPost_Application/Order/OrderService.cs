@@ -20,7 +20,7 @@ namespace MagicPost_Application.Order
 			_context = context;
 		}
 
-		public async Task<PageResult<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request)
+		public async Task<List<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request)
 		{
 			var query = from p in _context.Orders
 						join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
@@ -53,7 +53,7 @@ namespace MagicPost_Application.Order
 				PageIndex = request.PageIndex,
 				TotalRecords = totalRow
 			};
-			return pageResult;
+			return data;
 		}
 
 		public async Task<OrderVm> GetById(int orderId)

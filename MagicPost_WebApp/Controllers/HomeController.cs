@@ -34,8 +34,13 @@ namespace MagicPost_WebApp.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Slides = await _slideApiClient.GetAll()
-               
+                Slides = await _slideApiClient.GetAll(),
+               Orders = await _orderApiClient.GetPagings(new GetManageOrderPagingRequest() { 
+                     Keyword="",
+                     PageIndex = 1,
+                     PageSize =10
+               })
+              
             };
 
             return View(viewModel);

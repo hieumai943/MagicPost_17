@@ -33,7 +33,7 @@ namespace shopCommerce_ApiIntergration
         public async Task<List<OrderVm>> GetPagings(GetManageOrderPagingRequest request)
         {
             var data = await GetListAsync<OrderVm>(
-                $"/api/product/paging?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                $"/api/order/paging?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}");
                
 

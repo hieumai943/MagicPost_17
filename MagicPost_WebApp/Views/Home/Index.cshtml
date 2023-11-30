@@ -13,61 +13,199 @@
     ViewData["Title"] = "Home Page";
 }
 @section slider{
-    <div id="carouselBlk">
-        <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-                @for (int i = 0; i < Model.Slides.Count; i++)
-                {
-                    var slide = Model.Slides[i];
-                    <div class="item @(i ==0?"active":"") ">
-                        <div class="container">
-                            <a href="@slide.Url"><img style="width:100%" src=@slide.Image alt=@slide.Name /></a>
-                            <div class="carousel-caption">
-                                <h4>@slide.Name</h4>
-                                <p>@slide.Description</p>
-                            </div>
-                        </div>
-                    </div>
-                }
+    <table>
+        <thead>
+            <tr>
+                <th>Tên Người Gửi</th>
+                <th>Tên Người Nhận</th>
+                <th>Đồ Vật</th>
+                <th>Địa chỉ nhận</th>
+            </tr>
+        </thead>
+        <tbody>
+                @for (int i = 0; i < Model.Orders.Count; i++)
+            {
+                var order = Model.Orders[i];
 
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-    </div>
-}
-<div class="well well-small">
-   
-    <div class="row-fluid">
-        <div id="featured" class="carousel slide">
+            <tr>
+                <td>@order.SendName</td>
+                <td>@order.ReceiveName</td>
+                <td>@order.Code</td>
+                <td>@order.ReceiveAddress</td>
+            </tr>
+            }
+            <!-- Thêm các hàng khác tùy vào số đơn hàng -->
+        </tbody>
+    </table>
+    <!-- -------------------------------------------------------------------------------------------------------->
+    <div id="banner1" class="carousel slide banner_slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#banner1" data-slide-to="0" class="active"></li>
+               <li data-target="#banner1" data-slide-to="1"></li>
+               <li data-target="#banner1" data-slide-to="2"></li>
+            </ol>
             <div class="carousel-inner">
-                @{
-                    List<List<OrderVm>> AllOrders = new List<List<OrderVm>>();
-                    List<OrderVm> featuredPart = new List<OrderVm>();
-                }
-
-              
-                @for (int index = 0; index < AllOrders.Count; index++)
-                {
-                    <div class="item @(index == 0?"active":"")">
-                        <ul class="thumbnails">
-                            @foreach (var item in AllOrders[index])
-                            {
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <i class="tag"></i>
-                                        <a href="product_details.html"><img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)" alt="@item.Code"></a>
-                                        @*<div class="caption">
-                                            <h5>@item.Name</h5>
-                                            <h4><a class="btn" href="" localize-content>VIEW</a> <span class="pull-right">@item.Price.ToString()</span></h4>
-                                        </div>*@
+               <div class="carousel-item active">
+                  <div class="container-fluid">
+                     <div class="carousel-caption">
+                        <div class="row">
+                           <div class="col-md-7 col-lg-5">
+                              <div class="text-bg">
+                                 <h1>Best Logistic Company</h1>
+                                 <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has i</span>
+                                 <a class="read_more" href="#">Contact Us</a>
+                              </div>
+                           </div>
+                           <div class="col-md-12 col-lg-7">
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="ban_track">
+                                       <figure><img src="images/track.png" alt="#"/></figure>
                                     </div>
-                                </li>
-                            }
-                        </ul>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <form class="transfot">
+                                       <div class="col-md-12">
+                                          <span>Professional Services</span>
+                                          <h3>Get your transport quote</h3>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="Location" type="text" name="Location">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="To destination" type="text" name="To destination">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="Email" type="text" name="Email">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="Contact Number" type="text" name="Contact Number">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <button class="get_now">Get Now quote</button>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container-fluid">
+                     <div class="carousel-caption">
+                        <div class="row">
+                           <div class="col-md-7 col-lg-5">
+                              <div class="text-bg">
+                                 <h1>Best Logistic Company</h1>
+                                 <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has i</span>
+                                 <a class="read_more" href="#">Contact Us</a>
+                              </div>
+                           </div>
+                           <div class="col-md-12 col-lg-7">
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="ban_track">
+                                       <figure><img src="images/track.png" alt="#"/></figure>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <form class="transfot">
+                                       <div class="col-md-12">
+                                          <span>Professional Services</span>
+                                          <h3>Get your transport quote</h3>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="Location" type="text" name="Location">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="To destination" type="text" name="To destination">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="Email" type="text" name="Email">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <input class="transfot_form" placeholder="Contact Number" type="text" name="Contact Number">
+                                       </div>
+                                       <div class="col-md-12">
+                                          <button class="get_now">Get Now quote</button>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+         </div>
+}
+<div id="service" class="service">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="titlepage">
+                    <h2>Our Services</h2>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, There </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="service_main">
+                    <div class="service_box blu_colo">
+                        <i><img src="images/ser1.png" alt="#" /></i>
+                        <h4>FLY ANYWHERE</h4>
                     </div>
-                }
+                    <div class="service_box yelldark_colo">
+                        <i><img src="images/ser2.png" alt="#" /></i>
+                        <h4>Cargo service</h4>
+                    </div>
+                    <div class="service_box yell_colo">
+                        <i><img src="images/ser3.png" alt="#" /></i>
+                        <h4> COURIER SERVICES</h4>
+                    </div>
+                    <div class="service_box yelldark_colo">
+                        <i><img src="images/ser4.png" alt="#" /></i>
+                        <h4>BOX STORAGE</h4>
+                    </div>
+                    <div class="service_box yell_colo">
+                        <i><img src="images/ser5.png" alt="#" /></i>
+                        <h4>100% safe</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <a class="read_more" href="#">Read More</a>
             </div>
         </div>
     </div>
 </div>
+<style>
+    /* CSS để tạo bảng */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #3498db;
+        color: #fff;
+    }
+</style>

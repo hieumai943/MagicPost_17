@@ -6,8 +6,7 @@ namespace MagicPost_WebApp.Models
 {
 	public class HomeViewModel
     {
-
         public List<SlideVm> Slides { get; set; }
-
+        public List<OrderVm> Orders { get; set; }
     }
 }

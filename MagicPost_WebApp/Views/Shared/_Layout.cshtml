@@ -1,223 +1,186 @@
-﻿@using System.Globalization;
-@{
-	var culture = CultureInfo.CurrentCulture.Name;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Bootshop online Shopping cart</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<!--Less styles -->
-	<!-- Other Less css file //different less files has different color scheam
-	 <link rel="stylesheet/less" type="text/css" href="/themes/less/simplex.less">
-	 <link rel="stylesheet/less" type="text/css" href="/themes/less/classified.less">
-	 <link rel="stylesheet/less" type="text/css" href="/themes/less/amelia.less">  MOVE DOWN TO activate
-	 -->
-	<!--<link rel="stylesheet/less" type="text/css" href="/themes/less/bootshop.less">
-	<script src="/themes/js/less.js" type="text/javascript"></script> -->
-	<!-- Bootstrap style -->
-	<link id="callCss" rel="stylesheet" href="/themes/bootshop/bootstrap.min.css" media="screen" />
-	<link href="/themes/css/base.css" rel="stylesheet" media="screen" />
-	<!-- Bootstrap style responsive -->
-	<link href="/themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
-	<link href="/themes/css/font-awesome.css" rel="stylesheet" type="text/css">
-	<!-- Google-code-prettify -->
-	<link href="/themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
-	<!-- fav and touch icons -->
-	<link rel="shortcut icon" href="/themes/images/ico/favicon.ico">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/themes/images/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/themes/images/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/themes/images/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="/themes/images/ico/apple-touch-icon-57-precomposed.png">
-	<style type="text/css" id="enject"></style>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Magic Post</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
-<body>
-	<div id="header">
-		<div class="container">
-			<div id="welcomeLine" class="row">
-				@if (User.Identity.IsAuthenticated)
-				{
-					<div class="span6">Welcome!<strong> @User.Identity.Name</strong></div>
-				}
-				else
-				{
-					<div class="span6">Welcome!<strong> Guest!</strong></div>
-				}
-				<div class="span6">
-					<div class="pull-right">
-						<language-nav language-label="NativeName"
-									  cookie-handler-url="@(Url.Action("SetCultureCookie", "Home", new { area= "", cltr="{0}", returnUrl="{1}" }))">
-						</language-nav>
+<!-- body -->
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="index.html">Home </a>
+        <a href="#about">About</a>
+        <a href="#service">Services  </a>
+        <a href="#vehicles">Our Vehicles</a>
+        <a href="#testimonial">Testimonial</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="logo">
+                            <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div class="right_bottun">
+                            <ul class="conat_info d_none ">
+                                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                            </ul>
+                            <button class="openbtn" onclick="openNav()"><img src="images/menu_icon.png" alt="#" /> </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- banner -->
+    <section class="banner_main">
+        @RenderSection("slider",required: false)
+    </section>
+    <!-- end banner -->
+    
+    <!-- service section -->
+    @RenderBody()
+    <!-- end service section -->
+   
+    <!-- contact section -->
+    <div id="contact" class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Requst A call  for You</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="con_bg">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5">
+                        <form id="request" class="main_form">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <input class="contactus" placeholder="Name" type="type" name="Name">
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactus" placeholder="Email" type="type" name="Email">
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="contactusmess" placeholder="Message" type="type" Message="Name">
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="send_btn">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="co_tru">
+                            <figure><img src="images/truc4.png" alt="#" /></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end contact section -->
+    <!--  footer -->
+    <footer>
+        <div class="footer bottom_cross1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="location_icon">
+                            <li>
+                                <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Address : Lorem Ipsum <br> is simply dummy
+                            </li>
+                            <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>Phone :  +(1234) 567 890</li>
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>Email : demo@gmail.com</li>
+                        </ul>
+                        <form class="bottom_form">
+                            <h3>Newsletter</h3>
+                            <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                            <button class="sub_btn">subscribe</button>
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="map">
+                            <figure><img src="images/map.png" alt="#" /></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>© 2019 All Rights Reserved. Design by<a href="https://html.design/"> Free Html Templates</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <!-- sidebar -->
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+        }
 
-						<a href="product_summary.html">
-							<span class="btn btn-mini btn-primary">
-								<i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart
-							</span>
-						</a>
-					</div>
-				</div>
-			</div>
-			<!-- Navbar ================================================== -->
-			<div id="logoArea" class="navbar">
-				<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<div class="navbar-inner">
-					<a class="brand" href="index.html"><img src="/themes/images/logo.png" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="post" action="products.html">
-						<input id="srchFld" class="srchTxt" type="text" />
-						<select class="srchTxt">
-							<option>All</option>
-							<option>CLOTHES </option>
-							<option>FOOD AND BEVERAGES </option>
-							<option>HEALTH & BEAUTY </option>
-							<option>SPORTS & LEISURE </option>
-							<option>BOOKS & ENTERTAINMENTS </option>
-						</select>
-						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-					</form>
-					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a asp-route-culture="@culture" localize-content>Specials Offer</a></li>
-						<li class=""><a asp-route-culture="@culture" localize-content>Delivery</a></li>
-						<li class=""><a asp-route-culture="@culture" localize-content>Contact</a></li>
-						<li class="">
-							@if (User.Identity.IsAuthenticated)
-							{
-								<form action="/@culture/Account/Logout" method="post">
-									<button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
-										<span class="btn btn-large btn-success"><localize>Logout</localize></span>
-									</button>
-								</form>
-							}
-							else
-							{
-								<a href="/@culture/Account/Login" style="padding-right:0">
-									<span class="btn btn-large btn-success"><localize>Login</localize></span>
-								</a>
-							}
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Header End====================================================================== -->
-	@RenderSection("slider",required: false)
-	<div id="mainBody">
-		<div class="container">
-			<div class="row">
-				
-				<div class="span9">
-					@RenderBody()
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Footer ================================================================== -->
-	<div id="footerSection">
-		<div class="container">
-			<div class="row">
-				<div class="span3">
-					<h5>ACCOUNT</h5>
-					<a href="login.html">YOUR ACCOUNT</a>
-					<a href="login.html">PERSONAL INFORMATION</a>
-					<a href="login.html">ADDRESSES</a>
-					<a href="login.html">DISCOUNT</a>
-					<a href="login.html">ORDER HISTORY</a>
-				</div>
-				<div class="span3">
-					<h5>INFORMATION</h5>
-					<a href="contact.html">CONTACT</a>
-					<a href="register.html">REGISTRATION</a>
-					<a href="legal_notice.html">LEGAL NOTICE</a>
-					<a href="tac.html">TERMS AND CONDITIONS</a>
-					<a href="faq.html">FAQ</a>
-				</div>
-				<div class="span3">
-					<h5>OUR OFFERS</h5>
-					<a href="#">NEW PRODUCTS</a>
-					<a href="#">TOP SELLERS</a>
-					<a href="special_offer.html">SPECIAL OFFERS</a>
-					<a href="#">MANUFACTURERS</a>
-					<a href="#">SUPPLIERS</a>
-				</div>
-				<div id="socialMedia" class="span3 pull-right">
-					<h5>SOCIAL MEDIA </h5>
-					<a href="#"><img width="60" height="60" src="/themes/images/facebook.png" title="facebook" alt="facebook" /></a>
-					<a href="#"><img width="60" height="60" src="/themes/images/twitter.png" title="twitter" alt="twitter" /></a>
-					<a href="#"><img width="60" height="60" src="/themes/images/youtube.png" title="youtube" alt="youtube" /></a>
-				</div>
-			</div>
-			<p class="pull-right">&copy; Bootshop</p>
-		</div><!-- Container End -->
-	</div>
-	<!-- Placed at the end of the document so the pages load faster ============================================= -->
-	<script src="/themes/js/jquery.js" type="text/javascript"></script>
-	<script src="/themes/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="/themes/js/google-code-prettify/prettify.js"></script>
-
-	<script src="/themes/js/bootshop.js"></script>
-	<script src="/themes/js/jquery.lightbox-0.5.js"></script>
-
-	<!-- /themes switcher section ============================================================================================= -->
-	<div id="secectionBox">
-		<link rel="stylesheet" href="//themes/switch//themeswitch.css" type="text/css" media="screen" />
-		<script src="/themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
-		<div id="themeContainer">
-			<div id="hideme" class="themeTitle">Style Selector</div>
-			<div class="themeName">Oregional Skin</div>
-			<div class="images style">
-				<a href="/themes/css/#" name="bootshop"><img src="/themes/switch/images/clr/bootshop.png" alt="bootstrap business templates" class="active"></a>
-				<a href="/themes/css/#" name="businessltd"><img src="/themes/switch/images/clr/businessltd.png" alt="bootstrap business templates" class="active"></a>
-			</div>
-			<div class="themeName">Bootswatch Skins (11)</div>
-			<div class="images style">
-				<a href="/themes/css/#" name="amelia" title="Amelia"><img src="/themes/switch/images/clr/amelia.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="spruce" title="Spruce"><img src="/themes/switch/images/clr/spruce.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="superhero" title="Superhero"><img src="/themes/switch/images/clr/superhero.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="cyborg"><img src="/themes/switch/images/clr/cyborg.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="cerulean"><img src="/themes/switch/images/clr/cerulean.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="journal"><img src="/themes/switch/images/clr/journal.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="readable"><img src="/themes/switch/images/clr/readable.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="simplex"><img src="/themes/switch/images/clr/simplex.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="slate"><img src="/themes/switch/images/clr/slate.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="spacelab"><img src="/themes/switch/images/clr/spacelab.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="united"><img src="/themes/switch/images/clr/united.png" alt="bootstrap business templates"></a>
-				<p style="margin:0;line-height:normal;margin-left:-10px;display:none;"><small>These are just examples and you can build your own color scheme in the backend.</small></p>
-			</div>
-			<div class="themeName">Background Patterns </div>
-			<div class="images patterns">
-				<a href="/themes/css/#" name="pattern1"><img src="/themes/switch/images/pattern/pattern1.png" alt="bootstrap business templates" class="active"></a>
-				<a href="/themes/css/#" name="pattern2"><img src="/themes/switch/images/pattern/pattern2.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern3"><img src="/themes/switch/images/pattern/pattern3.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern4"><img src="/themes/switch/images/pattern/pattern4.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern5"><img src="/themes/switch/images/pattern/pattern5.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern6"><img src="/themes/switch/images/pattern/pattern6.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern7"><img src="/themes/switch/images/pattern/pattern7.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern8"><img src="/themes/switch/images/pattern/pattern8.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern9"><img src="/themes/switch/images/pattern/pattern9.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern10"><img src="/themes/switch/images/pattern/pattern10.png" alt="bootstrap business templates"></a>
-
-				<a href="/themes/css/#" name="pattern11"><img src="/themes/switch/images/pattern/pattern11.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern12"><img src="/themes/switch/images/pattern/pattern12.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern13"><img src="/themes/switch/images/pattern/pattern13.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern14"><img src="/themes/switch/images/pattern/pattern14.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern15"><img src="/themes/switch/images/pattern/pattern15.png" alt="bootstrap business templates"></a>
-
-				<a href="/themes/css/#" name="pattern16"><img src="/themes/switch/images/pattern/pattern16.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern17"><img src="/themes/switch/images/pattern/pattern17.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern18"><img src="/themes/switch/images/pattern/pattern18.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern19"><img src="/themes/switch/images/pattern/pattern19.png" alt="bootstrap business templates"></a>
-				<a href="/themes/css/#" name="pattern20"><img src="/themes/switch/images/pattern/pattern20.png" alt="bootstrap business templates"></a>
-
-			</div>
-		</div>
-	</div>
-	<span id="/themesBtn"></span>
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+    </script>
 </body>
 </html>
+

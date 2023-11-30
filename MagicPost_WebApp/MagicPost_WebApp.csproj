@@ -20,6 +20,10 @@
     <ProjectReference Include="..\MagicPost_ViewModel\MagicPost_ViewModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\icon\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="appsetting.json" /></VisualStudio></ProjectExtensions>
 
 </Project>
