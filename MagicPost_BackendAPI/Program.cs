@@ -2,6 +2,8 @@ using FluentValidation.AspNetCore;
 using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
 using MagicPost_Application.Order;
+using MagicPost_Application.System.Roles;
+using MagicPost_Application.System.Users;
 using MagicPost_Application.Utilities.Slides;
 using MagicPost_ViewModel.System.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,9 +36,9 @@ builder.Services.AddTransient<IStorageService, FileStorageService>();*/
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<ISlideService, SlideService>();
-
-/*builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
+/*
 builder.Services.AddTransient<ISlideService, SlideService>();*/
 
 
