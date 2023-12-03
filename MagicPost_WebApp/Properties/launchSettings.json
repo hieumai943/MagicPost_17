@@ -3,16 +3,16 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:20534",
-      "sslPort": 44349
+      "applicationUrl": "http://localhost:27681",
+      "sslPort": 44302
     }
   },
   "profiles": {
-    "MagicPost_WebApp": {
+    "shopCommer_WebApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7270",
+      "applicationUrl": "https://localhost:7007",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
