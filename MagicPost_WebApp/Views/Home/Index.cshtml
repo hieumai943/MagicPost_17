@@ -23,12 +23,12 @@
             </tr>
         </thead>
         <tbody>
-                @for (int i = 0; i < Model.Orders.Count; i++)
+                @foreach (var order in  Model.Orders.items)
             {
-                var order = Model.Orders[i];
+               
 
             <tr>
-                <td>@order.SendName</td>
+                    <td>@order.SendName</td>
                 <td>@order.ReceiveName</td>
                 <td>@order.Code</td>
                 <td>@order.ReceiveAddress</td>

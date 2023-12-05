@@ -12,7 +12,7 @@ namespace MagicPost_ApiIntergration
 {
 	public interface IOrderApiClient
 	{
-		Task<List<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
+		Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
 		Task<OrderVm> GetById(int id, string languageId);
 		
 	}

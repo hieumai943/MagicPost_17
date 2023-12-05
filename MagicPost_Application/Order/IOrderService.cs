@@ -10,7 +10,7 @@ namespace MagicPost_Application.Order
 {
 	public interface IOrderService
 	{
-		Task<List<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request);
+		Task<PageResult<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request);
 		Task<OrderVm> GetById(int orderId);
 
 	}
