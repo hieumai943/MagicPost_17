@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization;
+@{
+    var culture = CultureInfo.CurrentCulture.Name;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- basic -->
@@ -16,6 +20,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- style css -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+
     <!-- Responsive-->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- fevicon -->
@@ -62,12 +68,21 @@
                                 <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                                 <li class="">
-                                    
-                                        <form  method="post">
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <form action="/@culture/Account/Logout" method="post">
                                             <button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
                                                 <span class="btn btn-large btn-success"><localize>Logout</localize></span>
                                             </button>
                                         </form>
+                                    }
+                                    else
+                                    {
+                                        <a href="/@culture/Account/Login" style="padding-right:0">
+                                            <span class="btn btn-large btn-success"><localize>Login</localize></span>
+                                        </a>
+                                    }
                                    
                                 </li>
                             </ul>
