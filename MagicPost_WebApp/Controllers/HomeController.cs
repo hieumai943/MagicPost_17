@@ -45,8 +45,22 @@ namespace MagicPost_WebApp.Controllers
 
             return View(viewModel);
         }
+        public async Task<IActionResult> About()
+        {
+            var viewModel = new HomeViewModel
+            {
+                Slides = await _slideApiClient.GetAll(),
+                Orders = await _orderApiClient.GetPagings(new GetManageOrderPagingRequest()
+                {
+                    Keyword = "",
+                    PageIndex = 1,
+                    PageSize = 10
+                })
 
-		public IActionResult Privacy()
+            };
+            return View(viewModel);
+        }
+        public IActionResult Privacy()
         {
             return View();
         }
