@@ -59,8 +59,14 @@ namespace MagicPost_WebApp.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-		[HttpGet]
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
 		public async Task<IActionResult> Register()
 		{
 			return View();

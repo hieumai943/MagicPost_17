@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div >
                             <div class="top-bar-item">
                                 <div class="top-bar-icon">
                                     <i class="far fa-envelope"></i>
@@ -75,6 +75,16 @@
                                     <p>nhom17@gmail.com</p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-4">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="span6">Welcome!<strong> @User.Identity.Name</strong></div>
+                            }
+                            else
+                            {
+                                <div class="span6">Welcome!<strong> Guest!</strong></div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -116,7 +126,8 @@
                             {
                                 <form action="/@culture/Account/Logout" method="post">
                                     <button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
-                                    <a href="/"> <span class="btn btn-large btn-success"><localize>Logout</localize></span></a>
+                                    <a class="btn btn-custom" >Đăng xuất</a>
+
                                 </button>
                                 </form>
                             }
