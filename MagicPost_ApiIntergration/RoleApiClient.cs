@@ -40,9 +40,5 @@ namespace MagicPost_ApiIntergration
             return JsonConvert.DeserializeObject<ApiErrorResult<List<RoleVm>>>(body);
         }
 
-        Task<ApiResult<List<RoleVm>>> IRoleApiClient.GetAll()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -18,6 +18,8 @@ namespace MagicPost_BackendAPI.Controllers
         }
        
         [HttpGet("paging")]
+       
+
         public async Task<IActionResult> GetAllPaging([FromQuery] GetManageOrderPagingRequest request)
         {
             var products = await _OrderService.GetAllPaging(request); 

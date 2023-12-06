@@ -89,8 +89,8 @@ namespace MagicPost_BackendAPI.Controllers
 
         public async Task<IActionResult> GetAllPaging( [FromQuery] GetUserPagingRequest request)
         {
-            var products = await _userService.GetUsersPaging(request);
-            return Ok(products);
+            var orders = await _userService.GetUsersPaging(request);
+            return Ok(orders);
         }
 
         [HttpGet("id")]
