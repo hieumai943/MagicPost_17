@@ -12,9 +12,9 @@ namespace MagicPost__Data.Entities
     public class Order
     {
         public int Id { set; get; }
-        public DateTime OrderDate { set; get; }
-        public Guid UserId { set; get; }
-        public string Code { set; get; }
+        public DateTime? OrderDate { set; get; }
+        public Guid? UserId { set; get; }
+        public string? Code { set; get; }
 		public string SendName { set; get; }
 
 		public string ReceiveName { set; get; }

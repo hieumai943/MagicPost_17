@@ -1,4 +1,4 @@
-﻿using MagicPost_Application.Order;
+﻿using MagicPost_Application.Orders;
 using MagicPost_ViewModel.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +35,41 @@ namespace MagicPost_BackendAPI.Controllers
                 return BadRequest("Cannot find product");
             return Ok(product);
         }
-       
+        // ------phân quyền cho Giao dịch viên--------
+
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        // [Authorize(Roles ="GiaoDichVien")]
+        public async Task<IActionResult> Create([FromForm] OrderCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var orderId = await _OrderService.Create(request);
+            if (orderId == 0)
+                return BadRequest();
+
+            var product = await _OrderService.GetById(orderId);
+
+            return CreatedAtAction(nameof(GetById), new { id = orderId }, product);
+        }
+
+        [HttpDelete("{orderId}")]
+       // [Authorize(Roles = "GiaoDichVien")]
+        public async Task<IActionResult> Delete(int orderId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var affectResult = await _OrderService.Delete(orderId);
+            if (affectResult == 0)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
     }
 }

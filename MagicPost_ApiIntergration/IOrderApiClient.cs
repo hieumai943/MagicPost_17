@@ -14,6 +14,7 @@ namespace MagicPost_ApiIntergration
 	{
 		Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
 		Task<OrderVm> GetById(int id, string languageId);
-		
-	}
+		Task<bool> CreateOrder(OrderCreateRequest request);
+
+    }
 }

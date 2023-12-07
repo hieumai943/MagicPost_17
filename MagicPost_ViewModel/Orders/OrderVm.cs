@@ -10,9 +10,9 @@ namespace MagicPost_ViewModel.Orders
 	public class OrderVm
 	{
 		public int Id { set; get; }
-		public DateTime OrderDate { set; get; }
-		public Guid UserId { set; get; }
-		public string Code { set; get; }
+		public DateTime? OrderDate { set; get; }
+		public Guid? UserId { set; get; }
+		public string? Code { set; get; }
 		public string SendName { set; get; }
 
 		public string ReceiveName { set; get; }
@@ -22,7 +22,7 @@ namespace MagicPost_ViewModel.Orders
 		public string ReceivePhoneNumber { set; get; }
 		public decimal Cuoc { set; get; }
 		public double KhoiLuong { set; get; }
-		public string ThumbnailImage { set; get; }
+		// public string ThumbnailImage { set; get; }
 		public OrderStatus Status { set; get; }
 	}
 }

@@ -1,7 +1,7 @@
 using FluentValidation.AspNetCore;
 using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
-using MagicPost_Application.Order;
+using MagicPost_Application.Orders;
 using MagicPost_Application.System.Roles;
 using MagicPost_Application.System.Users;
 using MagicPost_Application.Utilities.Slides;

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MagicPostUtilities.cs\MagicPostUtilities.cs.csproj" />
     <ProjectReference Include="..\MagicPost_ViewModel\MagicPost_ViewModel.csproj" />
     <ProjectReference Include="..\MagicPost__Data\MagicPost__Data.csproj" />
   </ItemGroup>

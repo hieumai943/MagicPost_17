@@ -2,6 +2,7 @@
 using MagicPost__Data.Entities;
 using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.Orders;
+using MagicPostUtilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MagicPost_Application.Order
+namespace MagicPost_Application.Orders
 {
 	public class OrderService : IOrderService
 	{
@@ -20,7 +21,47 @@ namespace MagicPost_Application.Order
 			_context = context;
 		}
 
-		public async Task<PageResult<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request)
+        public async Task<int> Create(OrderCreateRequest request)
+        {
+            
+            var order = new Order()
+            {
+              OrderDate = request.OrderDate,
+			  UserId = request.UserId,
+			  Code = request.Code,
+			  SendName = request.SendName,
+			  ReceiveName = request.ReceiveName,
+			  SendAddress = request.SendAddress,
+			  ReceiveAddress = request.ReceiveAddress,
+			  SendPhoneNumber = request.SendPhoneNumber,
+			  ReceivePhoneNumber = request.ReceivePhoneNumber,
+			  Cuoc = request.Cuoc,
+			  KhoiLuong = request.KhoiLuong,
+			  Status = request.Status,
+			 
+            };
+            //Save image
+           
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            return order.Id;
+        }
+
+        public async Task<int> Delete(int orderId)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+
+            if (order == null) throw new EShopException($"Cannot find a product: {orderId}");
+           /* var images = _context.ProductImages.Where(i => i.ProductId == orderId);
+            foreach (var image in images)
+            {
+                await _storageService.DeleteFileAsync(image.ImagePath);
+            }*/
+            _context.Orders.Remove(order);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<PageResult<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request)
 		{
 			var query = from p in _context.Orders
 						join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
@@ -44,7 +85,7 @@ namespace MagicPost_Application.Order
 					ReceiveAddress = x.p.ReceiveAddress,
 					Cuoc = x.p.Cuoc,
 					KhoiLuong = x.p.KhoiLuong,
-					ThumbnailImage = x.pi.ImagePath
+					// ThumbnailImage = x.pi.ImagePath
 				}).ToListAsync();
 			var pageResult = new PageResult<OrderVm>()
 			{
