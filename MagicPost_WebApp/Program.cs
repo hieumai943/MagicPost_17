@@ -62,6 +62,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<ISlideApiClient, SlideApiClient>();
+builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
 
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 var app = builder.Build();
