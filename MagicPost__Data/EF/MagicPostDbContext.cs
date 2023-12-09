@@ -28,10 +28,12 @@ namespace MagicPost__Data.EF
             modelBuilder.ApplyConfiguration(new OrderImageConfiguration());
 			modelBuilder.ApplyConfiguration(new SlideConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new DiemGiaoDichConfiguration());
+            modelBuilder.ApplyConfiguration(new DiemTapKetConfiguration());
 
 
             // identity configuration 
-            
+
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
@@ -57,5 +59,8 @@ namespace MagicPost__Data.EF
         public DbSet<OrderImage> ProductImages { get; set; }
 
         public DbSet<Slide> Slides { get; set; }
+        public DbSet<DiemGiaoDich> DiemGiaoDichs { get; set; }
+        public DbSet<DiemTapKet> DiemTapKets { get; set; }
+
     }
 }

@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
+using MagicPost_Application.DiemGiaoDichs;
+using MagicPost_Application.DiemTapKets;
 using MagicPost_Application.Orders;
 using MagicPost_Application.System.Roles;
 using MagicPost_Application.System.Users;
@@ -38,6 +40,9 @@ builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<ISlideService, SlideService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
+builder.Services.AddTransient<IDiemGiaoDichService, DiemGiaoDichService>();
+builder.Services.AddTransient<IDiemTapKetService, DiemTapKetService>();
+
 /*
 builder.Services.AddTransient<ISlideService, SlideService>();*/
 

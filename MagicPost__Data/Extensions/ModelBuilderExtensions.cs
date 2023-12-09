@@ -101,6 +101,20 @@ namespace MagicPost_Data.Extensions
 			  new Slide() { Id = 5, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 5, Url = "#", Image = "/themes/images/carousel/5.png", Status = Status.Active },
 			  new Slide() { Id = 6, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 6, Url = "#", Image = "/themes/images/carousel/6.png", Status = Status.Active }
 			  );
-		}
+            modelBuilder.Entity<DiemGiaoDich>().HasData(
+			  new DiemGiaoDich() { Id = 1, DiemTapKetId = 1, Name ="Diem Giao Dich 1.1", Address= "144 Xuan Thuy, Cau Giay, Ha Noi" , UserId = new Guid("7DBA6422-7136-4D8D-488C-08DBF31D70C7") },
+              new DiemGiaoDich() { Id = 2, DiemTapKetId = 1, Name = "Diem Giao Dich 1.2", Address = "36 Xuan Thuy, Cau Giay, Ha Noi", UserId = new Guid("D756AD9C-BD14-4E57-88F2-08DBF52DD1EF") },
+              new DiemGiaoDich() { Id = 3, DiemTapKetId = 1, Name = "Diem Giao Dich 1.3", Address = "27 Xuan Thuy, Cau Giay, Ha Noi"  },
+              new DiemGiaoDich() { Id = 4, DiemTapKetId = 2, Name = "Diem Giao Dich 2.1", Address = "27 De La Thanh, Ba Dinh, Ha Noi" },
+              new DiemGiaoDich() { Id = 5, DiemTapKetId = 2, Name = "Diem Giao Dich 2.2", Address = "39 De La Thanh, Ba Dinh, Ha Noi" }
+
+
+              );
+            modelBuilder.Entity<DiemTapKet>().HasData(
+               new DiemTapKet() { Id = 1, Name = "Diem Tap Ket 1", Address = "Xuan Thuy, Cau Giay, Ha Noi",UserId =new Guid("7DBA6422-7136-4D8D-488C-08DBF31D70C7") },
+               new DiemTapKet() { Id = 2,  Name = "Diem Tap Ket 2", Address = "De La Thanh, Ba Dinh, Ha Noi" , UserId = new Guid("D756AD9C-BD14-4E57-88F2-08DBF52DD1EF") }
+         
+           );
+        }
     }
 }

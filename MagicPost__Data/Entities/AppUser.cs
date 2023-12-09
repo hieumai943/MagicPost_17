@@ -19,5 +19,7 @@ namespace MagicPost__Data.Entities
         public List<Order> Orders { get; set; }
 
         public List<Transaction> Transactions { get; set; }
+        public DiemGiaoDich? DiemGiaoDich { get; set; }
+        public DiemTapKet? DiemTapKet { get; set; }
     }
 }
