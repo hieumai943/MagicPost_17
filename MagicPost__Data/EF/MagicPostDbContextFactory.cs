@@ -17,7 +17,7 @@ namespace MagicPost__Data.Extensions
         {
             IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json").Build();
-            var connectionString = configuration.GetConnectionString("MagicPostDb");
+            var connectionString = configuration.GetConnectionString("MagicPostDb2");
             var optionsBuilder = new DbContextOptionsBuilder<MagicPostDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
             return new MagicPostDbContext(optionsBuilder.Options);

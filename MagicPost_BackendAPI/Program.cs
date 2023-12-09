@@ -21,7 +21,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<MagicPostDbContext>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("MagicPostDb"));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("MagicPostDb2"));
 });
 
 builder.Services.AddIdentity<AppUser, AppRole>()

@@ -60,8 +60,8 @@ namespace MagicPost_Data.Extensions
             modelBuilder.Entity<AppUser>().HasData(new AppUser
             {
                 Id = NhanVienId,
-                UserName = "NhanVienTapKet",
-                NormalizedUserName = "NhanVienTapKet",
+                UserName = "admin",
+                NormalizedUserName = "admin",
                 Email = "hieumai09042003@gmail.com",
                 NormalizedEmail = "hieumai09042003@gmail.com",
                 EmailConfirmed = true,
@@ -70,7 +70,36 @@ namespace MagicPost_Data.Extensions
                 FirstName = "Hieu",
                 LastName = "Nguyen",
                 Dob = new DateTime(2003, 04, 09)
-            });
+            },
+            new AppUser
+            {
+                Id = LanhDaoID,
+                UserName = "haonguyen123",
+                NormalizedUserName = "haonguyen123",
+                Email = "hieumai09042003@gmail.com",
+                NormalizedEmail = "hieumai09042003@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Haonguyen@123"),
+                SecurityStamp = string.Empty,
+                FirstName = "Hao",
+                LastName = "Nguyen",
+                Dob = new DateTime(2003, 04, 09)
+            },
+            new AppUser
+            {
+                Id = TruongDiemId,
+                UserName = "hungnguyen123",
+                NormalizedUserName = "hungnguyen123",
+                Email = "hieumai09042003@gmail.com",
+                NormalizedEmail = "hieumai09042003@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Hungnguyen@123"),
+                SecurityStamp = string.Empty,
+                FirstName = "Hungnguyen",
+                LastName = "Nguyen",
+                Dob = new DateTime(2003, 04, 09)
+            }
+            );
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
             {
@@ -102,8 +131,8 @@ namespace MagicPost_Data.Extensions
 			  new Slide() { Id = 6, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 6, Url = "#", Image = "/themes/images/carousel/6.png", Status = Status.Active }
 			  );
             modelBuilder.Entity<DiemGiaoDich>().HasData(
-              new DiemGiaoDich() { Id = 1, DiemTapKetId = 1, Name = "Diem Giao Dich 1.1", Address = "144 Xuan Thuy, Cau Giay, Ha Noi", UserId = new Guid("7DBA6422-7136-4D8D-488C-08DBF31D70C7") },
-              new DiemGiaoDich() { Id = 2, DiemTapKetId = 1, Name = "Diem Giao Dich 1.2", Address = "36 Xuan Thuy, Cau Giay, Ha Noi", UserId = new Guid("D756AD9C-BD14-4E57-88F2-08DBF52DD1EF") },
+              new DiemGiaoDich() { Id = 1, DiemTapKetId = 1, Name = "Diem Giao Dich 1.1", Address = "144 Xuan Thuy, Cau Giay, Ha Noi", UserId=  LanhDaoID },
+              new DiemGiaoDich() { Id = 2, DiemTapKetId = 1, Name = "Diem Giao Dich 1.2", Address = "36 Xuan Thuy, Cau Giay, Ha Noi" },
               new DiemGiaoDich() { Id = 3, DiemTapKetId = 1, Name = "Diem Giao Dich 1.3", Address = "27 Xuan Thuy, Cau Giay, Ha Noi" },
               new DiemGiaoDich() { Id = 4, DiemTapKetId = 2, Name = "Diem Giao Dich 2.1", Address = "27 De La Thanh, Ba Dinh, Ha Noi" },
               new DiemGiaoDich() { Id = 5, DiemTapKetId = 2, Name = "Diem Giao Dich 2.2", Address = "39 De La Thanh, Ba Dinh, Ha Noi" }
@@ -111,8 +140,8 @@ namespace MagicPost_Data.Extensions
 
               );
             modelBuilder.Entity<DiemTapKet>().HasData(
-               new DiemTapKet() { Id = 1, Name = "Diem Tap Ket 1", Address = "Xuan Thuy, Cau Giay, Ha Noi", UserId = new Guid("7DBA6422-7136-4D8D-488C-08DBF31D70C7") },
-               new DiemTapKet() { Id = 2, Name = "Diem Tap Ket 2", Address = "De La Thanh, Ba Dinh, Ha Noi", UserId = new Guid("D756AD9C-BD14-4E57-88F2-08DBF52DD1EF") }
+               new DiemTapKet() { Id = 1, Name = "Diem Tap Ket 1", Address = "Xuan Thuy, Cau Giay, Ha Noi", UserId = NhanVienId },
+               new DiemTapKet() { Id = 2, Name = "Diem Tap Ket 2", Address = "De La Thanh, Ba Dinh, Ha Noi", UserId = LanhDaoID }
 
            );
         }
