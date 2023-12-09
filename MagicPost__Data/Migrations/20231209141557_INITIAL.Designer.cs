@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicPost__Data.Migrations
 {
     [DbContext(typeof(MagicPostDbContext))]
-    [Migration("20231206154553_addMoreRoles")]
-    partial class addMoreRoles
+    [Migration("20231209141557_INITIAL")]
+    partial class INITIAL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,7 +83,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("8dbdfeba-e424-4e2c-9931-cdde4472daa6"),
-                            ConcurrencyStamp = "0c69d83c-b3f9-4d27-9c82-d02497b86cb1",
+                            ConcurrencyStamp = "e40c990d-6d60-40f5-b72d-1aa2cbb5756a",
                             Description = "Trưởng điểm giao dịch và tập kết ",
                             Name = "TruongDiem",
                             NormalizedName = "TruongDiem"
@@ -91,7 +91,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            ConcurrencyStamp = "c29b807a-2bd6-4cf1-9089-079a26ccaa6d",
+                            ConcurrencyStamp = "db6f0daa-c07b-4e7f-9211-e088c7dd6e0d",
                             Description = "Lãnh đạo",
                             Name = "LanhDao",
                             NormalizedName = "LanhDao"
@@ -99,7 +99,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("f98d4249-7ab3-44b6-b074-9c28b018475b"),
-                            ConcurrencyStamp = "275e6d82-ddf6-433e-940d-db1e6af960f2",
+                            ConcurrencyStamp = "23bdc0cf-7d7b-40e7-add8-fe2e312f6908",
                             Description = "Giao dịch viên",
                             Name = "GiaoDichVien",
                             NormalizedName = "GiaoDichVien"
@@ -107,7 +107,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "4920ff46-118d-41f3-9bed-b1f180e44e6b",
+                            ConcurrencyStamp = "a083c1c4-afe0-47f7-a9aa-0854703a4bea",
                             Description = "Nhân viên tập kết",
                             Name = "NhanVienTapKet",
                             NormalizedName = "NhanVienTapKet"
@@ -125,6 +125,12 @@ namespace MagicPost__Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DiemGiaoDichId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DiemTapKetId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Dob")
                         .HasColumnType("datetime2");
@@ -177,6 +183,10 @@ namespace MagicPost__Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiemGiaoDichId");
+
+                    b.HasIndex("DiemTapKetId");
+
                     b.ToTable("AppUsers", (string)null);
 
                     b.HasData(
@@ -184,7 +194,7 @@ namespace MagicPost__Data.Migrations
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b90b5fd5-3a20-4fbb-9535-005c842afe18",
+                            ConcurrencyStamp = "06b673b7-6bb4-4558-8502-d4c6f958278c",
                             Dob = new DateTime(2003, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hieumai09042003@gmail.com",
                             EmailConfirmed = true,
@@ -193,7 +203,7 @@ namespace MagicPost__Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hieumai09042003@gmail.com",
                             NormalizedUserName = "NhanVienTapKet",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA5zwnuK1FVSCEcEJnPhWUBxCCv7PJa9+R7dBRroCMFmAa6PBzRF497wF74wsa2R4g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEESBStYU69S+dMcCgi3LneaZxYtIr6CQ8PfPmPGNdc2Cv9kNXWLhcLGkmgyoD+n9tw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -234,6 +244,126 @@ namespace MagicPost__Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts", (string)null);
+                });
+
+            modelBuilder.Entity("MagicPost__Data.Entities.DiemGiaoDich", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("DiemTapKetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiemTapKetId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("DiemGiaoDichs", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "144 Xuan Thuy, Cau Giay, Ha Noi",
+                            DiemTapKetId = 1,
+                            Name = "Diem Giao Dich 1.1",
+                            UserId = new Guid("7dba6422-7136-4d8d-488c-08dbf31d70c7")
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "36 Xuan Thuy, Cau Giay, Ha Noi",
+                            DiemTapKetId = 1,
+                            Name = "Diem Giao Dich 1.2",
+                            UserId = new Guid("d756ad9c-bd14-4e57-88f2-08dbf52dd1ef")
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "27 Xuan Thuy, Cau Giay, Ha Noi",
+                            DiemTapKetId = 1,
+                            Name = "Diem Giao Dich 1.3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "27 De La Thanh, Ba Dinh, Ha Noi",
+                            DiemTapKetId = 2,
+                            Name = "Diem Giao Dich 2.1"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "39 De La Thanh, Ba Dinh, Ha Noi",
+                            DiemTapKetId = 2,
+                            Name = "Diem Giao Dich 2.2"
+                        });
+                });
+
+            modelBuilder.Entity("MagicPost__Data.Entities.DiemTapKet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("DiemTapKets", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Xuan Thuy, Cau Giay, Ha Noi",
+                            Name = "Diem Tap Ket 1",
+                            UserId = new Guid("7dba6422-7136-4d8d-488c-08dbf31d70c7")
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "De La Thanh, Ba Dinh, Ha Noi",
+                            Name = "Diem Tap Ket 2",
+                            UserId = new Guid("d756ad9c-bd14-4e57-88f2-08dbf52dd1ef")
+                        });
                 });
 
             modelBuilder.Entity("MagicPost__Data.Entities.Language", b =>
@@ -279,7 +409,6 @@ namespace MagicPost__Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Cuoc")
@@ -288,7 +417,7 @@ namespace MagicPost__Data.Migrations
                     b.Property<double>("KhoiLuong")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("OrderDate")
+                    b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ReceiveAddress")
@@ -318,7 +447,7 @@ namespace MagicPost__Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -334,7 +463,7 @@ namespace MagicPost__Data.Migrations
                             Code = "MAX123",
                             Cuoc = 100000m,
                             KhoiLuong = 1.2,
-                            OrderDate = new DateTime(2023, 12, 6, 22, 45, 53, 28, DateTimeKind.Local).AddTicks(5916),
+                            OrderDate = new DateTime(2023, 12, 9, 21, 15, 56, 653, DateTimeKind.Local).AddTicks(8696),
                             ReceiveAddress = "Xuan Thuy",
                             ReceiveName = "Hung",
                             ReceivePhoneNumber = "088965072",
@@ -710,13 +839,52 @@ namespace MagicPost__Data.Migrations
                     b.ToTable("AppUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MagicPost__Data.Entities.AppUser", b =>
+                {
+                    b.HasOne("MagicPost__Data.Entities.DiemGiaoDich", "DiemGiaoDich")
+                        .WithMany()
+                        .HasForeignKey("DiemGiaoDichId");
+
+                    b.HasOne("MagicPost__Data.Entities.DiemTapKet", "DiemTapKet")
+                        .WithMany()
+                        .HasForeignKey("DiemTapKetId");
+
+                    b.Navigation("DiemGiaoDich");
+
+                    b.Navigation("DiemTapKet");
+                });
+
+            modelBuilder.Entity("MagicPost__Data.Entities.DiemGiaoDich", b =>
+                {
+                    b.HasOne("MagicPost__Data.Entities.DiemTapKet", "DiemTapKet")
+                        .WithMany("DiemGiaoDichs")
+                        .HasForeignKey("DiemTapKetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MagicPost__Data.Entities.AppUser", "TruongDiemGiaoDich")
+                        .WithOne()
+                        .HasForeignKey("MagicPost__Data.Entities.DiemGiaoDich", "UserId");
+
+                    b.Navigation("DiemTapKet");
+
+                    b.Navigation("TruongDiemGiaoDich");
+                });
+
+            modelBuilder.Entity("MagicPost__Data.Entities.DiemTapKet", b =>
+                {
+                    b.HasOne("MagicPost__Data.Entities.AppUser", "TruongDiemTapKet")
+                        .WithOne()
+                        .HasForeignKey("MagicPost__Data.Entities.DiemTapKet", "UserId");
+
+                    b.Navigation("TruongDiemTapKet");
+                });
+
             modelBuilder.Entity("MagicPost__Data.Entities.Order", b =>
                 {
                     b.HasOne("MagicPost__Data.Entities.AppUser", "AppUser")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("AppUser");
                 });
@@ -770,6 +938,11 @@ namespace MagicPost__Data.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("MagicPost__Data.Entities.DiemTapKet", b =>
+                {
+                    b.Navigation("DiemGiaoDichs");
                 });
 
             modelBuilder.Entity("MagicPost__Data.Entities.Language", b =>
