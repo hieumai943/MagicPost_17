@@ -3,6 +3,7 @@ using MagicPost__Data.Entities;
 using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.Diem;
 using MagicPost_ViewModel.Orders;
+using MagicPost_ViewModel.System.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace MagicPost_Application.DiemTapKets
             _context = context;
         }
 
-        public async Task<PageResult<DiemTapKetVm>> GetAllPaging(PagingRequestBase request)
+        public async Task<ApiResult<PageResult<DiemTapKetVm>>> GetAllPaging(PagingRequestBase request)
         {
             var query = from p in _context.DiemTapKets
                     
@@ -45,7 +46,7 @@ namespace MagicPost_Application.DiemTapKets
                 PageIndex = request.PageIndex,
                 TotalRecords = totalRow
             };
-            return pageResult;
+            return new ApiSuccessResult<PageResult<DiemTapKetVm>>(pageResult);
         }
     }
 }

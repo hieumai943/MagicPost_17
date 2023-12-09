@@ -11,7 +11,7 @@ namespace MagicPost_ApiIntergration
 {
     public interface IDiemGiaoDichApiClient
     {
-        Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetUsersPagings(PagingRequestBase request);
+        Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetUsersPagings(PagingRequestBase request, int DiemTapKetId);
 
     }
 }

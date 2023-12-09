@@ -25,13 +25,13 @@ namespace MagicPost_ApiIntergration
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetUsersPagings(PagingRequestBase request)
+        public async Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetUsersPagings(PagingRequestBase request, int DiemTapKetId)
         {
             var client = _httpClientFactory.CreateClient();
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/DiemGiaoDich/paging?pageIndex=" +
+            var response = await client.GetAsync($"/api/DiemGiaoDich/paging/{DiemTapKetId}?pageIndex=" +
                 $"{request.PageIndex}&pageSize={request.PageSize}&BearerToken={sessions}"); // liên kết luôn đến api endpoint của web api luôn
             var body = await response.Content.ReadAsStringAsync();
             var DiemGiaoDichs = JsonConvert.DeserializeObject<ApiResult<PageResult<DiemGiaoDichVm>>>(body);

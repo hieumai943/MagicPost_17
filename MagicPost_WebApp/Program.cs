@@ -65,6 +65,9 @@ builder.Services.AddTransient<ISlideApiClient, SlideApiClient>();
 builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
 
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
+builder.Services.AddTransient<IDiemGiaoDichApiClient, DiemGiaoDichApiClient>();
+builder.Services.AddTransient<IDiemTapKetApiClient, DiemTapKetApiClient>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.meView

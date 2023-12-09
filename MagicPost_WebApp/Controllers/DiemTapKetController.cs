@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MagicPost_WebApp.Controllers
 {
-    public class DiemGiaoDichController : Controller
+    public class DiemTapKetController : Controller
     {
-        private readonly IDiemGiaoDichApiClient _DiemGiaoDichApiClient;
+        private readonly IDiemTapKetApiClient _DiemTapKetApiClient;
         private readonly IConfiguration _configuration;
         private readonly IRoleApiClient _roleApiClient;
-        public DiemGiaoDichController(IDiemGiaoDichApiClient DiemGiaoDichApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
+        public DiemTapKetController(IDiemTapKetApiClient DiemTapKetApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
         {
-            _DiemGiaoDichApiClient = DiemGiaoDichApiClient;
+            _DiemTapKetApiClient = DiemTapKetApiClient;
             _configuration = configuration;
             _roleApiClient = roleApiClient;
         }
-        public async Task<IActionResult> Index( int pageIndex = 1, int pageSize = 10, int DiemTapKetId =1)
+        public async Task<IActionResult> Index( int pageIndex = 1, int pageSize = 10)
         {
             var sessions = HttpContext.Session.GetString("Token");
             var request = new PagingRequestBase()
@@ -26,7 +26,7 @@ namespace MagicPost_WebApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-            var data = await _DiemGiaoDichApiClient.GetUsersPagings(request, DiemTapKetId);
+            var data = await _DiemTapKetApiClient.GetUsersPagings(request);
             if (TempData["result"] != null)
             {
                 ViewBag.SuccessMsg = TempData["result"];

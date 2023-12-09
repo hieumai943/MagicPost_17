@@ -20,6 +20,17 @@
     <ProjectReference Include="..\MagicPost_ViewModel\MagicPost_ViewModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\DiemGiaoDich\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\DiemTapKet\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="appsetting.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

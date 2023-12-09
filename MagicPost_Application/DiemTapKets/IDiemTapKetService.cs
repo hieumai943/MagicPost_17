@@ -12,7 +12,7 @@ namespace MagicPost_Application.DiemTapKets
 {
     public interface IDiemTapKetService
     {
-        Task<PageResult<DiemTapKetVm>> GetAllPaging(PagingRequestBase request);
+        Task<ApiResult<PageResult<DiemTapKetVm>>> GetAllPaging(PagingRequestBase request);
 
     }
 }
