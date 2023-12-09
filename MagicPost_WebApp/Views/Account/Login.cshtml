@@ -14,44 +14,133 @@
 <hr class="soft" />
 
 <div class="row">
-    <div class="span4">
-        <div class="well">
-            <h5>CREATE YOUR ACCOUNT</h5><br />
-            Enter your e-mail address to create an account.<br /><br /><br />
-            <form action="register.html">
-                
-                <div class="controls">
-                    <a href="/@culture/Account/Register" class="btn block">Create Your Account</a>
-                </div>
-            </form>
-        </div>
-    </div>
     <div class="span1"> &nbsp;</div>
     <div class="span4">
         <div class="well">
-            <h5>ALREADY REGISTERED ?</h5>
-            <form action="/@culture/Account/Login" method="post">
+            <form action="/@culture/Account/Login" class="form" method="post">
                 <div class="control-group">
-                    <label class="control-label" for="inputEmail1">Email</label>
                     <div class="controls">
-                        <input class="span3" type="text" asp-for="UserName" placeholder="Email">
+                        <input class="input" type="text" asp-for="UserName" placeholder="Email">
                         <span asp-validation-for="UserName" class="text-error"></span>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="inputPassword1">Password</label>
                     <div class="controls">
-                        <input type="password" class="span3" asp-for="Password" placeholder="Password">
+                        <input type="password" class="input" asp-for="Password" placeholder="Password">
                         <span asp-validation-for="Password" class="text-error"></span>
-                       
+
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn">Sign in</button> <a href="forgetpass.html">Forget password?</a>
+                        <a href="forgetpass.html" class="forgetpass">Forget password?</a>
+                        <button type="submit" class="btn">Sign in</button>
+                        <form action="register.html">
+                            <div class="controls">
+                                <p class="signup-link">
+                                    No account?
+                                    <a href="/@culture/Account/Register">Sign up</a>
+                                </p>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</div>	
+</div>
+
+<style>
+    /*css login*/
+
+    .row {
+        /*height: 100vh;*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .span4 {
+        width: 400px;
+        background: #F8F9FD;
+        background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+        border-radius: 40px;
+        padding: 25px 35px;
+        border: 5px solid rgb(255, 255, 255);
+        box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+        margin: 20px;
+    }
+
+    .form {
+        margin-top: 20px;
+    }
+
+    .form .input {
+        width: 100%;
+        background: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 20px;
+        margin-top: 15px;
+        box-shadow: #cff0ff 0px 10px 10px -5px;
+        border-inline: 2px solid transparent;
+    }
+
+    .form .input::-moz-placeholder {
+        color: rgb(170, 170, 170);
+    }
+
+    .form .input::placeholder {
+        color: rgb(170, 170, 170);
+    }
+
+    .form .input:focus {
+        outline: none;
+        border-inline: 2px solid #12B1D1;
+    }
+
+    .form .btn {
+        display: block;
+        width: 100%;
+        font-weight: bold;
+        background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+        color: white;
+        padding-block: 15px;
+        margin: 20px auto;
+        border-radius: 20px;
+        box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+        border: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .form .btn:hover {
+        transform: scale(1.03);
+        box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+    }
+
+    .form .btn:active {
+        transform: scale(0.95);
+        box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+    }
+
+    .form .forgetpass {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    .signup-link {
+        color: #6B7280;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .signup-link a {
+        text-decoration: underline;
+    }
+</style>
