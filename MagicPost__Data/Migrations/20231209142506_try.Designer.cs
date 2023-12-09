@@ -4,6 +4,7 @@ using MagicPost__Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicPost__Data.Migrations
 {
     [DbContext(typeof(MagicPostDbContext))]
-    partial class MagicPostDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231209142506_try")]
+    partial class @try
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("8dbdfeba-e424-4e2c-9931-cdde4472daa6"),
-                            ConcurrencyStamp = "6279d754-5c50-44d8-b65e-1b18fc74fceb",
+                            ConcurrencyStamp = "096981f1-98a7-4d23-af6a-f3d6c4d3bc2e",
                             Description = "Trưởng điểm giao dịch và tập kết ",
                             Name = "TruongDiem",
                             NormalizedName = "TruongDiem"
@@ -89,7 +91,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            ConcurrencyStamp = "608738ae-675a-49c3-b370-a587b5fa844c",
+                            ConcurrencyStamp = "46963661-3892-48e5-a022-f70279ce83bc",
                             Description = "Lãnh đạo",
                             Name = "LanhDao",
                             NormalizedName = "LanhDao"
@@ -97,7 +99,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("f98d4249-7ab3-44b6-b074-9c28b018475b"),
-                            ConcurrencyStamp = "623d13c4-04fb-482e-9680-cb630b01b433",
+                            ConcurrencyStamp = "eb5d1d76-badd-4b8b-9370-3d4371f11c44",
                             Description = "Giao dịch viên",
                             Name = "GiaoDichVien",
                             NormalizedName = "GiaoDichVien"
@@ -105,7 +107,7 @@ namespace MagicPost__Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "310e1a35-4e41-4429-97c8-4a739a8f5d96",
+                            ConcurrencyStamp = "05616071-0066-4fc8-86e5-3249ff9eed35",
                             Description = "Nhân viên tập kết",
                             Name = "NhanVienTapKet",
                             NormalizedName = "NhanVienTapKet"
@@ -192,7 +194,7 @@ namespace MagicPost__Data.Migrations
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1ae9ae66-2d59-440e-80cb-2a329a93a06b",
+                            ConcurrencyStamp = "fb35d7af-eebb-4aca-836b-669af396eb1b",
                             Dob = new DateTime(2003, 4, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hieumai09042003@gmail.com",
                             EmailConfirmed = true,
@@ -201,7 +203,7 @@ namespace MagicPost__Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hieumai09042003@gmail.com",
                             NormalizedUserName = "NhanVienTapKet",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGRLsgYhbgka2ul3fSOM9FhDcFvCXAGj0O0Hlea+yYaw1Wvz4YfaRGuinnrZo4iPPQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHdsnWG9QQM0wmibhqCL2ng/a+hhS9ShxhIFSa6is7Sgjxg9cnYMJ4BxxAPV6oflGA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -277,45 +279,6 @@ namespace MagicPost__Data.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("DiemGiaoDichs", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "144 Xuan Thuy, Cau Giay, Ha Noi",
-                            DiemTapKetId = 1,
-                            Name = "Diem Giao Dich 1.1",
-                            UserId = new Guid("7dba6422-7136-4d8d-488c-08dbf31d70c7")
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "36 Xuan Thuy, Cau Giay, Ha Noi",
-                            DiemTapKetId = 1,
-                            Name = "Diem Giao Dich 1.2",
-                            UserId = new Guid("d756ad9c-bd14-4e57-88f2-08dbf52dd1ef")
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "27 Xuan Thuy, Cau Giay, Ha Noi",
-                            DiemTapKetId = 1,
-                            Name = "Diem Giao Dich 1.3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "27 De La Thanh, Ba Dinh, Ha Noi",
-                            DiemTapKetId = 2,
-                            Name = "Diem Giao Dich 2.1"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "39 De La Thanh, Ba Dinh, Ha Noi",
-                            DiemTapKetId = 2,
-                            Name = "Diem Giao Dich 2.2"
-                        });
                 });
 
             modelBuilder.Entity("MagicPost__Data.Entities.DiemTapKet", b =>
@@ -346,22 +309,6 @@ namespace MagicPost__Data.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("DiemTapKets", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Xuan Thuy, Cau Giay, Ha Noi",
-                            Name = "Diem Tap Ket 1",
-                            UserId = new Guid("7dba6422-7136-4d8d-488c-08dbf31d70c7")
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "De La Thanh, Ba Dinh, Ha Noi",
-                            Name = "Diem Tap Ket 2",
-                            UserId = new Guid("d756ad9c-bd14-4e57-88f2-08dbf52dd1ef")
-                        });
                 });
 
             modelBuilder.Entity("MagicPost__Data.Entities.Language", b =>
@@ -461,7 +408,7 @@ namespace MagicPost__Data.Migrations
                             Code = "MAX123",
                             Cuoc = 100000m,
                             KhoiLuong = 1.2,
-                            OrderDate = new DateTime(2023, 12, 9, 21, 25, 37, 716, DateTimeKind.Local).AddTicks(2597),
+                            OrderDate = new DateTime(2023, 12, 9, 21, 25, 5, 342, DateTimeKind.Local).AddTicks(5705),
                             ReceiveAddress = "Xuan Thuy",
                             ReceiveName = "Hung",
                             ReceivePhoneNumber = "088965072",
