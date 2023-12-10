@@ -20,7 +20,8 @@ namespace MagicPost__Data.Configurations
             builder.Property(x => x.ReceivePhoneNumber).IsRequired();
 			builder.Property(x => x.Cuoc).IsRequired();
 			builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
+           
 
-		}
-	}
+        }
+    }
 }

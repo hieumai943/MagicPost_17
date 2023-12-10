@@ -111,6 +111,7 @@ namespace MagicPost_Data.Extensions
 			    Id =1,
                 OrderDate = DateTime.Now,
                 UserId = NhanVienId,
+                LogId =1,
                 Code = "MAX123",
                 SendName ="Hieu",
                 ReceiveName ="Hung",
@@ -121,7 +122,23 @@ namespace MagicPost_Data.Extensions
                 Cuoc = 100000,
                 KhoiLuong = 1.2
                 
-			});
+			}, new Order
+            {
+                Id = 2,
+                OrderDate = DateTime.Now,
+                UserId = NhanVienId,
+                LogId = 2,
+                Code = "MAX123456",
+                SendName = "Hieu",
+                ReceiveName = "Hao",
+                SendAddress = "Cau giay",
+                ReceiveAddress = "Xuan Thuy",
+                SendPhoneNumber = "08272594033",
+                ReceivePhoneNumber = "0889650723",
+                Cuoc = 100000,
+                KhoiLuong = 1.2
+
+            });
 			modelBuilder.Entity<Slide>().HasData(
 			  new Slide() { Id = 1, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 1, Url = "#", Image = "/themes/images/carousel/1.png", Status = Status.Active },
 			  new Slide() { Id = 2, Name = "Magic Post siêu uy tín", Description = "Magic Post siêu uy tín, uy tín số 1 Việt Nam", SortOrder = 2, Url = "#", Image = "/themes/images/carousel/2.png", Status = Status.Active },
@@ -144,6 +161,11 @@ namespace MagicPost_Data.Extensions
                new DiemTapKet() { Id = 2, Name = "Diem Tap Ket 2", Address = "De La Thanh, Ba Dinh, Ha Noi", UserId = LanhDaoID }
 
            );
+            modelBuilder.Entity<Log>().HasData(
+              new Log() { Id = 1, DiemGiaoDichFromId =1 , DiemTapKetToId = 1, DateCreated = DateTime.Now, OrderStatus = OrderStatus.InProgress, OrderId = 1},
+              new Log() { Id = 2, DiemGiaoDichFromId =2 , DiemTapKetToId = 2, DateCreated = DateTime.Now, OrderStatus = OrderStatus.Success, OrderId =2}
+
+          );
         }
     }
 }

@@ -30,6 +30,7 @@ namespace MagicPost__Data.EF
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             modelBuilder.ApplyConfiguration(new DiemGiaoDichConfiguration());
             modelBuilder.ApplyConfiguration(new DiemTapKetConfiguration());
+            modelBuilder.ApplyConfiguration(new LogConfiguration());
 
 
             // identity configuration 
@@ -61,6 +62,7 @@ namespace MagicPost__Data.EF
         public DbSet<Slide> Slides { get; set; }
         public DbSet<DiemGiaoDich> DiemGiaoDichs { get; set; }
         public DbSet<DiemTapKet> DiemTapKets { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
     }
 }

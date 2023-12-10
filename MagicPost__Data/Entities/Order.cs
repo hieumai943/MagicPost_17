@@ -14,6 +14,7 @@ namespace MagicPost__Data.Entities
         public int Id { set; get; }
         public DateTime? OrderDate { set; get; }
         public Guid? UserId { set; get; }
+        public int? LogId { set; get; }
         public string? Code { set; get; }
 		public string SendName { set; get; }
 
@@ -30,7 +31,8 @@ namespace MagicPost__Data.Entities
         public List<OrderDetail> OrderDetails { get; set; } // quan he 1 nhieu o day la: 1 order co nhieu order details con 1 order tails chi thuoc 1 order
 
         public AppUser AppUser { get; set; }
-
+  
+        public Log? Log { get; set; }
 
     }
 }
