@@ -1,17 +1,16 @@
-﻿@using System.Globalization;
-@model MagicPost_ViewModel.System.Users.RegisterRequest;
+﻿@model MagicPost_ViewModel.System.Users.RegisterRequest;
 
 
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var culture = CultureInfo.CurrentCulture.Name;
 }
 
 <ul class="breadcrumb">
     <li><a href="index.html">Home</a> <span class="divider">/</span></li>
     <li class="active">Registration</li>
 </ul>
+<h3> Registration</h3>
 <div class="well">
     <!--
     <div class="alert alert-info fade in">
@@ -26,183 +25,76 @@
         <button type="button" class="close" data-dismiss="alert">×</button>
         <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
      </div> -->
-     <form class="form">
-        <p class="title">Register</p>
-        <p class="message">Signup now and get full access to our app.</p>
-    
-        <div class="flex">
-            <label>
-                <input type="text" asp-for="FirstName" required="" placeholder="" class="input">
-                <span>Firstname</span>
-                <span asp-validation-for="FirstName" class="text-error"></span>
-            </label>
-    
-            <label>
-                <input type="text" asp-for="LastName" required="" placeholder="" class="input">
-                <span>Lastname</span>
-            </label>
+    <form asp-action="Register" asp-controller="Account" method="post" class="form-horizontal">
+        <h4>Your personal information</h4>
+        <div asp-validation-summary="All" class="text-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
         </div>
-    
-        <label>
-            <input type="email" asp-for="Email" required="" placeholder="" class="input">
-            <span>Email</span>
-            <span asp-validation-for="Email" class="text-error"></span>
-        </label>
-    
-        <label>
-            <input type="password" asp-for="Password" required="" placeholder="" class="input">
-            <span>Password</span>
-        </label>
-    
-        <label>
-            <input type="password" asp-for="ConfirmPassword" required="" placeholder="" class="input">
-            <span>Confirm password</span>
-        </label>
-
-        <label>
-            <input type="text" asp-for="PhoneNumber" required="" placeholder="" class="input">
-            <span>Mobile Phone</span>
-        </label>      
-    
-        <button class="submit">Register</button>
-        <form action="login.html">
+        <div class="control-group">
+            <label class="control-label" for="inputFname1">First name <sup>*</sup></label>
             <div class="controls">
-                <p class="signin">
-                    Already have an account?
-                    <a href="/@culture/Account/Login">Login</a>
-                </p>
+                <input type="text" asp-for="FirstName" placeholder="First Name">
+                <span asp-validation-for="FirstName" class="text-error"></span>
             </div>
-        </form>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLnam">Last name <sup>*</sup></label>
+            <div class="controls">
+                <input type="text" asp-for="LastName" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input_email">Date <sup>*</sup></label>
+            <div class="controls">
+                <input type="date" asp-for="Dob" placeholder="Email">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input_email">Email <sup>*</sup></label>
+            <div class="controls">
+                <input type="email" asp-for="Email" placeholder="Email">
+                <span asp-validation-for="Email" class="text-error"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword1">User Name <sup>*</sup></label>
+            <div class="controls">
+                <input type="text" asp-for="UserName" placeholder="User Name">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
+            <div class="controls">
+                <input type="password" asp-for="Password" placeholder="Password">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword1">Confirm Password <sup>*</sup></label>
+            <div class="controls">
+                <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="mobile">Mobile Phone </label>
+            <div class="controls">
+                <input type="text" asp-for="PhoneNumber" placeholder="Mobile Phone" />
+            </div>
+        </div>
+
+        <p><sup>*</sup>Required field	</p>
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="hidden" name="email_create" value="1">
+                <input type="hidden" name="is_new_customer" value="1">
+                <input class="btn btn-large btn-success" type="submit" value="Register" />
+            </div>
+        </div>
     </form>
 </div>
-    
 
 <style>
     /*register css*/
-    .well {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 400px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 20px;
-      position: relative;
-    }
-
-    .title {
-      font-size: 28px;
-      color: royalblue;
-      font-weight: 600;
-      letter-spacing: -1px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      padding-left: 30px;
-    }
-
-    .title::before,.title::after {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      border-radius: 50%;
-      left: 0px;
-      background-color: royalblue;
-    }
-
-    .title::before {
-      width: 18px;
-      height: 18px;
-      background-color: royalblue;
-    }
-
-    .title::after {
-      width: 18px;
-      height: 18px;
-      animation: pulse 1s linear infinite;
-    }
-
-    .message, .signin {
-      color: rgba(88, 87, 87, 0.822);
-      font-size: 14px;
-    }
-
-    .signin {
-      text-align: center;
-    }
-
-    .signin a {
-      color: royalblue;
-    }
-
-    .signin a:hover {
-      text-decoration: underline royalblue;
-    }
-
-    .flex {
-      display: flex;
-      width: 100%;
-      gap: 6px;
-    }
-
-    .form label {
-      position: relative;
-    }
-
-    .form label .input {
-      width: 100%;
-      padding: 10px 10px 20px 10px;
-      outline: 0;
-      border: 1px solid rgba(105, 105, 105, 0.397);
-      border-radius: 10px;
-    }
-
-    .form label .input + span {
-      position: absolute;
-      left: 10px;
-      top: 15px;
-      color: grey;
-      font-size: 0.9em;
-      cursor: text;
-      transition: 0.3s ease;
-    }
-
-    .form label .input:placeholder-shown + span {
-      top: 15px;
-      font-size: 0.9em;
-    }
-
-    .form label .input:focus + span,.form label .input:valid + span {
-      top: 30px;
-      font-size: 0.7em;
-      font-weight: 600;
-    }
-
-    .form label .input:valid + span {
-      color: green;
-    }
-
-    .submit {
-      border: none;
-      outline: none;
-      background-color: royalblue;
-      padding: 10px;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 16px;
-      transform: .3s ease;
-    }
-
-    .submit:hover {
-      background-color: rgb(56, 90, 194);
-    }
-
 
 </style>
