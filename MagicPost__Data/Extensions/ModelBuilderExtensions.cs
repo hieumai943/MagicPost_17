@@ -120,7 +120,8 @@ namespace MagicPost_Data.Extensions
                 SendPhoneNumber ="0827259403",
 				ReceivePhoneNumber ="088965072",
                 Cuoc = 100000,
-                KhoiLuong = 1.2
+                KhoiLuong = 1.2,
+                DiemGiaoDichId =1,
                 
 			}, new Order
             {
@@ -136,7 +137,8 @@ namespace MagicPost_Data.Extensions
                 SendPhoneNumber = "08272594033",
                 ReceivePhoneNumber = "0889650723",
                 Cuoc = 100000,
-                KhoiLuong = 1.2
+                KhoiLuong = 1.2,
+                DiemTapKetId =1,
 
             });
 			modelBuilder.Entity<Slide>().HasData(

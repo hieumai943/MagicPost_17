@@ -4,6 +4,7 @@ using MagicPost__Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicPost__Data.Migrations
 {
     [DbContext(typeof(MagicPostDbContext))]
-    partial class MagicPostDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231211171447_ADD_DTK-Order")]
+    partial class ADD_DTKOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -19,7 +19,9 @@ namespace MagicPost__Data.Entities
         public List<Order> Orders { get; set; }
 
         public List<Transaction> Transactions { get; set; }
+        // neu la truong diem giao dich hay giao dich vien tai diem giao dich
         public DiemGiaoDich? DiemGiaoDich { get; set; }
+        // neu la nhan vien tai diem tap ket hoac truong diem tap ket
         public DiemTapKet? DiemTapKet { get; set; }
     }
 }
