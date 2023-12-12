@@ -16,7 +16,8 @@ namespace MagicPost_WebApp.Controllers
             _configuration = configuration;
             _roleApiClient = roleApiClient;
         }
-        public async Task<IActionResult> Index( int pageIndex = 1, int pageSize = 10, int DiemTapKetId =1)
+        [HttpGet("/vi/DiemGiaoDich/Index/{DiemTapKetId}")]
+        public async Task<IActionResult> Index(int DiemTapKetId, int pageIndex = 1, int pageSize = 10)
         {
             var sessions = HttpContext.Session.GetString("Token");
             var request = new PagingRequestBase()
@@ -26,6 +27,7 @@ namespace MagicPost_WebApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
+            
             var data = await _DiemGiaoDichApiClient.GetUsersPagings(request, DiemTapKetId);
             if (TempData["result"] != null)
             {

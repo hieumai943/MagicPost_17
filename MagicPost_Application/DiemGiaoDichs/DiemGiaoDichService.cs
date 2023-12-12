@@ -19,7 +19,7 @@ namespace MagicPost_Application.DiemGiaoDichs
         {
             _context = context;
         }
-        public async Task<PageResult<DiemGiaoDichVm>> GetAllPaging(PagingRequestBase request, int DiemTapKetId)
+        public async Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetAllPaging(PagingRequestBase request, int DiemTapKetId)
         {
             var query = from p in _context.DiemGiaoDichs
                         where p.DiemTapKetId == DiemTapKetId
@@ -42,7 +42,8 @@ namespace MagicPost_Application.DiemGiaoDichs
                 PageIndex = request.PageIndex,
                 TotalRecords = totalRow
             };
-            return pageResult;
+            return new ApiSuccessResult<PageResult<DiemGiaoDichVm>>(pageResult);
+
         }
     }
 }

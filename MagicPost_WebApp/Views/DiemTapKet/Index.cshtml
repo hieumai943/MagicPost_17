@@ -1,7 +1,10 @@
 ﻿@using MagicPost_ViewModel.Common;
+@using System.Globalization;
 
 @model PageResult<MagicPost_ViewModel.Diem.DiemTapKetVm>
-
+@{
+    var culture = CultureInfo.CurrentCulture.Name;
+}
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,7 +22,7 @@
     </script>
 }
 <div class="container-fluid">
-    <h1 class="mt-4">Danh sách người dùng</h1>
+    <h1 class="mt-4">Danh sách điểm tập kết</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
         <li class="breadcrumb-item active">Danh sách các điểm tập kết</li>
@@ -47,7 +50,9 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                
+                                    <a href="/@culture/DiemGiaoDich/Index/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                                    
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Address)

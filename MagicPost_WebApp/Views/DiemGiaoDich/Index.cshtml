@@ -1,7 +1,10 @@
 ﻿@using MagicPost_ViewModel.Common;
+@using System.Globalization;
 
 @model PageResult<MagicPost_ViewModel.Diem.DiemGiaoDichVm>
-
+@{
+    var culture = CultureInfo.CurrentCulture.Name;
+}
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -47,7 +50,8 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    <a href="/@culture/Home/About/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Address)

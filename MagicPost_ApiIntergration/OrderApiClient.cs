@@ -40,6 +40,15 @@ namespace shopCommerce_ApiIntergration
 
             return data;
         }
+        public async Task<PageResult<OrderVm>> GetPagingDiemGiaoDich(GetManageOrderPagingRequest request, int DiemGiaoDichId)
+        {
+            var data = await GetAsync<PageResult<OrderVm>>(
+                $"/api/order/paging/{DiemGiaoDichId}?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}");
+
+
+            return data;
+        }
         public async Task<OrderVm> GetById(int id, string languageId)
         {
             var data = await GetAsync<OrderVm>($"/api/product/{id}/{languageId}");

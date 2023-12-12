@@ -13,7 +13,9 @@ namespace MagicPost_ApiIntergration
 	public interface IOrderApiClient
 	{
 		Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
-		Task<OrderVm> GetById(int id, string languageId);
+        Task<PageResult<OrderVm>> GetPagingDiemGiaoDich(GetManageOrderPagingRequest request, int DiemGiaoDichId);
+
+        Task<OrderVm> GetById(int id, string languageId);
 		Task<bool> CreateOrder(OrderCreateRequest request);
 
     }

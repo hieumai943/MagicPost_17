@@ -45,8 +45,10 @@ namespace MagicPost_WebApp.Controllers
 
             return View(viewModel);
         }
+      
         public async Task<IActionResult> About()
         {
+
             var viewModel = new HomeViewModel
             {
                 Slides = await _slideApiClient.GetAll(),
@@ -56,6 +58,23 @@ namespace MagicPost_WebApp.Controllers
                     PageIndex = 1,
                     PageSize = 10
                 })
+
+            };
+            return View(viewModel);
+        }
+        [HttpGet("/vi/Home/About/{DiemGiaoDichId}")]
+        public async Task<IActionResult> About(int DiemGiaoDichId)
+        {
+
+            var viewModel = new HomeViewModel
+            {
+                Slides = await _slideApiClient.GetAll(),
+                Orders = await _orderApiClient.GetPagingDiemGiaoDich(new GetManageOrderPagingRequest()
+                {
+                    Keyword = "",
+                    PageIndex = 1,
+                    PageSize = 10
+                }, DiemGiaoDichId)
 
             };
             return View(viewModel);

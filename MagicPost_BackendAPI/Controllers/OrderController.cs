@@ -3,6 +3,7 @@ using MagicPost_Application.System.Users;
 using MagicPost_ViewModel.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System.Security.Claims;
 
 namespace MagicPost_BackendAPI.Controllers
@@ -40,13 +41,25 @@ namespace MagicPost_BackendAPI.Controllers
                 }
                 if (users.ResultObj.DiemTapKetId.HasValue)
                 {
-                    var product1 = await _OrderService.GetAllPagingDiemGiaoDich(request, users.ResultObj.DiemTapKetId.Value);
+                    var product1 = await _OrderService.GetAllPagingDiemTapKet(request, users.ResultObj.DiemTapKetId.Value);
                     return Ok(product1);
                 }
             }
             var products = await _OrderService.GetAllPaging(request ); 
             return Ok(products);
         }
+        [HttpGet("paging/{DiemGiaoHangId}")]
+        // [Authorize(Roles ="GiaoDichVien")]
+
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetManageOrderPagingRequest request, int DiemGiaoHangId)
+        {
+
+                    var product1 = await _OrderService.GetAllPagingDiemGiaoDich(request,DiemGiaoHangId);
+                    return Ok(product1);
+                
+            
+        }
+
         //https://localhost:port/product/{id}
         [HttpGet("{orderId}/{languageId}")]
 
