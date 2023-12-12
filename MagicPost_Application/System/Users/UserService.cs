@@ -46,7 +46,9 @@ namespace MagicPost_Application.System.Users
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Role, string.Join(";", roles)),
-                new Claim(ClaimTypes.Name, request.UserName)
+                new Claim(ClaimTypes.Name, request.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // de lay ra userId
+
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -90,7 +92,9 @@ namespace MagicPost_Application.System.Users
                 Id = user.Id,
                 LastName = user.LastName,
                 UserName = user.UserName,
-                Roles = roles
+                Roles = roles,
+                DiemGiaoDichId = user.DiemGiaoDichId,
+                DiemTapKetId = user.DiemTapKetId
             };
             return new ApiSuccessResult<UserVm>(userVm);
         }

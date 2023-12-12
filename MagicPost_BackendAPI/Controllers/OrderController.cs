@@ -1,8 +1,9 @@
 ﻿using MagicPost_Application.Orders;
+using MagicPost_Application.System.Users;
 using MagicPost_ViewModel.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Security.Claims;
 
 namespace MagicPost_BackendAPI.Controllers
 {
@@ -10,19 +11,40 @@ namespace MagicPost_BackendAPI.Controllers
     [ApiController]
     public class OrderController : Controller
     {
- 
+        private readonly IUserService _userService;
+
         private readonly IOrderService _OrderService;
-        public OrderController(IOrderService OrderService)
+        public OrderController(IOrderService OrderService, IUserService userService)
         {
             this._OrderService = OrderService;
+            _userService = userService;
+
         }
-       
+
         [HttpGet("paging")]
-       
+        // [Authorize(Roles ="GiaoDichVien")]
 
         public async Task<IActionResult> GetAllPaging([FromQuery] GetManageOrderPagingRequest request)
         {
-            var products = await _OrderService.GetAllPaging(request); 
+
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            if (userId != null)
+            {
+                var users = await _userService.GetById(Guid.Parse(userId));
+                if (users.ResultObj.DiemGiaoDichId.HasValue)
+                {
+                    var product1 = await _OrderService.GetAllPagingDiemGiaoDich(request, users.ResultObj.DiemGiaoDichId.Value);
+                    return Ok(product1);
+                }
+                if (users.ResultObj.DiemTapKetId.HasValue)
+                {
+                    var product1 = await _OrderService.GetAllPagingDiemGiaoDich(request, users.ResultObj.DiemTapKetId.Value);
+                    return Ok(product1);
+                }
+            }
+            var products = await _OrderService.GetAllPaging(request ); 
             return Ok(products);
         }
         //https://localhost:port/product/{id}
@@ -39,17 +61,18 @@ namespace MagicPost_BackendAPI.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
-        // [Authorize(Roles ="GiaoDichVien")]
+        [Authorize(Roles ="GiaoDichVien")]
         public async Task<IActionResult> Create([FromForm] OrderCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             var orderId = await _OrderService.Create(request);
             if (orderId == 0)
                 return BadRequest();
-
+           
             var product = await _OrderService.GetById(orderId);
 
             return CreatedAtAction(nameof(GetById), new { id = orderId }, product);

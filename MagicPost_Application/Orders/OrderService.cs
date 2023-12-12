@@ -60,10 +60,87 @@ namespace MagicPost_Application.Orders
             _context.Orders.Remove(order);
             return await _context.SaveChangesAsync();
         }
+        public async Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDich(GetManageOrderPagingRequest request, int DiemGiaoDichId)
+        {
 
+            var query = from p in _context.Orders
+
+                        join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                        from pi in ppi.DefaultIfEmpty()
+                        where p.DiemGiaoDichId.Value == DiemGiaoDichId
+                        select new { p, pi };
+            // filter
+            if (!string.IsNullOrEmpty(request.Keyword))
+                query = query.Where(x => x.p.Code.Contains(request.Keyword));
+
+            //3 .paging
+            int totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                .Select(x => new OrderVm()
+                {
+                    Id = x.p.Id,
+                    OrderDate = x.p.OrderDate,
+                    Code = x.p.Code,
+                    SendName = x.p.SendName,
+                    ReceiveName = x.p.ReceiveName,
+                    SendAddress = x.p.SendAddress,
+                    ReceiveAddress = x.p.ReceiveAddress,
+                    Cuoc = x.p.Cuoc,
+                    KhoiLuong = x.p.KhoiLuong,
+                    // ThumbnailImage = x.pi.ImagePath
+                }).ToListAsync();
+            var pageResult = new PageResult<OrderVm>()
+            {
+                items = data,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                TotalRecords = totalRow
+            };
+            return pageResult;
+        }
+        public async Task<PageResult<OrderVm>> GetAllPagingDiemTapKet(GetManageOrderPagingRequest request, int DiemTapKetId)
+        {
+
+            var query = from p in _context.Orders
+
+                        join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                        from pi in ppi.DefaultIfEmpty()
+                        where p.DiemTapKetId.Value == DiemTapKetId
+                        select new { p, pi };
+            // filter
+            if (!string.IsNullOrEmpty(request.Keyword))
+                query = query.Where(x => x.p.Code.Contains(request.Keyword));
+
+            //3 .paging
+            int totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                .Select(x => new OrderVm()
+                {
+                    Id = x.p.Id,
+                    OrderDate = x.p.OrderDate,
+                    Code = x.p.Code,
+                    SendName = x.p.SendName,
+                    ReceiveName = x.p.ReceiveName,
+                    SendAddress = x.p.SendAddress,
+                    ReceiveAddress = x.p.ReceiveAddress,
+                    Cuoc = x.p.Cuoc,
+                    KhoiLuong = x.p.KhoiLuong,
+                    // ThumbnailImage = x.pi.ImagePath
+                }).ToListAsync();
+            var pageResult = new PageResult<OrderVm>()
+            {
+                items = data,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                TotalRecords = totalRow
+            };
+            return pageResult;
+        }
         public async Task<PageResult<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request)
 		{
+			
 			var query = from p in _context.Orders
+						
 						join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
 						from pi in ppi.DefaultIfEmpty()
 						select new { p, pi };

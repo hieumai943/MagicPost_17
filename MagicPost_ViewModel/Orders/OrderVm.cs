@@ -1,4 +1,5 @@
-﻿using MagicPost__Data.Enums;
+﻿using MagicPost__Data.Entities;
+using MagicPost__Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,11 @@ namespace MagicPost_ViewModel.Orders
 		public string ReceivePhoneNumber { set; get; }
 		public decimal Cuoc { set; get; }
 		public double KhoiLuong { set; get; }
-		// public string ThumbnailImage { set; get; }
-		public OrderStatus Status { set; get; }
-	}
+        public int? DiemGiaoDichId { set; get; }
+        public int? DiemTapKetId { set; get; }
+        // public string ThumbnailImage { set; get; }
+        public OrderStatus Status { set; get; }
+        public DiemTapKet? DiemTapKet { set; get; }
+        public DiemGiaoDich? DiemGiaoDich { set; get; }
+    }
 }

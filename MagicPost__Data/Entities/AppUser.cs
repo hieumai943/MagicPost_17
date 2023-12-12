@@ -13,7 +13,8 @@ namespace MagicPost__Data.Entities
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
+        public int? DiemGiaoDichId { get; set; }
+        public int? DiemTapKetId { get; set; }
         public DateTime Dob { get; set; }
 
         public List<Order> Orders { get; set; }

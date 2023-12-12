@@ -83,7 +83,8 @@ namespace MagicPost_Data.Extensions
                 SecurityStamp = string.Empty,
                 FirstName = "Hao",
                 LastName = "Nguyen",
-                Dob = new DateTime(2003, 04, 09)
+                Dob = new DateTime(2003, 04, 09),
+                DiemGiaoDichId = 1
             },
             new AppUser
             {

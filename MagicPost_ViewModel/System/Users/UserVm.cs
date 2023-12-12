@@ -29,7 +29,8 @@ namespace MagicPost_ViewModel.System.Users
 
         [Display(Name = "Ngày sinh")]
         public DateTime Dob { get; set; }
-
+        public int? DiemGiaoDichId { get; set; }
+        public int? DiemTapKetId { get; set; }
         public IList<string> Roles { get; set; } 
 
      }

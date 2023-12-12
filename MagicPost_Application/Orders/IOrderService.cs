@@ -11,7 +11,10 @@ namespace MagicPost_Application.Orders
 	public interface IOrderService
 	{
 		Task<PageResult<OrderVm>> GetAllPaging(GetManageOrderPagingRequest request);
-		Task<OrderVm> GetById(int orderId);
+        Task<PageResult<OrderVm>> GetAllPagingDiemTapKet(GetManageOrderPagingRequest request, int DiemTapKetId);
+        Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDich(GetManageOrderPagingRequest request, int DiemGiaoDichId);
+
+        Task<OrderVm> GetById(int orderId);
         Task<int> Create(OrderCreateRequest request);
         Task<int> Delete(int orderId);
 

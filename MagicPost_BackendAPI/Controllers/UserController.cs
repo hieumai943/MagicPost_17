@@ -60,6 +60,7 @@ namespace MagicPost_BackendAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
             var result = await _userService.Update(id, request);
             if (!result.IsSuccessed)
 
