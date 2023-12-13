@@ -15,7 +15,7 @@ namespace MagicPost__Data.Entities
 
         public string Address { set; get; }
 
-        public Guid? UserId { set; get; }
+        public Guid UserId { set; get; }
         public List<Order>? Orders { set; get; }
 
         public DiemTapKet DiemTapKet { get; set; } // quan he 1 nhieu o day la: 1 order co nhieu order details con 1 order tails chi thuoc 1 order

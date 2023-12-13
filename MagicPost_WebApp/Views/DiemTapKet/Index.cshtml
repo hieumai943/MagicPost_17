@@ -42,7 +42,9 @@
                             <th>
                                 Địa chỉ
                             </th>
-                            
+                            <th>
+                                Trưởng điểm tập kết
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +59,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Address)
                                 </td>
-                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TruongDiemTapKet.FirstName) @Html.DisplayFor(modelItem => item.TruongDiemTapKet.LastName)
+                                </td>
                              @*   <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
                                     @Html.ActionLink("Xem", "Details", new { id = item.Id }) |

@@ -33,6 +33,8 @@ namespace MagicPost_Application.DiemGiaoDichs
                     Id = x.p.Id,
                     Name = x.p.Name,
                     Address = x.p.Address,
+                    UserId = x.p.UserId,
+                    TruongDiemGiaoDich = x.p.TruongDiemGiaoDich
                 }).ToListAsync();
 
             var pageResult = new PageResult<DiemGiaoDichVm>()

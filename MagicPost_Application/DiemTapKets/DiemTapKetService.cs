@@ -38,6 +38,8 @@ namespace MagicPost_Application.DiemTapKets
                     Id = x.p.Id,
                    Name = x.p.Name,
                    Address = x.p.Address,
+                   UserId = x.p.UserId,
+                   TruongDiemTapKet = x.p.TruongDiemTapKet
                 }).ToListAsync();
             var pageResult = new PageResult<DiemTapKetVm>()
             {
