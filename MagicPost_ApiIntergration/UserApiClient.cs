@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using MagicPost_ViewModel.Diem;
 
 namespace MagicPost_ApiIntergration
 {
@@ -58,7 +59,7 @@ namespace MagicPost_ApiIntergration
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var response = await client.GetAsync($"/api/user/id?Id={id}");
-            var body = await response.Content.ReadAsStringAsync(); 
+            var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiSuccessResult<UserVm>>(body);
 
@@ -81,9 +82,9 @@ namespace MagicPost_ApiIntergration
 
         public async Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest)
         {
-            
+
             var client = _httpClientFactory.CreateClient();
-         
+
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             var json = JsonConvert.SerializeObject(registerRequest);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -118,7 +119,26 @@ namespace MagicPost_ApiIntergration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+        public async Task<ApiResult<bool>> DiemTapKetAssign(Guid Userid, DiemTapKetAssignRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
 
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/user/{Userid}/DiemTapKet", httpContent); // liên kết luôn đến api endpoint của web api luôn
+
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);  // chuyen tu string sang apiResult
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
         public async Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request)
         {
             var client = _httpClientFactory.CreateClient();

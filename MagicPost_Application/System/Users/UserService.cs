@@ -1,5 +1,6 @@
 ﻿using MagicPost__Data.Entities;
 using MagicPost_ViewModel.Common;
+using MagicPost_ViewModel.System.DiemGiaoDichs;
 using MagicPost_ViewModel.System.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -37,7 +38,8 @@ namespace MagicPost_Application.System.Users
             if (user == null) return new ApiErrorResult<string>("Tai khoan khong ton tai");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
-            if (!result.Succeeded){
+            if (!result.Succeeded)
+            {
                 return null;
             }
             var roles = await _userManager.GetRolesAsync(user);
@@ -70,15 +72,15 @@ namespace MagicPost_Application.System.Users
             {
                 return new ApiErrorResult<bool>("User khong ton tai");
             }
-           var result = await _userManager.DeleteAsync(user);
-            if(result.Succeeded )  return new ApiSuccessResult<bool>();
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded) return new ApiSuccessResult<bool>();
             return new ApiErrorResult<bool>("Xóa không thành công");
         }
 
         public async Task<ApiResult<UserVm>> GetById(Guid Id)
         {
             var user = await _userManager.FindByIdAsync(Id.ToString());
-            if(user == null)
+            if (user == null)
             {
                 return new ApiErrorResult<UserVm>("User không tồn tại");
             }
@@ -117,7 +119,9 @@ namespace MagicPost_Application.System.Users
                     UserName = x.UserName,
                     FirstName = x.FirstName,
                     Id = x.Id,
-                    LastName = x.LastName
+                    LastName = x.LastName,
+                    Dob = x.Dob
+
                 }).ToListAsync();
             var pageResult = new PageResult<UserVm>()
             {
@@ -129,7 +133,7 @@ namespace MagicPost_Application.System.Users
             return new ApiSuccessResult<PageResult<UserVm>>(pageResult);
         }
 
-        public  async Task<ApiResult<bool>> Register(RegisterRequest request)
+        public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user != null)
@@ -179,21 +183,45 @@ namespace MagicPost_Application.System.Users
                 }
             }
             var addedRoles = request.Roles.Where(x => x.Selected == true).Select(x => x.Name).ToList();
-           foreach(var roleName in addedRoles)
+            foreach (var roleName in addedRoles)
             {
-                if(await _userManager.IsInRoleAsync(user, roleName)== false)
+                if (await _userManager.IsInRoleAsync(user, roleName) == false)
                 {
                     await _userManager.AddToRoleAsync(user, roleName);
                 }
+
             }
-         
+
             return new ApiSuccessResult<bool>();
         }
+        public async Task<ApiResult<bool>> DiemGiaoDichAssign(Guid Id, int DiemGiaoDichId)
+        {
+            var user = await _userManager.FindByIdAsync(Id.ToString());
+            user.DiemGiaoDichId = DiemGiaoDichId;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
 
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
+        public async Task<ApiResult<bool>> DiemTapKetAssign(Guid Id, int DiemTapKetId)
+        {
+            var user = await _userManager.FindByIdAsync(Id.ToString());
+            user.DiemTapKetId = DiemTapKetId;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
         public async Task<ApiResult<bool>> Update(Guid Id, UserUpdateRequest request)
         {
-            
-          
+
+
             if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != Id)) // nghĩa 
             {
                 return new ApiErrorResult<bool>("Emai đã tồn tại");

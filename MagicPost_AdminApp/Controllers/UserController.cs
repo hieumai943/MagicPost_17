@@ -1,5 +1,6 @@
 ﻿using MagicPost_ApiIntergration;
 using MagicPost_ViewModel.Common;
+using MagicPost_ViewModel.Diem;
 using MagicPost_ViewModel.System.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,13 +16,17 @@ namespace MagicPost_AdminApp.Controllers
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
         private readonly IRoleApiClient _roleApiClient;
+        private readonly IDiemTapKetApiClient _DiemTapKetApiClient;
+        private readonly IDiemGiaoDichApiClient _DiemGiaoDichApiClient;
 
 
-        public UserController(IUserApiClient userApiClient, IConfiguration configuration , IRoleApiClient roleApiClient)
+        public UserController(IUserApiClient userApiClient, IConfiguration configuration, IRoleApiClient roleApiClient, IDiemTapKetApiClient diemTapKetApiClient, IDiemGiaoDichApiClient diemGiaoDichApiClient)
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
             _roleApiClient = roleApiClient;
+            _DiemTapKetApiClient = diemTapKetApiClient;
+            _DiemGiaoDichApiClient = diemGiaoDichApiClient;
         }
         public async  Task<IActionResult> Index(string keyword = "" , int pageIndex=1, int pageSize =10)
         {
@@ -169,6 +174,44 @@ namespace MagicPost_AdminApp.Controllers
 
             return View(roleAssignRequest);
         }
+        [HttpGet]
+        public async Task<IActionResult> DiemTapKetAssign(int pageIndex = 1, int pageSize = 10)
+        {
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new PagingRequestBase()
+            {
+                // BearerToken = sessions,
+
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            ViewBag.UserId = userId;
+            var data = await _DiemTapKetApiClient.GetUsersPagings(request);
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data.ResultObj);
+        }
+        [HttpPost()]
+         public async Task<IActionResult> DiemTapKetAssign( DiemTapKetAssignRequest request)
+         {
+             if (!ModelState.IsValid)
+                 return View();
+
+             var result = await _userApiClient.DiemTapKetAssign(request.Id, request);
+
+             if (result.IsSuccessed)
+             {
+                 TempData["result"] = "chỉnh sửa  thành công";
+                 return RedirectToAction("Index");
+             }
+
+             ModelState.AddModelError("", result.Message);
+             return RedirectToAction("Index", "Home");
+
+         }
         private async Task<RoleAssignRequest> GetRoleAssignRequest(Guid id)
         {
             var userObj = await _userApiClient.GetById(id);

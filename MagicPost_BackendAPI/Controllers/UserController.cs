@@ -1,4 +1,6 @@
 ﻿using MagicPost_Application.System.Users;
+using MagicPost_ViewModel.Diem;
+using MagicPost_ViewModel.System.DiemGiaoDichs;
 using MagicPost_ViewModel.System.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,12 +30,12 @@ namespace MagicPost_BackendAPI.Controllers
                 return BadRequest(ModelState);
             }
             var resultToken = await _userService.Authenticate(request);
-            if(string.IsNullOrEmpty(resultToken.ResultObj))
+            if (string.IsNullOrEmpty(resultToken.ResultObj))
             {
                 return BadRequest(resultToken.Message);
             }
-            return Ok(resultToken );
-           
+            return Ok(resultToken);
+
         }
         [HttpPost]
         [AllowAnonymous]
@@ -53,14 +55,14 @@ namespace MagicPost_BackendAPI.Controllers
         }
         // https:localhost/api/users/id
         [HttpPut("{id}")]
- 
+
         public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
+
             var result = await _userService.Update(id, request);
             if (!result.IsSuccessed)
 
@@ -69,7 +71,7 @@ namespace MagicPost_BackendAPI.Controllers
             }
             return Ok(result);
         }
-   
+
 
         [HttpPut("{id}/roles")]
         public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
@@ -84,11 +86,41 @@ namespace MagicPost_BackendAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpPut("{id}/DiemGiaoDich")]
+        [AllowAnonymous]
+
+        public async Task<IActionResult> DiemGiaoDichAssign(Guid id, DiemGiaoDichAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.DiemGiaoDichAssign(id, request.DiemGiaoDichId);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpPut("{id}/DiemTapKet")]
+        [AllowAnonymous]
+
+        public async Task<IActionResult> DiemTapKetAssign(Guid id, int DiemTapKetId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.DiemTapKetAssign(id, DiemTapKetId);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
 
         // https://localhost/api/user/paging?pageIndex=1&pageSize=10$keyword =
         [HttpGet("paging")]
-
-        public async Task<IActionResult> GetAllPaging( [FromQuery] GetUserPagingRequest request)
+        [Authorize(Roles = "TruongDiemGiaoDich")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
         {
             var orders = await _userService.GetUsersPaging(request);
             return Ok(orders);

@@ -30,6 +30,9 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
+builder.Services.AddTransient<IDiemTapKetApiClient, DiemTapKetApiClient>();
+builder.Services.AddTransient<IDiemGiaoDichApiClient, DiemGiaoDichApiClient>();
+
 // builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 
 /*var mvcBuilder = builder.Services.AddRazorPages();

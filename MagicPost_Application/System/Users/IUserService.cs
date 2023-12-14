@@ -1,5 +1,6 @@
 ﻿
 using MagicPost_ViewModel.Common;
+using MagicPost_ViewModel.System.DiemGiaoDichs;
 using MagicPost_ViewModel.System.Users;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,10 @@ namespace MagicPost_Application.System.Users
 
 
         Task<ApiResult<bool>> RoleAssign(Guid Id, RoleAssignRequest request);
+        Task<ApiResult<bool>> DiemGiaoDichAssign(Guid Id, int DiemGiaoDichId);
+        Task<ApiResult<bool>> DiemTapKetAssign(Guid Id, int DiemTapKetId);
+
+
         Task<ApiResult<bool>> Update(Guid Id, UserUpdateRequest request);
 
     }
