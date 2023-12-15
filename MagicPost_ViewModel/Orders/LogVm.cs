@@ -11,10 +11,10 @@ namespace MagicPost_ViewModel.Orders
     public class LogVm
     {
         public int Id { get; set; }
-        public DiemGiaoDich? DiemGiaoDichFrom { get; set; }
-        public DiemTapKet? DiemTapKetFrom { get; set; }
-        public DiemGiaoDich? DiemGiaoDichTo { get; set; }
-        public DiemTapKet? DiemTapKetTo { get; set; }
+        public int? DiemGiaoDichFrom { get; set; }
+        public int? DiemTapKetFrom { get; set; }
+        public int? DiemGiaoDichTo { get; set; }
+        public int? DiemTapKetTo { get; set; }
         public DateTime DateCreated { get; set; }
         public OrderStatus OrderStatus { get; set; }
 
