@@ -1,6 +1,7 @@
 ﻿using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
 using MagicPost_ViewModel.Common;
+using MagicPost_ViewModel.Diem;
 using MagicPost_ViewModel.System.DiemGiaoDichs;
 using MagicPost_ViewModel.System.Users;
 using Microsoft.AspNetCore.Identity;
@@ -201,6 +202,10 @@ namespace MagicPost_Application.System.Users
         {
             var user = await _userManager.FindByIdAsync(Id.ToString());
             user.DiemGiaoDichId = DiemGiaoDichId;
+            var DiemGiaoDichEntity = await _context.DiemGiaoDichs.FindAsync(DiemGiaoDichId);
+
+            // Cập nhật UserId
+            DiemGiaoDichEntity.UserId = Id;
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {

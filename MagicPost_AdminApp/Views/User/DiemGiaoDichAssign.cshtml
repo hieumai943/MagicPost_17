@@ -55,9 +55,9 @@
                             <tr>
                                 <td>
 
-                                    <form method="post" action="/User/DiemTapKetAssign">
+                                    <form method="post" action="/User/DiemGiaoDichAssign">
                                         <input type="hidden" name="Id" value="@TempData["UserId"]" />
-                                        <input type="hidden" name="DiemTapKetId" value="@item.Id" />
+                                        <input type="hidden" name="DiemGiaoDichId" value="@item.Id" />
                                         <!-- Thêm các trường khác của DiemTapKetAssignRequest vào đây nếu cần -->
                                         <button type="submit">@Html.DisplayFor(modelItem => item.Name)</button>
                                     </form>
