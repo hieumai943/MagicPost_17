@@ -37,6 +37,7 @@ namespace MagicPost_WebApp.Controllers
             }
             return View(data.ResultObj);
         }
+
         /*[HttpPost()]
 
         public async Task<IActionResult> Assign(DiemGiaoDichAssignRequest request)

@@ -119,6 +119,27 @@ namespace MagicPost_ApiIntergration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+       
+        public async Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/user/{id}", httpContent); // liên kết luôn đến api endpoint của web api luôn
+
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);  // chuyen tu string sang apiResult
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
         public async Task<ApiResult<bool>> DiemTapKetAssign(Guid Userid, DiemTapKetAssignRequest request)
         {
             var client = _httpClientFactory.CreateClient();
@@ -139,7 +160,7 @@ namespace MagicPost_ApiIntergration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
-        public async Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request)
+        public async Task<ApiResult<bool>> DiemGiaoDichAssign(Guid Userid, DiemGiaoDichAssignRequest request)
         {
             var client = _httpClientFactory.CreateClient();
 
@@ -150,7 +171,7 @@ namespace MagicPost_ApiIntergration
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync($"/api/user/{id}", httpContent); // liên kết luôn đến api endpoint của web api luôn
+            var response = await client.PutAsync($"/api/user/DiemGiaoDich/{Userid}/{request.DiemGiaoDichId}", httpContent); // liên kết luôn đến api endpoint của web api luôn
 
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)

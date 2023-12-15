@@ -1,0 +1,89 @@
+﻿@using MagicPost_ViewModel.Common;
+@using System.Globalization;
+
+@model PageResult<MagicPost_ViewModel.Diem.DiemGiaoDichVm>
+@{
+    var culture = CultureInfo.CurrentCulture.Name;
+}
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userId = ViewBag.UserId;
+}
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            var msgAlert = document.getElementById('msgAlert');
+            if (msgAlert) {
+                msgAlert.style.transition = 'opacity 1s ease';
+                msgAlert.style.opacity = '0';
+                msgAlert.style.display = 'none';
+            }
+        }, 2000);
+    </script>
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách điểm giao dịch</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách các điểm tập kết</li>
+    </ol>
+    <div class="card mb-12">
+
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên
+                            </th>
+                            <th>
+                                Địa chỉ
+                            </th>
+                            <th>
+                                Trưởng điểm tập kết
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.items)
+                        {
+                            <tr>
+                                <td>
+
+                                    <form method="post" action="/User/DiemTapKetAssign">
+                                        <input type="hidden" name="Id" value="@TempData["UserId"]" />
+                                        <input type="hidden" name="DiemTapKetId" value="@item.Id" />
+                                        <!-- Thêm các trường khác của DiemTapKetAssignRequest vào đây nếu cần -->
+                                        <button type="submit">@Html.DisplayFor(modelItem => item.Name)</button>
+                                    </form>
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TruongDiemGiaoDich.FirstName) @Html.DisplayFor(modelItem => item.TruongDiemGiaoDich.LastName)
+                                </td>
+                                @*   <td>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Xem", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+
+                            </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @await Component.InvokeAsync("Pager", Model)
+        </div>
+    </div>
+</div>
+
+
+

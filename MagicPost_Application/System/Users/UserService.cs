@@ -1,4 +1,5 @@
-﻿using MagicPost__Data.Entities;
+﻿using MagicPost__Data.EF;
+using MagicPost__Data.Entities;
 using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.System.DiemGiaoDichs;
 using MagicPost_ViewModel.System.Users;
@@ -24,13 +25,15 @@ namespace MagicPost_Application.System.Users
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
+		private readonly MagicPostDbContext _context;
 
-        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config)
+        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, MagicPostDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
+            _context = context;
         }
         public async Task<ApiResult<string>> Authenticate(LoginRequest request)
         {
@@ -209,6 +212,10 @@ namespace MagicPost_Application.System.Users
         public async Task<ApiResult<bool>> DiemTapKetAssign(Guid Id, int DiemTapKetId)
         {
             var user = await _userManager.FindByIdAsync(Id.ToString());
+            var DiemTapKetEntity = await _context.DiemTapKets.FindAsync(DiemTapKetId);
+
+            // Cập nhật UserId
+            DiemTapKetEntity.UserId = Id;
             user.DiemTapKetId = DiemTapKetId;
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)

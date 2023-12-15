@@ -172,6 +172,15 @@ namespace MagicPost_AdminApp.Controllers
 
                 }
             }
+            foreach (var i in request.Roles)
+            {
+                if (i.Selected == true && (i.Name == "GiaoDichVien" || i.Name == "TruongDiemGiaoDich"))
+                {
+                    TempData["UserId"] = request.Id;
+                    return RedirectToAction("DiemGiaoDichAssign", "User");
+
+                }
+            }
             if (result.IsSuccessed)
             {
                 
@@ -222,6 +231,43 @@ namespace MagicPost_AdminApp.Controllers
              return RedirectToAction("Index", "Home");
 
          }
+        [HttpGet]
+        public async Task<IActionResult> DiemGiaoDichAssign(int pageIndex = 1, int pageSize = 10)
+        {
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new PagingRequestBase()
+            {
+                // BearerToken = sessions,
+
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+
+            var data = await _DiemGiaoDichApiClient.GetUsersPagingsAll(request);
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data.ResultObj);
+        }
+        [HttpPost()]
+        public async Task<IActionResult> DiemGiaoDichAssign(DiemGiaoDichAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _userApiClient.DiemGiaoDichAssign(request.Id, request);
+
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "chỉnh sửa  thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", result.Message);
+            return RedirectToAction("Index", "Home");
+
+        }
         private async Task<RoleAssignRequest> GetRoleAssignRequest(Guid id)
         {
             var userObj = await _userApiClient.GetById(id);

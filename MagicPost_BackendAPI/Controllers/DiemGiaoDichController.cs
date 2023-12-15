@@ -16,12 +16,18 @@ namespace MagicPost_BackendAPI.Controllers
         {
             this._DiemGiaoDichService = DiemGiaoDichService;
         }
-
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] PagingRequestBase request)
+        {
+            var products = await _DiemGiaoDichService.GetAllPaging(request);
+            return Ok(products);
+        }
         [HttpGet("paging/{DiemTapKetId}")]
         public async Task<IActionResult> GetAllPaging([FromQuery] PagingRequestBase request, int DiemTapKetId)
         {
             var products = await _DiemGiaoDichService.GetAllPaging(request, DiemTapKetId);
             return Ok(products);
         }
+       
     }
 }

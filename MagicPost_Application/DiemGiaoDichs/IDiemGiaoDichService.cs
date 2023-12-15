@@ -11,6 +11,8 @@ namespace MagicPost_Application.DiemGiaoDichs
 {
     public interface IDiemGiaoDichService
     {
+        Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetAllPaging(PagingRequestBase request);
+
         Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetAllPaging(PagingRequestBase request, int DiemTapKetId);
 
     }

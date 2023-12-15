@@ -22,5 +22,15 @@ namespace MagicPost_BackendAPI.Controllers
             var products = await _DiemTapKetService.GetAllPaging(request);
             return Ok(products);
         }
+        [HttpGet("{DiemTapKetId}")]
+
+        public async Task<IActionResult> GetById(int DiemTapKetId)
+        {
+            var DiemTapKet = await _DiemTapKetService.GetById(DiemTapKetId);
+            
+            if (DiemTapKet == null)
+                return BadRequest("Cannot find Diem tap ket");
+            return Ok(DiemTapKet);
+        }
     }
 }

@@ -47,5 +47,32 @@ namespace MagicPost_Application.DiemGiaoDichs
             return new ApiSuccessResult<PageResult<DiemGiaoDichVm>>(pageResult);
 
         }
+        public async Task<ApiResult<PageResult<DiemGiaoDichVm>>> GetAllPaging(PagingRequestBase request)
+        {
+            var query = from p in _context.DiemGiaoDichs
+                        select new { p };
+            // filter
+            //3 .paging
+            int totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                .Select(x => new DiemGiaoDichVm()
+                {
+                    Id = x.p.Id,
+                    DiemTapKetId = 1,
+                    Name = x.p.Name,
+                    Address = x.p.Address,
+                    UserId = x.p.UserId,
+                    TruongDiemGiaoDich = x.p.TruongDiemGiaoDich
+                }).ToListAsync();
+            var pageResult = new PageResult<DiemGiaoDichVm>()
+            {
+                items = data,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                TotalRecords = totalRow
+            };
+            return new ApiSuccessResult<PageResult<DiemGiaoDichVm>>(pageResult);
+
+        }
     }
 }

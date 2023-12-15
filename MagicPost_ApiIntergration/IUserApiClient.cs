@@ -13,6 +13,7 @@ namespace MagicPost_ApiIntergration
         Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
         Task<ApiResult<bool>> RoleAssign( Guid id , RoleAssignRequest request);
         Task<ApiResult<bool>> DiemTapKetAssign(Guid Userid, DiemTapKetAssignRequest request);
+        Task<ApiResult<bool>> DiemGiaoDichAssign(Guid Userid, DiemGiaoDichAssignRequest request);
 
         Task<ApiResult<UserVm>> GetById(Guid id);
         Task<ApiResult<bool>> Delete(Guid id);

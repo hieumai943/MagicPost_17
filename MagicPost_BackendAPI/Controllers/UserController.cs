@@ -1,4 +1,6 @@
-﻿using MagicPost_Application.System.Users;
+﻿using MagicPost_Application.DiemGiaoDichs;
+using MagicPost_Application.DiemTapKets;
+using MagicPost_Application.System.Users;
 using MagicPost_ViewModel.Diem;
 using MagicPost_ViewModel.System.DiemGiaoDichs;
 using MagicPost_ViewModel.System.Users;
@@ -15,10 +17,14 @@ namespace MagicPost_BackendAPI.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IDiemTapKetService _DiemTapKetService;
+        private readonly IDiemGiaoDichService _DiemGiaoDichService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IDiemTapKetService diemTapKetService, IDiemGiaoDichService diemGiaoDichService)
         {
             _userService = userService;
+            _DiemTapKetService  = diemTapKetService;
+            _DiemGiaoDichService = diemGiaoDichService;
         }
 
         [HttpPost("authenticate")]
@@ -110,13 +116,29 @@ namespace MagicPost_BackendAPI.Controllers
                 return BadRequest(ModelState);
 
             var result = await _userService.DiemTapKetAssign(id, DiemTapKetId);
+          
             if (!result.IsSuccessed)
             {
                 return BadRequest(result);
             }
             return Ok(result);
         }
+        [HttpPut("/api/User/DiemGiaoDich/{id}/{DiemGiaoDichId}")]
+        [AllowAnonymous]
 
+        public async Task<IActionResult> DiemGiaoDichAssign(Guid id, int DiemGiaoDichId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.DiemGiaoDichAssign(id, DiemGiaoDichId);
+           
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
         // https://localhost/api/user/paging?pageIndex=1&pageSize=10$keyword =
         [HttpGet("paging")]
         // [Authorize(Roles = "TruongDiemGiaoDich")]

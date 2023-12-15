@@ -50,5 +50,21 @@ namespace MagicPost_Application.DiemTapKets
             };
             return new ApiSuccessResult<PageResult<DiemTapKetVm>>(pageResult);
         }
+
+        public async Task<DiemTapKetVm> GetById(int DiemTapKetId)
+        {
+            var DiemTapKet = await _context.DiemTapKets.FindAsync(DiemTapKetId);
+
+
+            var DiemTapKetViewModel = new DiemTapKetVm()
+            {
+                Id = DiemTapKet.Id,
+                Name = DiemTapKet.Name,
+                Address = DiemTapKet.Address,
+                UserId = DiemTapKet.UserId,
+                TruongDiemTapKet = DiemTapKet.TruongDiemTapKet
+            };
+            return DiemTapKetViewModel;
+        }
     }
 }

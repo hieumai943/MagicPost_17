@@ -22,5 +22,6 @@ namespace MagicPost_BackendAPI.Controllers
             var roles = await  _roleService.GetAll();
             return Ok(roles);
         }
+
     }
 }
