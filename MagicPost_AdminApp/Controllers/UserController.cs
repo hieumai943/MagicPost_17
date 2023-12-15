@@ -162,15 +162,26 @@ namespace MagicPost_AdminApp.Controllers
                 return View();
 
             var result = await _userApiClient.RoleAssign(request.Id, request);
+           
+            foreach(var i in request.Roles)
+            {
+                if(i.Selected == true && (i.Name == "NhanVienTapKet" || i.Name == "TruongDiemTapKet"))
+                {
+                    TempData["UserId"] = request.Id;
+                    return RedirectToAction("DiemTapKetAssign", "User");
 
+                }
+            }
             if (result.IsSuccessed)
             {
+                
                 TempData["result"] = "Cập nhật quyền thành công";
                 return RedirectToAction("Index");
             }
-
+          
             ModelState.AddModelError("", result.Message);
-             var roleAssignRequest = await GetRoleAssignRequest(request.Id);
+            
+            var roleAssignRequest = await GetRoleAssignRequest(request.Id);
 
             return View(roleAssignRequest);
         }
@@ -185,8 +196,7 @@ namespace MagicPost_AdminApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            ViewBag.UserId = userId;
+          
             var data = await _DiemTapKetApiClient.GetUsersPagings(request);
             if (TempData["result"] != null)
             {

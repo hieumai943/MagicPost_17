@@ -101,7 +101,7 @@ namespace MagicPost_BackendAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpPut("{id}/DiemTapKet")]
+        [HttpPut("/api/User/DiemTapKet/{id}/{DiemTapKetId}")]
         [AllowAnonymous]
 
         public async Task<IActionResult> DiemTapKetAssign(Guid id, int DiemTapKetId)
@@ -119,7 +119,7 @@ namespace MagicPost_BackendAPI.Controllers
 
         // https://localhost/api/user/paging?pageIndex=1&pageSize=10$keyword =
         [HttpGet("paging")]
-        [Authorize(Roles = "TruongDiemGiaoDich")]
+        // [Authorize(Roles = "TruongDiemGiaoDich")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
         {
             var orders = await _userService.GetUsersPaging(request);

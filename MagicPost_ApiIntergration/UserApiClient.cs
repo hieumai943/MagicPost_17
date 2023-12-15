@@ -130,7 +130,7 @@ namespace MagicPost_ApiIntergration
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync($"/api/user/{Userid}/DiemTapKet", httpContent); // liên kết luôn đến api endpoint của web api luôn
+            var response = await client.PutAsync($"/api/user/DiemTapKet/{Userid}/{request.DiemTapKetId}", httpContent); // liên kết luôn đến api endpoint của web api luôn
 
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
