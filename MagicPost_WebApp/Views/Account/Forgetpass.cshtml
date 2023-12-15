@@ -1,1 +1,150 @@
-﻿
+﻿<!--@model MagicPost_ViewModel.System.Users.ForgetPassRequest;
+
+
+@{
+ViewData["Title"] = "ForgetPass";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+  <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+  <li class="active">Forget Pass</li>
+</ul>
+<h3> ForgetPass</h3>
+<div class="well">
+  <form asp-action="ForgetPass" asp-controller="Account" method="post" class="form-horizontal">
+
+    <div class="control-group">
+      <label class="label" for="input_email">Email <sup>*</sup></label>
+      <div class="controls">
+        <input type="email" asp-for="Email" class="input">
+        <span asp-validation-for="Email" class="text-error"></span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="label" for="inputPassword1">User Name <sup>*</sup></label>
+      <div class="controls">
+        <input type="text" asp-for="UserName" class="input">
+      </div>
+    </div>
+          <div class="control-group">
+      <label class="label" for="mobile">Mobile Phone </label>
+      <div class="controls">
+        <input type="text" asp-for="PhoneNumber" class="input" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="label" for="inputPassword1">New Password <sup>*</sup></label>
+      <div class="controls">
+        <input type="password" asp-for="NewPassword" class="input">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="label" for="inputPassword1">Confirm Password <sup>*</sup></label>
+      <div class="controls">
+        <input type="password" asp-for="ConfirmPassword" class="input">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <input type="hidden" name="email_create" value="1">
+        <input type="hidden" name="is_new_customer" value="1">
+        <button class="button">
+          <span class="reg-button" type="submit">Register</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<style>
+  /*register css*/
+  .well {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input {
+    width: 350px;
+    height: 44px;
+    background-color: #05060f0a;
+    border-radius: .5rem;
+    padding: 0 1rem;
+    border: 2px solid transparent;
+    font-size: 1rem;
+    transition: border-color .3s cubic-bezier(.25, .01, .25, 1) 0s, color .3s cubic-bezier(.25, .01, .25, 1) 0s, background .2s cubic-bezier(.25, .01, .25, 1) 0s;
+  }
+
+  .label {
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #05060f99;
+    transition: color .3s cubic-bezier(.25, .01, .25, 1) 0s;
+  }
+
+  .label2 {
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #05060f99;
+    transition: color .3s cubic-bezier(.25, .01, .25, 1) 0s;
+  }
+
+
+  .input:hover,
+  .input:focus,
+  .controls:hover .input {
+    outline: none;
+    border-color: #05060f;
+  }
+
+  .controls:hover .label,
+  .input:focus {
+    color: #05060fc2;
+  }
+
+  .button {
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #3d3a4e;
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    margin-left: 69px;
+    margin-top: 20px;
+  }
+
+  .button:hover::before {
+    transform: scaleX(1);
+  }
+
+  .reg-button {
+    position: relative;
+    z-index: 1;
+  }
+
+  .button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(82.3deg,
+        rgba(150, 93, 233, 1) 10.8%,
+        rgba(99, 88, 238, 1) 94.3%);
+    transition: all 0.475s;
+  }
+</style>-->
