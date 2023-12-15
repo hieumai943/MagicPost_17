@@ -4,6 +4,7 @@ using MagicPost__Data.Entities;
 using MagicPost_Application.DiemGiaoDichs;
 using MagicPost_Application.DiemTapKets;
 using MagicPost_Application.Orders;
+using MagicPost_Application.Transfer;
 using MagicPost_Application.System.Roles;
 using MagicPost_Application.System.Users;
 using MagicPost_Application.Utilities.Slides;
@@ -42,6 +43,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<IDiemGiaoDichService, DiemGiaoDichService>();
 builder.Services.AddTransient<IDiemTapKetService, DiemTapKetService>();
+builder.Services.AddTransient<ITransferService, TransferService>();
 
 /*
 builder.Services.AddTransient<ISlideService, SlideService>();*/
