@@ -191,7 +191,7 @@ a {
     .top-bar .top-bar-item {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     .top-bar .top-bar-icon {
@@ -259,6 +259,7 @@ a {
     .nav-bar.nav-sticky .navbar {
         padding: 5px 0;
     }
+
 
 .navbar-dark .navbar-nav .nav-link,
 .navbar-dark .navbar-nav .nav-link:focus,

@@ -4,6 +4,7 @@
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>AutoWash - Car Wash Website Template</title>
@@ -13,9 +14,10 @@
 
     <!-- Favicon -->
     <link href="/img/favicon.ico" rel="icon">
-    
+
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +27,7 @@
     <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
     <link href="/css/app.css" rel="stylesheet">
-   
+
 </head>
 
 <body>
@@ -65,7 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div >
+                        <div class="col-4">
                             <div class="top-bar-item">
                                 <div class="top-bar-icon">
                                     <i class="far fa-envelope"></i>
@@ -76,16 +78,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
-                            @if (User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated)
                             {
-                                <div class="span6">Welcome!<strong> @User.Identity.Name</strong></div>
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-text">
+                                            <h3>Welcome!</h3>
+                                            <p>@User.Identity.Name</p>
+                                        </div>
+                                    </div>
+                                </div>
                             }
-                            else
-                            {
-                                <div class="span6">Welcome!<strong> Guest!</strong></div>
-                            }
-                        </div>
                     </div>
                 </div>
             </div>
@@ -119,33 +122,38 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
-                    <div class="ml-auto">
-                     
 
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <form action="/@culture/Account/Logout" method="post">
-                                    <button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
-                                    <a class="btn btn-custom" >Đăng xuất</a>
+
+                    <div class="ml-auto">
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form action="/@culture/Account/Logout" method="post">
+                                <button type="submit"
+                                    style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
+                                    <a class="btn btn-custom">
+                                        Đăng xuất
+                                    </a>
 
                                 </button>
-                                </form>
-                            }
-                            else
-                            {
+                            </form>
+                        }
+                        else
+                        {
 
                             <a class="btn btn-custom" href="/@culture/Account/Login">Đăng nhập</a>
 
-                            }
+                        }
 
-                       
+
                     </div>
                 </div>
             </nav>
         </div>
     </div>
     <!-- Nav Bar End -->
-   
+
     @RenderBody()
     <!-- Footer Start -->
     <div class="footer">
@@ -198,7 +206,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- Footer End -->
     <!-- Back to top button -->
@@ -219,7 +227,8 @@
 
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
-    @RenderSection("Scripts",required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
+
 </html>
