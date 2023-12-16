@@ -1,7 +1,4 @@
-	/*
-  	Flaticon icon font: Flaticon
-  	Creation date: 11/10/2020 08:08
-  	*/
+
 
 @font-face {
   font-family: "Flaticon";
@@ -11,6 +8,14 @@
        url("./Flaticon.woff") format("woff"),
        url("./Flaticon.ttf") format("truetype"),
        url("./Flaticon.svg#Flaticon") format("svg");
+
+
+
+
+
+
+
+
   font-weight: normal;
   font-style: normal;
 }
@@ -30,13 +35,33 @@ font-style: normal;
 margin-left: 20px;
 }
 
-.flaticon-car-wash-1:before { content: "\f100"; }
-.flaticon-car-service:before { content: "\f101"; }
-.flaticon-seat:before { content: "\f102"; }
-.flaticon-car-service-1:before { content: "\f103"; }
-.flaticon-car-wash:before { content: "\f104"; }
-.flaticon-brush:before { content: "\f105"; }
-.flaticon-vacuum-cleaner:before { content: "\f106"; }
-.flaticon-brush-1:before { content: "\f107"; }
-.flaticon-car-service-2:before { content: "\f108"; }
-.flaticon-car-service-3:before { content: "\f109"; }
+.flaticon-car-wash-1:before { 
+    content: "\f100"; 
+}
+.flaticon-car-service:before { 
+    content: "\f101"; 
+}
+.flaticon-seat:before {
+    content: "\f102"; 
+}
+.flaticon-car-service-1:before { 
+    content: "\f103";
+}
+.flaticon-car-wash:before { 
+    content: "\f104"; 
+}
+.flaticon-brush:before { 
+    content: "\f105"; 
+}
+.flaticon-vacuum-cleaner:before { 
+    content: "\f106"; 
+}
+.flaticon-brush-1:before { 
+    content: "\f107"; 
+}
+.flaticon-car-service-2:before {
+    content: "\f108";
+}
+.flaticon-car-service-3:before {
+    content: "\f109"; 
+}
