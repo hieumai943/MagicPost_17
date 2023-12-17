@@ -98,7 +98,23 @@ namespace MagicPost_ApiIntergration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+        public async Task<ApiResult<bool>> RegisterGiaoDichVien(RegisterRequest registerRequest, int DiemGiaoDichId)
+        {
+            var client = _httpClientFactory.CreateClient();
 
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var json = JsonConvert.SerializeObject(registerRequest);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/user/{DiemGiaoDichId}", httpContent); // liên kết luôn đến api endpoint của web api luôn
+            
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);  // chuyen tu string sang apiResult
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
         public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
         {
             var client = _httpClientFactory.CreateClient();
@@ -180,5 +196,7 @@ namespace MagicPost_ApiIntergration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+
+        
     }
 }

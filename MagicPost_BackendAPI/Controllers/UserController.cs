@@ -59,6 +59,22 @@ namespace MagicPost_BackendAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("{DiemGiaoDichId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterGiaoDichVien([FromBody] RegisterRequest request, int DiemGiaoDichId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _userService.RegisterGiaoDichVien(request, DiemGiaoDichId);
+            if (!result.IsSuccessed)
+
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
         // https:localhost/api/users/id
         [HttpPut("{id}")]
 

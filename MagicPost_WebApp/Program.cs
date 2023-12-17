@@ -8,6 +8,8 @@ using System.Globalization;
 using shopCommerce_ApiIntergration;
 using Microsoft.AspNetCore.Localization;
 using MagicPost_WebApp.LocalizationResources;
+using MagicPost__Data.EF;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,7 +61,10 @@ builder.Services.AddSession(options =>
 	options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+builder.Services.AddDbContext<MagicPostDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MagicPostDb2"));
+});
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<ISlideApiClient, SlideApiClient>();
 builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();

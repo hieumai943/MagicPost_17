@@ -1,17 +1,26 @@
-﻿using MagicPost_ApiIntergration;
+﻿using MagicPost__Data.EF;
+using MagicPost__Data.Entities;
+using MagicPost_ApiIntergration;
+using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.System.Users;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MagicPost_WebApp.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserApiClient _userApiClient;
+        private readonly IDiemGiaoDichApiClient _diemGiaoDichApiClient;
+
         private readonly IConfiguration _configuration;
         private readonly IRoleApiClient _roleApiClient;
-        public UserController(IUserApiClient userApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
+        public UserController(IUserApiClient userApiClient, IDiemGiaoDichApiClient diemGiaoDichApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
         {
             _userApiClient = userApiClient;
+            _diemGiaoDichApiClient = diemGiaoDichApiClient;
             _configuration = configuration;
             _roleApiClient = roleApiClient;
         }
@@ -55,6 +64,33 @@ namespace MagicPost_WebApp.Controllers
                 return View();
             }
             var result = await _userApiClient.RegisterUser(request);
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Thêm mới người dùng thành công";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+        [HttpGet]
+        public IActionResult CreateGiaoDichVien(RegisterRequest request)
+        {
+            return View(request);
+        }
+        [HttpPost()]
+        // [Authorize("TruongDiemGiaoDich")]
+        public async Task<IActionResult> CreateGiaoDichVienpost(RegisterRequest request)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            int DiemGiaoDichId = int.Parse(User.FindFirstValue(ClaimTypes.Hash));
+
+            // Lấy DiemGiaoDichId từ người dùng hiện tại
+            var result = await _userApiClient.RegisterGiaoDichVien(request, DiemGiaoDichId);
+            
             if (result.IsSuccessed)
             {
                 TempData["result"] = "Thêm mới người dùng thành công";

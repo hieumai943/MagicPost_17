@@ -54,6 +54,8 @@ namespace MagicPost_Application.System.Users
                 new Claim(ClaimTypes.Role, string.Join(";", roles)),
                 new Claim(ClaimTypes.Name, request.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // de lay ra userId
+                new Claim(ClaimTypes.Hash, user.DiemGiaoDichId.Value.ToString()), // de lay ra userId
+
 
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
@@ -136,7 +138,40 @@ namespace MagicPost_Application.System.Users
             };
             return new ApiSuccessResult<PageResult<UserVm>>(pageResult);
         }
+        public async Task<ApiResult<bool>> RegisterGiaoDichVien(RegisterRequest request, int DiemGiaoDichId)
+        {
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user != null)
+            {
+                return new ApiErrorResult<bool>("Tài khoản đã tồn tại");
 
+            }
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
+            {
+                return new ApiErrorResult<bool>("Emai đã tồn tại");
+
+            }
+            user = new AppUser()
+            {
+                Dob = request.Dob,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                UserName = request.UserName,
+                PhoneNumber = request.PhoneNumber,
+                DiemGiaoDichId = DiemGiaoDichId
+            };
+            // request.DiemGiaoDichs = await _context.DiemGiaoDichs.ToListAsync();
+            var result = await _userManager.CreateAsync(user, request.Password);
+            await _userManager.AddToRoleAsync(user, "GiaoDichVien");
+           
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
         public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
@@ -255,5 +290,7 @@ namespace MagicPost_Application.System.Users
 
 
         }
+
+        
     }
 }

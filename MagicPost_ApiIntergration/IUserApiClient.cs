@@ -10,6 +10,8 @@ namespace MagicPost_ApiIntergration
         Task<ApiResult<string>> Authenticate(LoginRequest request);
         Task<ApiResult<PageResult<UserVm>>> GetUsersPagings(GetUserPagingRequest request);
         Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest);
+        Task<ApiResult<bool>> RegisterGiaoDichVien(RegisterRequest registerRequest , int DiemGiaoDichId);
+
         Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
         Task<ApiResult<bool>> RoleAssign( Guid id , RoleAssignRequest request);
         Task<ApiResult<bool>> DiemTapKetAssign(Guid Userid, DiemTapKetAssignRequest request);

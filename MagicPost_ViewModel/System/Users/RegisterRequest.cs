@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicPost__Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -35,5 +36,6 @@ namespace MagicPost_ViewModel.System.Users
         [DataType(DataType.Password)]
 
         public string ConfirmPassword { get; set; }
+        // public List<DiemGiaoDich>? DiemGiaoDichs { get; set; }
     }
 }
