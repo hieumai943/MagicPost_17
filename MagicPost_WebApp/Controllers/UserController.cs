@@ -14,15 +14,17 @@ namespace MagicPost_WebApp.Controllers
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IDiemGiaoDichApiClient _diemGiaoDichApiClient;
+        private readonly MagicPostDbContext _context;
 
         private readonly IConfiguration _configuration;
         private readonly IRoleApiClient _roleApiClient;
-        public UserController(IUserApiClient userApiClient, IDiemGiaoDichApiClient diemGiaoDichApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
+        public UserController(IUserApiClient userApiClient, IDiemGiaoDichApiClient diemGiaoDichApiClient, IConfiguration configuration, IRoleApiClient roleApiClient, MagicPostDbContext context)
         {
             _userApiClient = userApiClient;
             _diemGiaoDichApiClient = diemGiaoDichApiClient;
             _configuration = configuration;
             _roleApiClient = roleApiClient;
+            _context = context;
         }
         public async Task<IActionResult> Index(string keyword = "", int pageIndex = 1, int pageSize = 10)
         {
@@ -42,7 +44,28 @@ namespace MagicPost_WebApp.Controllers
             }
             return View(data.ResultObj);
         }
-
+        public async Task<IActionResult> GetGiaoDichViens(string keyword = "", int pageIndex = 1, int pageSize = 10)
+        {
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new GetUserPagingRequest()
+            {
+                /*  BearerToken = sessions,*/
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            int DiemGiaoDichId = int.Parse(User.FindFirstValue(ClaimTypes.Hash));
+            DiemGiaoDich DiemGiaoDich = _context.DiemGiaoDichs.Where(x => x.Id == DiemGiaoDichId).FirstOrDefault();
+            var data = await _userApiClient.GetGiaoDichVienPagings(request, DiemGiaoDichId);
+            ViewBag.Keyword = keyword;
+            ViewBag.DiemGiaoDich = DiemGiaoDich.Name;
+            ViewBag.UserEmail = User.FindFirstValue(ClaimTypes.Email);
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data.ResultObj);
+        }
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -90,7 +113,7 @@ namespace MagicPost_WebApp.Controllers
 
             // Lấy DiemGiaoDichId từ người dùng hiện tại
             var result = await _userApiClient.RegisterGiaoDichVien(request, DiemGiaoDichId);
-            
+
             if (result.IsSuccessed)
             {
                 TempData["result"] = "Thêm mới người dùng thành công";

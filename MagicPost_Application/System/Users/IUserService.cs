@@ -21,6 +21,8 @@ namespace MagicPost_Application.System.Users
 
 
         Task<ApiResult<PageResult<UserVm>>> GetUsersPaging(GetUserPagingRequest request);
+        Task<ApiResult<PageResult<UserVm>>> GetUsersPagingGiaoDichVien(GetUserPagingRequest request, int DiemGiaoDichId);
+
         Task<ApiResult<UserVm>> GetById(Guid Id);
         Task<ApiResult<bool>> Delete(Guid Id);
 

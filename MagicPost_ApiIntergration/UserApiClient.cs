@@ -79,7 +79,18 @@ namespace MagicPost_ApiIntergration
             return users;
 
         }
-
+        public async Task<ApiResult<PageResult<UserVm>>> GetGiaoDichVienPagings(GetUserPagingRequest request, int DiemGiaoDichId)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/user/giaodichviens/{DiemGiaoDichId}?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}&BearerToken={sessions}"); // liên kết luôn đến api endpoint của web api luôn
+            var body = await response.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<ApiResult<PageResult<UserVm>>>(body);
+            return users;
+        }
         public async Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest)
         {
 
@@ -197,6 +208,6 @@ namespace MagicPost_ApiIntergration
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        
+  
     }
 }

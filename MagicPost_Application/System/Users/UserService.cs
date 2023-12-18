@@ -138,6 +138,39 @@ namespace MagicPost_Application.System.Users
             };
             return new ApiSuccessResult<PageResult<UserVm>>(pageResult);
         }
+        public async Task<ApiResult<PageResult<UserVm>>> GetUsersPagingGiaoDichVien(GetUserPagingRequest request, int DiemGiaoDichId)
+        {
+            var query = _userManager.Users;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.UserName.Contains(request.Keyword)
+                 || x.PhoneNumber.Contains(request.Keyword));
+            }
+            query = query.Where(x => x.DiemGiaoDichId == DiemGiaoDichId);
+
+            //3 .paging
+            int totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                .Select(x => new UserVm()
+                {
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
+                    UserName = x.UserName,
+                    FirstName = x.FirstName,
+                    Id = x.Id,
+                    LastName = x.LastName,
+                    Dob = x.Dob
+
+                }).ToListAsync();
+            var pageResult = new PageResult<UserVm>()
+            {
+                items = data,
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize
+            };
+            return new ApiSuccessResult<PageResult<UserVm>>(pageResult);
+        }
         public async Task<ApiResult<bool>> RegisterGiaoDichVien(RegisterRequest request, int DiemGiaoDichId)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
@@ -227,6 +260,8 @@ namespace MagicPost_Application.System.Users
                 if (await _userManager.IsInRoleAsync(user, roleName) == false)
                 {
                     await _userManager.AddToRoleAsync(user, roleName);
+                    // user.Roles = roleName;
+                    
                 }
 
             }

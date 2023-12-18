@@ -12,7 +12,7 @@ namespace MagicPost_BackendAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+     [Authorize]
     public class UserController : Controller
     {
 
@@ -157,13 +157,21 @@ namespace MagicPost_BackendAPI.Controllers
         }
         // https://localhost/api/user/paging?pageIndex=1&pageSize=10$keyword =
         [HttpGet("paging")]
+        [AllowAnonymous]
         // [Authorize(Roles = "TruongDiemGiaoDich")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
         {
             var orders = await _userService.GetUsersPaging(request);
             return Ok(orders);
         }
-
+        // https://localhost/api/user/paging?pageIndex=1&pageSize=10$keyword =
+        [HttpGet("giaodichviens/{DiemGiaoDichId}")]
+        // [Authorize(Roles = "TruongDiemGiaoDich")]
+        public async Task<IActionResult> GetAllPagingGiaoDichVien([FromQuery] GetUserPagingRequest request, int DiemGiaoDichId)
+        {
+            var orders = await _userService.GetUsersPagingGiaoDichVien(request, DiemGiaoDichId);
+            return Ok(orders);
+        }
         [HttpGet("id")]
 
         public async Task<IActionResult> GetById(Guid Id)
