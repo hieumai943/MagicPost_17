@@ -8,9 +8,11 @@
 @model HomeViewModel;
 @{
     var culture = CultureInfo.CurrentCulture.Name;
+
 }
 @{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Carousel Start -->
 <div class="carousel">
@@ -293,7 +295,7 @@
 </div>
 <!-- Location End -->
 <!-- Team Start -->
-<div class="team">
+<div class="team" id="team">
     <div class="container">
         <div class="section-header text-center">
             <p>Đội ngũ của chúng tôi</p>
@@ -415,8 +417,5 @@
     th {
         background-color: #3498db;
         color: #fff;
-    }
-    service-icon {
-        fill: red;
-    }
+
 </style>
