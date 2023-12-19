@@ -10,7 +10,7 @@ namespace MagicPost_WebApp.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderApiClient _orderApiClient;
-   
+        
 
         public OrderController(IOrderApiClient orderApiClient)
         {
@@ -52,6 +52,18 @@ namespace MagicPost_WebApp.Controllers
             ModelState.AddModelError("", "Thêm sản phẩm thất bại");
             return View(request);
         }
+        [HttpGet("getpdf")]
+        public async Task<IActionResult> GetPdf(string nameOfFile)
+        {
+            var fileBytes = await _orderApiClient.GetPdf(nameOfFile);
 
+            if (fileBytes != null)
+            {
+                var fileName = $"Đơn hàng {nameOfFile}.pdf";
+                return File(fileBytes, "application/pdf", fileName);
+            }
+
+            return BadRequest();
+        }
     }
 }

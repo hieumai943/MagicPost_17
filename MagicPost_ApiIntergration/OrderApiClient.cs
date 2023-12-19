@@ -22,7 +22,8 @@ namespace shopCommerce_ApiIntergration
         private readonly IHttpContextAccessor _httpContextAccessor;
         public OrderApiClient(IHttpClientFactory httpClientFactory,
                   IHttpContextAccessor httpContextAccessor,
-                   IConfiguration configuration)
+                   IConfiguration configuration
+                 )
         : base(httpClientFactory, httpContextAccessor, configuration)
         {
             _httpClientFactory = httpClientFactory;
@@ -30,7 +31,7 @@ namespace shopCommerce_ApiIntergration
             _httpContextAccessor = httpContextAccessor;
         }
 
-        
+
         public async Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request)
         {
             var data = await GetAsync<PageResult<OrderVm>>(
@@ -54,6 +55,23 @@ namespace shopCommerce_ApiIntergration
             var data = await GetAsync<OrderVm>($"/api/product/{id}/{languageId}");
 
             return data;
+        }
+        public async Task<byte[]> GetPdf(string nameOfFile)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/order/generatepdf?NameOfFile={nameOfFile}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var fileBytes = await response.Content.ReadAsByteArrayAsync();
+                return fileBytes;
+            }
+
+            return null;
         }
         public async Task<bool> CreateOrder(OrderCreateRequest request)
         {

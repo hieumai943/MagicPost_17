@@ -4,7 +4,11 @@ using MagicPost_ViewModel.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
+using PdfSharpCore;
+using PdfSharpCore.Pdf;
+using System.IO;
 using System.Security.Claims;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace MagicPost_BackendAPI.Controllers
 {
@@ -13,7 +17,6 @@ namespace MagicPost_BackendAPI.Controllers
     public class OrderController : Controller
     {
         private readonly IUserService _userService;
-
         private readonly IOrderService _OrderService;
         public OrderController(IOrderService OrderService, IUserService userService)
         {
@@ -106,6 +109,21 @@ namespace MagicPost_BackendAPI.Controllers
             }
             return Ok();
 
+        }
+        [HttpGet("generatepdf")]
+        public async Task<IActionResult> GeneratePDF(string NameOfFile)
+        {
+            var document = new PdfDocument();
+            string HtmlContent = "<h1>Welcome to MAGICPOST </h1>";
+            PdfGenerator.AddPdfPages(document, HtmlContent, PageSize.A4);
+            byte[]? response = null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                document.Save(ms);
+                response = ms.ToArray();
+            }
+            string Filename = "Đơn hàng" + NameOfFile + ".pdf";
+            return File(response, "application/pdf", Filename);
         }
     }
 }

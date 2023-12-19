@@ -14,6 +14,8 @@ namespace MagicPost_ApiIntergration
 	{
 		Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
         Task<PageResult<OrderVm>> GetPagingDiemGiaoDich(GetManageOrderPagingRequest request, int DiemGiaoDichId);
+        Task<byte[]> GetPdf(string nameOfFile);
+
 
         Task<OrderVm> GetById(int id, string languageId);
 		Task<bool> CreateOrder(OrderCreateRequest request);
