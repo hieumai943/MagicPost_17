@@ -72,7 +72,8 @@ namespace MagicPost_Application.Orders
             // filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.p.Code.Contains(request.Keyword));
-
+            if (request.OrderStatusId != null)
+                query = query.Where(x => x.p.Status == 0);
             //3 .paging
             int totalRow = await query.CountAsync();
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
@@ -110,7 +111,8 @@ namespace MagicPost_Application.Orders
             // filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.p.Code.Contains(request.Keyword));
-
+            if (request.OrderStatusId != null)
+                query = query.Where(x => x.p.Status == 0);
             //3 .paging
             int totalRow = await query.CountAsync();
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
@@ -147,9 +149,13 @@ namespace MagicPost_Application.Orders
 			// filter
 			if (!string.IsNullOrEmpty(request.Keyword))
 				query = query.Where(x => x.p.Code.Contains(request.Keyword));
-			
-			//3 .paging
-			int totalRow = await query.CountAsync();
+            if (request.OrderStatusId != null)
+            {
+                query = query.Where(x => (int)x.p.Status == request.OrderStatusId);
+
+            }
+            //3 .paging
+            int totalRow = await query.CountAsync();
 			var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
 				.Select(x => new OrderVm()
 				{

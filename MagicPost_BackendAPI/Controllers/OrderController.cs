@@ -114,7 +114,143 @@ namespace MagicPost_BackendAPI.Controllers
         public async Task<IActionResult> GeneratePDF(string NameOfFile)
         {
             var document = new PdfDocument();
-            string HtmlContent = "<h1>Welcome to MAGICPOST </h1>";
+            string HtmlContent = @"
+             <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            vertical-align: top;
+        }
+    </style>   
+             <table>
+        <tr>
+            <td>
+                <b>1. Họ tên địa chỉ người gửi</b>
+                <br>
+                <br>
+                <br>
+
+                <b>Điện thoại</b>
+                <br>
+                <b>Mã khách hàng:</b>
+                <b style=""margin-left: 300px;"">Mã bưu chính:</b>
+            </td>
+            <td colspan=""2"">
+                <b>2. Họ tên địa chỉ người nhận</b><br><br><br>
+                <b>Mã ĐH:</b><br>
+                <b>Điện thoại:</b>
+                <b style=""margin-left: 300px;"">Mã bưu chính:</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>3. Loại hàng gửi</b><br>
+                <input type=""checkbox"" style=""margin-left: 50px;"">Tài liệu
+                <input type=""checkbox"" style=""margin-left: 250px;"">Hàng hoá
+                <br>
+                <b>4. Nội dung giá trị bưu gửi</b>
+                <table>
+                    <tr>
+                        <th>
+                            Nội dung
+                        </th>
+                        <th>Số lượng</th>
+                        <th>Trị giá</th>
+                        <th>Giấy tờ đính kèm</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tổng
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+            <td rowspan=""3"">
+                <b>9. Cước</b><br>
+                a, Cước chính<br>
+                b, Phụ phí<br>
+                c, Cước GTGT<br>
+                d, Tổng cước(gồm VAT)<br>
+                e, Thu khác<br>
+                <b>f, Tổng thu</b>
+            </td>
+            <td>
+                <b>10. Khối lượng</b><br>
+                Khôi lượng  thực tế:<br>
+                Khối lượng quy đổi:<br>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td rowspan=""2"">
+                <b>5. Dịch vụ đặc biệt/Cộng thêm</b>
+                <br>
+                <br>
+                <br>
+            </td>
+            <td rowspan=""3"">
+                <b>12. Chú dẫn nghiệp vụ</b>
+            </td>
+
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+            <td>
+                <b>6. Chỉ dẫn của người gửi khi không phát được bưu gửi</b><br>
+                <input type=""checkbox"">Chuyển hoàn ngay
+                <input type=""checkbox"" style=""margin-left: 40px;"">Gọi điện cho người gửi/BC gửi
+                <input type=""checkbox"" style=""margin-left: 40px;"">Huỷ<br>
+                <input type=""checkbox"">Chuyển hoàn trước ngày
+                <input type=""checkbox"" style=""margin-left: 40px;"">Chuyển hoàn khi hết thời gian lưu trữ
+            </td>
+            <td rowspan="""">
+                <b>11. Thu của người nhận</b><br>
+                COD<br>
+                Thu khác<br>
+                Tổng thu
+            </td>
+
+        </tr>
+        <tr>
+            <td rowspan=""3"">
+                <b>7. Cam kết của người gửi</b><br>
+                <br>
+                <b>8. Ngày giờ gửi</b>
+                <b style=""margin-left: 250px;"">Chữ kí người gửi</b><br><br><br>
+
+            </td>
+            <td rowspan=""2"">
+                <b>13. Bưu cục chấp nhận</b>
+                <br><small style=""margin-left: 50px;"">Chữ kí của GDV nhận</small>
+            </td>
+
+        </tr>
+        <tr>
+            <td rowspan=""2"">
+                <b>14. Ngày giờ nhận</b><br>
+                &nbsp;&nbsp;&nbsp;h&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/20
+                <br>
+                <small style=""text-align: center;"">
+                    Người nhận/Người được<br>
+                    uỷ quyền nhận<br>
+                    (Ký, ghi rõ họ tên)
+                </small><br><br><br><br>
+            </td>
+
+
+        </tr>
+    </table>
+            "; ;
             PdfGenerator.AddPdfPages(document, HtmlContent, PageSize.A4);
             byte[]? response = null;
             using (MemoryStream ms = new MemoryStream())

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace MagicPost_WebApp.Controllers
 {
@@ -46,20 +47,23 @@ namespace MagicPost_WebApp.Controllers
             return View(viewModel);
         }
       
-        public async Task<IActionResult> About()
+        public async Task<IActionResult> About(string keyword = "", int? OrderStatusId =null, int pageIndex = 1, int pageSize = 10)
         {
-
+            var request = new GetManageOrderPagingRequest()
+            {
+                Keyword = keyword,
+                OrderStatusId = OrderStatusId,
+                PageIndex = 1,
+                PageSize = 10
+            };
             var viewModel = new HomeViewModel
             {
                 Slides = await _slideApiClient.GetAll(),
-                Orders = await _orderApiClient.GetPagings(new GetManageOrderPagingRequest()
-                {
-                    Keyword = "",
-                    PageIndex = 1,
-                    PageSize = 10
-                })
+                Orders = await _orderApiClient.GetPagings(request)
 
             };
+            ViewBag.Keyword = keyword;
+
             return View(viewModel);
         }
         [HttpGet("/vi/Home/About/{DiemGiaoDichId}")]

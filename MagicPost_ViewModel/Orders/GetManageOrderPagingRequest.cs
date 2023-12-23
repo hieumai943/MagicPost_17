@@ -10,5 +10,6 @@ namespace MagicPost_ViewModel.Orders
 	public class GetManageOrderPagingRequest : PagingRequestBase
 	{ 
 		public string? Keyword { get; set; }
+		public int ? OrderStatusId { get; set; }
 	}
 }

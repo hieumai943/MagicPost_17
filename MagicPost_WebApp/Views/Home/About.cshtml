@@ -7,13 +7,34 @@
     var culture = CultureInfo.CurrentCulture.Name;
 }
 @model HomeViewModel
-@if (User.IsInRole("GiaoDichVien"))
-{
-    // Code to execute if the user is in the "giaodichVien" role
+<div class="row">
+    @if (User.IsInRole("GiaoDichVien"))
+    {
+        // Code to execute if the user is in the "giaodichVien" role
+        <div class="col-md-6 col-xs-12">
+            <a class="btn btn-success" asp-action="Create" asp-controller="Order">Tạo mới</a>
+        </div>
+    }
     <div class="col-md-6 col-xs-12">
-        <a class="btn btn-success" asp-action="Create" asp-controller="Order">Tạo mới</a>
+        <form asp-action="About" method="get">
+            <div class="row">
+                <div class="col-md-9">
+                    <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                </div>
+                <select name="OrderStatusId" class="form-control">
+                    <option value= "">Select Order Status</option>
+                    <option value=0>In Progress</option>
+                    <option value=1 >Shipped</option>
+                    <option value= 2>Canceled</option>
+                </select>
+                <div class="cold-md-3">
+                    <button type="submit" class="btn btn-primary">Tìm</button>
+                    <button type="button" onclick="window.location.href='/Home/About'" class="btn btn-dark">Reset</button>
+                </div>
+            </div>
+        </form>
     </div>
-}
+</div>
 
 <div class="ShowOrder">
     <table>
