@@ -14,6 +14,8 @@ namespace MagicPost_ApiIntergration
 	{
 		Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
         Task<PageResult<OrderVm>> GetPagingDiemGiaoDich(GetManageOrderPagingRequest request, int DiemGiaoDichId);
+        Task<PageResult<OrderVm>> GetPagingDiemTapKet(GetManageOrderPagingRequest request, int DiemTapKetId);
+
         Task<byte[]> GetPdf(string nameOfFile);
 
 

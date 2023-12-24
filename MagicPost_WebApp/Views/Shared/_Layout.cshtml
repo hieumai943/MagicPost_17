@@ -124,15 +124,18 @@
                         }
                         @if (User.IsInRole("GiaoDichVien"))
                         {
-                            <a href="/@culture/Home/About" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
+                            <a href="/@culture/Home/About/DiemGiaoDich/1" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
 
                         }
                         @if (User.IsInRole("TruongDiemTapKet"))
                         {
 
-                            <a href="" class="nav-item nav-link">Quản lý điểm tập kết</a>
+                            <a href="/@culture/User/GetNhanVienTapKet" class="nav-item nav-link">Quản lý tài khoản nhân viên tập kết</a>
                         }
-                        
+                        @if (User.IsInRole("NhanVienTapKet"))
+                        {
+                            <a href="/@culture/Home/AboutDiemTapKet/DiemTapKet/1" class="nav-item nav-link">Quản lý đơn hàng điểm tập kết</a>
+                        }
                         @*<div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu">

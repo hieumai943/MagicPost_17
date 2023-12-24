@@ -77,9 +77,10 @@ namespace MagicPost_WebApp.Controllers
                 PageSize = pageSize
             };
             int DiemTapKetId = int.Parse(User.FindFirstValue(ClaimTypes.Dns));
-            // DiemGiaoDich DiemGiaoDich = _context.DiemGiaoDichs.Where(x => x.Id == DiemGiaoDichId).FirstOrDefault();
+            DiemTapKet DiemTapKet = _context.DiemTapKets.Where(x => x.Id == DiemTapKetId).FirstOrDefault();
             var data = await _userApiClient.GetNhanVienTapKetPagings(request, DiemTapKetId);
             ViewBag.Keyword = keyword;
+            ViewBag.DiemTapKet = DiemTapKet.Name;
             ViewBag.UserEmail = User.FindFirstValue(ClaimTypes.Email);
             if (TempData["result"] != null)
             {

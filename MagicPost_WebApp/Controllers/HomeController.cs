@@ -66,7 +66,7 @@ namespace MagicPost_WebApp.Controllers
 
             return View(viewModel);
         }
-        [HttpGet("/vi/Home/About/{DiemGiaoDichId}")]
+        [HttpGet("/vi/Home/About/DiemGiaoDich/{DiemGiaoDichId}")]
         public async Task<IActionResult> About(int DiemGiaoDichId)
         {
 
@@ -79,6 +79,23 @@ namespace MagicPost_WebApp.Controllers
                     PageIndex = 1,
                     PageSize = 10
                 }, DiemGiaoDichId)
+
+            };
+            return View(viewModel);
+        }
+        [HttpGet("/vi/Home/About/DiemTapKet/{DiemTapKetId}")]
+        public async Task<IActionResult> AboutDiemTapKet(int DiemTapKetId)
+        {
+
+            var viewModel = new HomeViewModel
+            {
+                Slides = await _slideApiClient.GetAll(),
+                Orders = await _orderApiClient.GetPagingDiemGiaoDich(new GetManageOrderPagingRequest()
+                {
+                    Keyword = "",
+                    PageIndex = 1,
+                    PageSize = 10
+                }, DiemTapKetId)
 
             };
             return View(viewModel);

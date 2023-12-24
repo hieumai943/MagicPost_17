@@ -50,6 +50,10 @@ namespace shopCommerce_ApiIntergration
 
             return data;
         }
+        public async Task<PageResult<OrderVm>> GetPagingDiemTapKet(GetManageOrderPagingRequest request, int DiemTapKetId)
+        {
+            throw new NotImplementedException();
+        }
         public async Task<OrderVm> GetById(int id, string languageId)
         {
             var data = await GetAsync<OrderVm>($"/api/product/{id}/{languageId}");
@@ -104,5 +108,7 @@ namespace shopCommerce_ApiIntergration
             var response = await client.PostAsync($"/api/order/", requestContent);
             return response.IsSuccessStatusCode;
         }
+
+        
     }
 }

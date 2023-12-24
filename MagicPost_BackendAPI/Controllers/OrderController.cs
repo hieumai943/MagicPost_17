@@ -115,7 +115,11 @@ namespace MagicPost_BackendAPI.Controllers
         {
             var document = new PdfDocument();
             string HtmlContent = @"
-             <style>
+           <style>
+        body {
+            width: 530px;
+         
+        }
         table {
             border-collapse: collapse;
             width: 100%;
@@ -125,9 +129,12 @@ namespace MagicPost_BackendAPI.Controllers
             text-align: left;
             padding: 8px;
             vertical-align: top;
+            
         }
-    </style>   
-             <table>
+    </style>
+          <body>
+
+    <table>
         <tr>
             <td>
                 <b>1. Họ tên địa chỉ người gửi</b>
@@ -138,20 +145,20 @@ namespace MagicPost_BackendAPI.Controllers
                 <b>Điện thoại</b>
                 <br>
                 <b>Mã khách hàng:</b>
-                <b style=""margin-left: 300px;"">Mã bưu chính:</b>
+                <b style='margin-left: 300px;'>Mã bưu chính:</b>
             </td>
-            <td colspan=""2"">
+            <td colspan='2'>
                 <b>2. Họ tên địa chỉ người nhận</b><br><br><br>
                 <b>Mã ĐH:</b><br>
                 <b>Điện thoại:</b>
-                <b style=""margin-left: 300px;"">Mã bưu chính:</b>
+                <b style='margin-left: 300px;'>Mã bưu chính:</b>
             </td>
         </tr>
         <tr>
             <td>
                 <b>3. Loại hàng gửi</b><br>
-                <input type=""checkbox"" style=""margin-left: 50px;"">Tài liệu
-                <input type=""checkbox"" style=""margin-left: 250px;"">Hàng hoá
+                    <input type='checkbox' style='margin-left: 50px;'>Tài liệu
+                    <input type='checkbox' style='margin-left: 250px;'>Hàng hoá
                 <br>
                 <b>4. Nội dung giá trị bưu gửi</b>
                 <table>
@@ -173,7 +180,7 @@ namespace MagicPost_BackendAPI.Controllers
                     </tr>
                 </table>
             </td>
-            <td rowspan=""3"">
+            <td>
                 <b>9. Cước</b><br>
                 a, Cước chính<br>
                 b, Phụ phí<br>
@@ -191,13 +198,13 @@ namespace MagicPost_BackendAPI.Controllers
 
         </tr>
         <tr>
-            <td rowspan=""2"">
+            <td rowspan='2'>
                 <b>5. Dịch vụ đặc biệt/Cộng thêm</b>
                 <br>
                 <br>
                 <br>
             </td>
-            <td rowspan=""3"">
+            <td >
                 <b>12. Chú dẫn nghiệp vụ</b>
             </td>
 
@@ -207,13 +214,13 @@ namespace MagicPost_BackendAPI.Controllers
         <tr>
             <td>
                 <b>6. Chỉ dẫn của người gửi khi không phát được bưu gửi</b><br>
-                <input type=""checkbox"">Chuyển hoàn ngay
-                <input type=""checkbox"" style=""margin-left: 40px;"">Gọi điện cho người gửi/BC gửi
-                <input type=""checkbox"" style=""margin-left: 40px;"">Huỷ<br>
-                <input type=""checkbox"">Chuyển hoàn trước ngày
-                <input type=""checkbox"" style=""margin-left: 40px;"">Chuyển hoàn khi hết thời gian lưu trữ
+                <input type='checkbox'>Chuyển hoàn ngay
+                <input type='checkbox' style='margin-left: 40px;'>Gọi điện cho người gửi/BC gửi
+                <input type='checkbox' style='margin-left: 40px;'>Huỷ<br>
+                <input type='checkbox'>Chuyển hoàn trước ngày
+                <input type='checkbox' style='margin-left: 40px;'>Chuyển hoàn khi hết thời gian lưu trữ
             </td>
-            <td rowspan="""">
+            <td rowspan=''>
                 <b>11. Thu của người nhận</b><br>
                 COD<br>
                 Thu khác<br>
@@ -222,35 +229,36 @@ namespace MagicPost_BackendAPI.Controllers
 
         </tr>
         <tr>
-            <td rowspan=""3"">
+            <td rowspan='3'>
                 <b>7. Cam kết của người gửi</b><br>
                 <br>
                 <b>8. Ngày giờ gửi</b>
-                <b style=""margin-left: 250px;"">Chữ kí người gửi</b><br><br><br>
+                <b style='margin-left: 250px;'>Chữ kí người gửi</b><br><br><br>
 
             </td>
-            <td rowspan=""2"">
+            <td rowspan='2'>
                 <b>13. Bưu cục chấp nhận</b>
-                <br><small style=""margin-left: 50px;"">Chữ kí của GDV nhận</small>
+                <br><small style='margin-left: 50px;'>Chữ kí của GDV nhận</small>
             </td>
 
         </tr>
         <tr>
-            <td rowspan=""2"">
+            <td rowspan='2'>
                 <b>14. Ngày giờ nhận</b><br>
                 &nbsp;&nbsp;&nbsp;h&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/20
                 <br>
-                <small style=""text-align: center;"">
-                    Người nhận/Người được<br>
-                    uỷ quyền nhận<br>
-                    (Ký, ghi rõ họ tên)
-                </small><br><br><br><br>
+                <small style='text-align: center;'>Người nhận/Người được<br>
+                uỷ quyền nhận<br>
+                (Ký, ghi rõ họ tên)</small><br><br><br><br>
             </td>
-
+       
 
         </tr>
     </table>
+
+</body>
             "; ;
+
             PdfGenerator.AddPdfPages(document, HtmlContent, PageSize.A4);
             byte[]? response = null;
             using (MemoryStream ms = new MemoryStream())
