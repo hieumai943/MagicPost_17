@@ -23,10 +23,10 @@
     </script>
 }
 <div class="container-fluid">
-    <h1 class="mt-4">Tạo mới đơn hàng</h1>
+    <h1 class="mt-4">Tạo mới người dùng</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-        <li class="breadcrumb-item active">Tạo mới đơn hàng</li>
+        <li class="breadcrumb-item active">Tạo mới sản phẩm</li>
     </ol>
     <div class="card mb-4">
         <div class="card-header">
@@ -38,44 +38,44 @@
                 <form asp-controller="Order" asp-action="Create" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="SendName" class="control-label">Người gửi</label>
+                        <label asp-for="SendName" class="control-label"></label>
                         <input asp-for="SendName" class="form-control" />
                         <span asp-validation-for="SendName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReceiveName" class="control-label">Người nhận</label>
+                        <label asp-for="ReceiveName" class="control-label"></label>
                         <input asp-for="ReceiveName"  class="form-control" />
                         <span asp-validation-for="ReceiveName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="SendAddress" class="control-label">Địa chỉ người gửi</label>
+                        <label asp-for="SendAddress" class="control-label"></label>
                         <input asp-for="SendAddress"  class="form-control" />
                         <span asp-validation-for="SendAddress" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReceiveAddress" class="control-label">Địa chỉ người nhận</label>
-                        <input asp-for="ReceiveAddress" class="form-control"  />
+                        <label asp-for="ReceiveAddress" class="control-label"></label>
+                        <input asp-for="ReceiveAddress" class="form-control" />
                         <span asp-validation-for="ReceiveAddress" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="SendPhoneNumber" class="control-label">Số điện thoại người gửi</label>
-                        <input asp-for="SendPhoneNumber" class="form-control" ></input>
+                        <label asp-for="SendPhoneNumber" class="control-label"></label>
+                        <input asp-for="SendPhoneNumber" class="form-control"></input>
                         <span asp-validation-for="SendPhoneNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReceivePhoneNumber" class="control-label">Số điện thoại người nhận</label>
-                        <input  asp-for="ReceivePhoneNumber" rows="1" class="form-control" ></input>
+                        <label asp-for="ReceivePhoneNumber" class="control-label"></label>
+                        <input  asp-for="ReceivePhoneNumber" rows="1" class="form-control"></input>
                         <span asp-validation-for="ReceivePhoneNumber" class="text-danger"></span>
                     </div>
                     
                     <div class="form-group">
-                        <label asp-for="Cuoc" class="control-label">Cước</label>
+                        <label asp-for="Cuoc" class="control-label"></label>
                         <input type="number" asp-for="Cuoc" class="form-control" />
                         <span asp-validation-for="Cuoc" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="KhoiLuong" class="control-label">Khối lượng</label>
+                        <label asp-for="KhoiLuong" class="control-label"></label>
                         <input type="number" asp-for="KhoiLuong" class="form-control" />
                         <span asp-validation-for="KhoiLuong" class="text-danger"></span>
                     </div>
