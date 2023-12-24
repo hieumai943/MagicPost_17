@@ -75,6 +75,21 @@ namespace MagicPost_BackendAPI.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("DiemTapKet/{DiemTapKetId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterNhanVienTapKet([FromBody] RegisterRequest request, int DiemTapKetId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _userService.RegisterNhanVienTapKet(request, DiemTapKetId);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
         // https:localhost/api/users/id
         [HttpPut("{id}")]
 
@@ -170,6 +185,13 @@ namespace MagicPost_BackendAPI.Controllers
         public async Task<IActionResult> GetAllPagingGiaoDichVien([FromQuery] GetUserPagingRequest request, int DiemGiaoDichId)
         {
             var orders = await _userService.GetUsersPagingGiaoDichVien(request, DiemGiaoDichId);
+            return Ok(orders);
+        }
+        [HttpGet("nhanvientapkets/{DiemTapKetId}")]
+        // [Authorize(Roles = "TruongDiemGiaoDich")]
+        public async Task<IActionResult> GetAllPagingNhanVienTapKet([FromQuery] GetUserPagingRequest request, int DiemTapKetId)
+        {
+            var orders = await _userService.GetUsersPagingNhanVienTapKet(request, DiemTapKetId);
             return Ok(orders);
         }
         [HttpGet("id")]

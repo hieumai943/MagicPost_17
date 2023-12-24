@@ -91,6 +91,18 @@ namespace MagicPost_ApiIntergration
             var users = JsonConvert.DeserializeObject<ApiResult<PageResult<UserVm>>>(body);
             return users;
         }
+        public async Task<ApiResult<PageResult<UserVm>>> GetNhanVienTapKetPagings(GetUserPagingRequest request, int DiemTapKetId)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/user/nhanvientapkets/{DiemTapKetId}?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}&BearerToken={sessions}"); // liên kết luôn đến api endpoint của web api luôn
+            var body = await response.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<ApiResult<PageResult<UserVm>>>(body);
+            return users;
+        }
         public async Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest)
         {
 
@@ -119,6 +131,23 @@ namespace MagicPost_ApiIntergration
 
             var response = await client.PostAsync($"/api/user/{DiemGiaoDichId}", httpContent); // liên kết luôn đến api endpoint của web api luôn
             
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);  // chuyen tu string sang apiResult
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
+        public async Task<ApiResult<bool>> RegisterNhanVienTapKet(RegisterRequest registerRequest, int DiemTapKetId)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var json = JsonConvert.SerializeObject(registerRequest);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/user/DiemTapKet/{DiemTapKetId}", httpContent); // liên kết luôn đến api endpoint của web api luôn
+
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
@@ -208,6 +237,6 @@ namespace MagicPost_ApiIntergration
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-  
+       
     }
 }

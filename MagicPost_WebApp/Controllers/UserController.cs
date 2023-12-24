@@ -66,6 +66,27 @@ namespace MagicPost_WebApp.Controllers
             }
             return View(data.ResultObj);
         }
+        public async Task<IActionResult> GetNhanVienTapKet(string keyword = "", int pageIndex = 1, int pageSize = 10)
+        {
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new GetUserPagingRequest()
+            {
+                /*  BearerToken = sessions,*/
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            int DiemTapKetId = int.Parse(User.FindFirstValue(ClaimTypes.Dns));
+            // DiemGiaoDich DiemGiaoDich = _context.DiemGiaoDichs.Where(x => x.Id == DiemGiaoDichId).FirstOrDefault();
+            var data = await _userApiClient.GetNhanVienTapKetPagings(request, DiemTapKetId);
+            ViewBag.Keyword = keyword;
+            ViewBag.UserEmail = User.FindFirstValue(ClaimTypes.Email);
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data.ResultObj);
+        }
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -113,6 +134,33 @@ namespace MagicPost_WebApp.Controllers
 
             // Lấy DiemGiaoDichId từ người dùng hiện tại
             var result = await _userApiClient.RegisterGiaoDichVien(request, DiemGiaoDichId);
+
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Thêm mới người dùng thành công";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+        [HttpGet]
+        public IActionResult CreateNhanVienTapKet(RegisterRequest request)
+        {
+            return View(request);
+        }
+        [HttpPost()]
+        // [Authorize("TruongDiemGiaoDich")]
+        public async Task<IActionResult> CreateNhanVienTapKetpost(RegisterRequest request)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            int DiemTapKetId = int.Parse(User.FindFirstValue(ClaimTypes.Dns));
+
+            // Lấy DiemGiaoDichId từ người dùng hiện tại
+            var result = await _userApiClient.RegisterNhanVienTapKet(request, DiemTapKetId);
 
             if (result.IsSuccessed)
             {

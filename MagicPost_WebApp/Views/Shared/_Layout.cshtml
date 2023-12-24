@@ -109,13 +109,31 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
                         <a href="/" class="nav-item nav-link active">Trang chủ</a>
-                        <a href="/@culture/Home/About" class="nav-item nav-link">Đơn hàng</a>
-                        <a href="/@culture/User/Index" class="nav-item nav-link">Quản lý tài khoản</a>
-                        <a href="/@culture/DiemTapKet/Index" class="nav-item nav-link">Thống kê đơn hàng</a>
-                        <a href="/@culture/User/GetGiaoDichViens" class="nav-item nav-link">Quản lỷ tài khoản giao dịch viên</a>
+                        
+                        <a href="/@culture/Home/About" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
+                        
+                        @if (User.IsInRole("LanhDao"))
+                        {
+                            <a href="/@culture/DiemTapKet/Index" class="nav-item nav-link">Quản lý các điểm</a>
+                            <a href="/@culture/User/Index" class="nav-item nav-link">Quản lý tài khoản</a>
 
-                        <a href="" class="nav-item nav-link">Quản lý điểm tập kết</a>
-                        <div class="nav-item dropdown">
+                        }
+                        @if(User.IsInRole("TruongDiemGiaoDich")){
+                            <a href="/@culture/User/GetGiaoDichViens" class="nav-item nav-link">Quản lỷ tài khoản giao dịch viên</a>
+
+                        }
+                        @if (User.IsInRole("GiaoDichVien"))
+                        {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
+
+                        }
+                        @if (User.IsInRole("TruongDiemTapKet"))
+                        {
+
+                            <a href="" class="nav-item nav-link">Quản lý điểm tập kết</a>
+                        }
+                        
+                        @*<div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu">
                                 <a href="#team" class="dropdown-item">Blog Grid</a>
@@ -124,7 +142,7 @@
                                 <a href="booking.html" class="dropdown-item">Schedule Booking</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>*@
                     </div>
 
 

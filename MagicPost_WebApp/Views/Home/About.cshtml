@@ -44,7 +44,10 @@
                 <th>Tên Người Nhận</th>
                 <th>Đồ Vật</th>
                 <th>Địa chỉ nhận</th>
+                @if (User.IsInRole("GiaoDichVien"))
+    {
                 <th>Hóa đơn </th>
+    }
                 <th>Trạng thái</th>
             </tr>
         </thead>
@@ -58,12 +61,15 @@
                     <td>@order.ReceiveName</td>
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
-                    <td>
-                        <form asp-controller="Order" asp-action="GetPdf" method="get">
-                            <input type="text" name="nameOfFile" placeholder="Enter file name" required>
-                            <button type="submit">Download PDF</button>
-                        </form>
-                    </td>
+                    @if (User.IsInRole("GiaoDichVien"))
+                    {
+                        <td>
+                            <form asp-controller="Order" asp-action="GetPdf" method="get">
+                                <input type="text" name="nameOfFile" placeholder="Enter file name" required>
+                                <button type="submit">Download PDF</button>
+                            </form>
+                        </td>
+                    }
                     <td>@order.Status</td>
                 </tr>
             }

@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,17 +48,17 @@ namespace MagicPost_Application.System.Users
                 return null;
             }
             var roles = await _userManager.GetRolesAsync(user);
-            var claims = new[]
-            {
+                var claims = new[] {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Role, string.Join(";", roles)),
                 new Claim(ClaimTypes.Name, request.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // de lay ra userId
-                new Claim(ClaimTypes.Hash, user.DiemGiaoDichId.Value.ToString()), // de lay ra userId
+                new Claim(ClaimTypes.Hash, user.DiemGiaoDichId.HasValue? user.DiemGiaoDichId.Value.ToString() : ""), // de lay ra userId
+                new Claim(ClaimTypes.Dns, user.DiemTapKetId.HasValue? user.DiemTapKetId.Value.ToString() : ""), // de lay ra userId
 
-
-            };
+                };
+           
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -171,6 +172,40 @@ namespace MagicPost_Application.System.Users
             };
             return new ApiSuccessResult<PageResult<UserVm>>(pageResult);
         }
+        public async Task<ApiResult<PageResult<UserVm>>> GetUsersPagingNhanVienTapKet(GetUserPagingRequest request, int DiemTapKetId)
+        {
+            var query = _userManager.Users;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.UserName.Contains(request.Keyword)
+                 || x.PhoneNumber.Contains(request.Keyword));
+            }
+            query = query.Where(x => x.DiemTapKetId == DiemTapKetId);
+
+            //3 .paging
+            int totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+                .Select(x => new UserVm()
+                {
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
+                    UserName = x.UserName,
+                    FirstName = x.FirstName,
+                    Id = x.Id,
+                    LastName = x.LastName,
+                    Dob = x.Dob
+
+                }).ToListAsync();
+            var pageResult = new PageResult<UserVm>()
+            {
+                items = data,
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize
+            };
+            return new ApiSuccessResult<PageResult<UserVm>>(pageResult);
+
+        }
         public async Task<ApiResult<bool>> RegisterGiaoDichVien(RegisterRequest request, int DiemGiaoDichId)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
@@ -198,6 +233,40 @@ namespace MagicPost_Application.System.Users
             var result = await _userManager.CreateAsync(user, request.Password);
             await _userManager.AddToRoleAsync(user, "GiaoDichVien");
            
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
+        public async  Task<ApiResult<bool>> RegisterNhanVienTapKet(RegisterRequest request, int DiemTapKetId)
+        {
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user != null)
+            {
+                return new ApiErrorResult<bool>("Tài khoản đã tồn tại");
+
+            }
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
+            {
+                return new ApiErrorResult<bool>("Emai đã tồn tại");
+
+            }
+            user = new AppUser()
+            {
+                Dob = request.Dob,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                UserName = request.UserName,
+                PhoneNumber = request.PhoneNumber,
+                DiemTapKetId = DiemTapKetId
+            };
+            // request.DiemGiaoDichs = await _context.DiemGiaoDichs.ToListAsync();
+            var result = await _userManager.CreateAsync(user, request.Password);
+            await _userManager.AddToRoleAsync(user, "NhanVienTapKet");
+
             if (result.Succeeded)
             {
                 return new ApiSuccessResult<bool>();
@@ -326,6 +395,6 @@ namespace MagicPost_Application.System.Users
 
         }
 
-        
+       
     }
 }

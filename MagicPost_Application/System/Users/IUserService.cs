@@ -18,10 +18,11 @@ namespace MagicPost_Application.System.Users
 
         Task<ApiResult<bool>> Register(RegisterRequest request);
         Task<ApiResult<bool>> RegisterGiaoDichVien(RegisterRequest request,int  DiemGiaoDichId);
-
+        Task<ApiResult<bool>> RegisterNhanVienTapKet(RegisterRequest request, int DiemTapKetId);
 
         Task<ApiResult<PageResult<UserVm>>> GetUsersPaging(GetUserPagingRequest request);
         Task<ApiResult<PageResult<UserVm>>> GetUsersPagingGiaoDichVien(GetUserPagingRequest request, int DiemGiaoDichId);
+        Task<ApiResult<PageResult<UserVm>>> GetUsersPagingNhanVienTapKet(GetUserPagingRequest request, int DiemTapKetId);
 
         Task<ApiResult<UserVm>> GetById(Guid Id);
         Task<ApiResult<bool>> Delete(Guid Id);
