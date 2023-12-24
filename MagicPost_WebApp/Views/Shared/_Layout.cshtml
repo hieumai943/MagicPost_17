@@ -110,7 +110,7 @@
                     <div class="navbar-nav mr-auto">
                         <a href="/" class="nav-item nav-link active">Trang chủ</a>
                         
-                        <a href="/@culture/Home/About" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
+                        <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
                         
                         @if (User.IsInRole("LanhDao"))
                         {
@@ -125,6 +125,7 @@
                         @if (User.IsInRole("GiaoDichVien"))
                         {
                             <a href="/@culture/Home/About/DiemGiaoDich/1" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
+                            <a href="/@culture/Order/Create" class="nav-item nav-link">Tạo đơn hàng</a>
 
                         }
                         @if (User.IsInRole("TruongDiemTapKet"))

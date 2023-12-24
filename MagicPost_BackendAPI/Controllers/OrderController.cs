@@ -115,25 +115,29 @@ namespace MagicPost_BackendAPI.Controllers
         {
             var document = new PdfDocument();
             string HtmlContent = @"
-           <style>
+    <style>
         body {
             width: 530px;
-         
+            height:1123px;
         }
         table {
             border-collapse: collapse;
             width: 100%;
         }
-        th, td {
+        td {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
             vertical-align: top;
+
+            font-size: 12px;
+            width: 50%;
             
         }
-    </style>
-          <body>
 
+    </style>
+</head>
+<body>
     <table>
         <tr>
             <td>
@@ -145,40 +149,39 @@ namespace MagicPost_BackendAPI.Controllers
                 <b>Điện thoại</b>
                 <br>
                 <b>Mã khách hàng:</b>
-                <b style='margin-left: 300px;'>Mã bưu chính:</b>
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <b>Mã bưu chính:</b>
             </td>
-            <td colspan='2'>
+            <td>
                 <b>2. Họ tên địa chỉ người nhận</b><br><br><br>
                 <b>Mã ĐH:</b><br>
                 <b>Điện thoại:</b>
-                <b style='margin-left: 300px;'>Mã bưu chính:</b>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <b style=""margin-left: 30%;"">Mã bưu chính:</b>
             </td>
         </tr>
         <tr>
             <td>
                 <b>3. Loại hàng gửi</b><br>
-                    <input type='checkbox' style='margin-left: 50px;'>Tài liệu
-                    <input type='checkbox' style='margin-left: 250px;'>Hàng hoá
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tài liệu
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Hàng hoá
                 <br>
-                <b>4. Nội dung giá trị bưu gửi</b>
-                <table>
-                    <tr>
-                        <th>
+                <b>4. Nội dung giá trị bưu gửi</b><br>
+                        <b>
                             Nội dung
-                        </th>
-                        <th>Số lượng</th>
-                        <th>Trị giá</th>
-                        <th>Giấy tờ đính kèm</th>
-                    </tr>
-                    <tr>
-                        <td>
+                        </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>Số lượng</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>Trị giá</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>Giấy tờ đính kèm</b><br>
+                        <b>
                             Tổng
-                        </td>
+                        </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <td></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <td></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
             </td>
             <td>
                 <b>9. Cước</b><br>
@@ -189,23 +192,23 @@ namespace MagicPost_BackendAPI.Controllers
                 e, Thu khác<br>
                 <b>f, Tổng thu</b>
             </td>
-            <td>
-                <b>10. Khối lượng</b><br>
-                Khôi lượng  thực tế:<br>
-                Khối lượng quy đổi:<br>
-            </td>
+
 
 
         </tr>
         <tr>
-            <td rowspan='2'>
+
+            <td>
                 <b>5. Dịch vụ đặc biệt/Cộng thêm</b>
                 <br>
                 <br>
                 <br>
             </td>
-            <td >
-                <b>12. Chú dẫn nghiệp vụ</b>
+
+            <td>
+                <b>10. Khối lượng</b><br>
+                Khôi lượng  thực tế:<br>
+                Khối lượng quy đổi:<br>
             </td>
 
         </tr>
@@ -214,13 +217,15 @@ namespace MagicPost_BackendAPI.Controllers
         <tr>
             <td>
                 <b>6. Chỉ dẫn của người gửi khi không phát được bưu gửi</b><br>
-                <input type='checkbox'>Chuyển hoàn ngay
-                <input type='checkbox' style='margin-left: 40px;'>Gọi điện cho người gửi/BC gửi
-                <input type='checkbox' style='margin-left: 40px;'>Huỷ<br>
-                <input type='checkbox'>Chuyển hoàn trước ngày
-                <input type='checkbox' style='margin-left: 40px;'>Chuyển hoàn khi hết thời gian lưu trữ
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chuyển hoàn ngay
+                Gọi điện cho người gửi/BC gửi
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Huỷ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               Chuyển hoàn trước ngày&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Chuyển hoàn khi hết thời gian lưu trữ
             </td>
-            <td rowspan=''>
+            <td>
                 <b>11. Thu của người nhận</b><br>
                 COD<br>
                 Thu khác<br>
@@ -229,28 +234,32 @@ namespace MagicPost_BackendAPI.Controllers
 
         </tr>
         <tr>
-            <td rowspan='3'>
+
+            <td>
                 <b>7. Cam kết của người gửi</b><br>
-                <br>
-                <b>8. Ngày giờ gửi</b>
-                <b style='margin-left: 250px;'>Chữ kí người gửi</b><br><br><br>
 
             </td>
-            <td rowspan='2'>
-                <b>13. Bưu cục chấp nhận</b>
-                <br><small style='margin-left: 50px;'>Chữ kí của GDV nhận</small>
+            <td>
+                <b>8. Ngày giờ gửi</b>
+                <b>Chữ kí người gửi</b><br><br><br>
             </td>
 
         </tr>
         <tr>
-            <td rowspan='2'>
+
+            <td>
+                <b>13. Bưu cục chấp nhận</b>
+                <br><small>Chữ kí của GDV nhận</small>
+            </td>
+            <td>
                 <b>14. Ngày giờ nhận</b><br>
                 &nbsp;&nbsp;&nbsp;h&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/20
                 <br>
-                <small style='text-align: center;'>Người nhận/Người được<br>
+                <small style=""text-align: center;"">Người nhận/Người được<br>
                 uỷ quyền nhận<br>
                 (Ký, ghi rõ họ tên)</small><br><br><br><br>
             </td>
+
        
 
         </tr>
