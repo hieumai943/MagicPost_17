@@ -21,20 +21,29 @@
             <tr>
                 <th>Tên Người Gửi</th>
                 <th>Tên Người Nhận</th>
+                <th>Địa chỉ gửi hàng</th>
                 <th>Đồ Vật</th>
+                <th>Số điện thoại người nhận</th>
                 <th>Địa chỉ nhận</th>
+                <th>Cước</th>
+                <th>Khối lượng</th>
+                <th>Trạng thái đơn hàng</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var order in Model.Orders.items)
             {
 
-
                 <tr>
                     <td>@order.SendName</td>
                     <td>@order.ReceiveName</td>
+                    <td>@order.SendAddress</td>
                     <td>@order.Code</td>
+                    <td>@order.ReceivePhoneNumber</td>
                     <td>@order.ReceiveAddress</td>
+                    <td>@order.Cuoc</td>
+                    <td>@order.KhoiLuong</td>
+                    <td>@order.Status</td>
                 </tr>
             }
             <!-- Thêm các hàng khác tùy vào số đơn hàng -->
