@@ -38,46 +38,38 @@
                 <form asp-controller="Order" asp-action="Create" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="SendName" class="control-label"></label>
-                        <input asp-for="SendName" class="form-control" />
-                        <span asp-validation-for="SendName" class="text-danger"></span>
+                        <span asp-validation-for="SendName">Tên người gửi</span>
+                        <input asp-for="SendName" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReceiveName" class="control-label"></label>
-                        <input asp-for="ReceiveName"  class="form-control" />
-                        <span asp-validation-for="ReceiveName" class="text-danger"></span>
+                        <span asp-validation-for="ReceiveName">Tên người nhận</span>
+                        <input asp-for="ReceiveName" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="SendAddress" class="control-label"></label>
-                        <input asp-for="SendAddress"  class="form-control" />
-                        <span asp-validation-for="SendAddress" class="text-danger"></span>
+                        <span asp-validation-for="SendAddress">Địa chỉ người gửi</span>
+                        <input asp-for="SendAddress" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReceiveAddress" class="control-label"></label>
-                        <input asp-for="ReceiveAddress" class="form-control" />
-                        <span asp-validation-for="ReceiveAddress" class="text-danger"></span>
+                        <span asp-validation-for="ReceiveAddress">Địa chỉ người nhận</span>
+                        <input asp-for="ReceiveAddress" />
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="SendPhoneNumber" class="control-label"></label>
-                        <input asp-for="SendPhoneNumber" class="form-control"></input>
-                        <span asp-validation-for="SendPhoneNumber" class="text-danger"></span>
+                        <span asp-validation-for="SendPhoneNumber">SĐT người gửi</span>
+                        <input asp-for="SendPhoneNumber"></input>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReceivePhoneNumber" class="control-label"></label>
-                        <input  asp-for="ReceivePhoneNumber" rows="1" class="form-control"></input>
-                        <span asp-validation-for="ReceivePhoneNumber" class="text-danger"></span>
+                        <span asp-validation-for="ReceivePhoneNumber">SĐT người nhận</span>
+                        <input  asp-for="ReceivePhoneNumber" rows="1"></input>
                     </div>
                     
                     <div class="form-group">
-                        <label asp-for="Cuoc" class="control-label"></label>
-                        <input type="number" asp-for="Cuoc" class="form-control" />
-                        <span asp-validation-for="Cuoc" class="text-danger"></span>
+                        <span asp-validation-for="Cuoc">Cước</span>
+                        <input type="number" asp-for="Cuoc" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="KhoiLuong" class="control-label"></label>
-                        <input type="number" asp-for="KhoiLuong" class="form-control" />
-                        <span asp-validation-for="KhoiLuong" class="text-danger"></span>
+                        <span asp-validation-for="KhoiLuong" >Khối lượng hàng hoá</span>
+                        <input type="number" asp-for="KhoiLuong"/>
                     </div>
                    
                     <div class="form-group">
@@ -88,3 +80,39 @@
         </div>
     </div>
 </div>
+
+<style>
+    .card-body .col-md-8 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form-group input {
+        width: 400px;
+        padding: 15px 20px;
+        outline: none;
+        background: transparent;
+        border-radius: 5px;
+        color: #212121;
+        border: 1px solid#212121;
+        font-size: 1em;
+    }
+
+    .form-group span {
+        position: absolute;
+        left: 0;
+        font-size: 0.7em;
+        transform: translateX(14px) translateY(-7.5px);
+        padding: 0 6px 1px 5px;
+        border-radius: 2px;
+        background: #e8e8e8;
+        letter-spacing: 1px;
+        border: 1px solid #212121;
+        color: #212121;
+    }
+</style>
