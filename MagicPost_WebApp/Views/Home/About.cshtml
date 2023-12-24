@@ -23,6 +23,7 @@
                 <th>Tên Người Nhận</th>
                 <th>Đồ Vật</th>
                 <th>Địa chỉ nhận</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,9 @@
                     <td>@order.ReceiveName</td>
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
+                    <td>
+                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer" ,new { id = order.Id })
+                    </td>
                 </tr>
             }
             <!-- Thêm các hàng khác tùy vào số đơn hàng -->

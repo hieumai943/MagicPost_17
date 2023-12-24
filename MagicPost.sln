@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPost_Application", "Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPost_ViewModel", "MagicPost_ViewModel\MagicPost_ViewModel.csproj", "{B4E40446-E2A6-4489-B2F1-513A6D7D511A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost_AdminApp", "MagicPost_AdminApp\MagicPost_AdminApp.csproj", "{5C759E86-E667-443F-8D89-31503D9BDAEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPost_AdminApp", "MagicPost_AdminApp\MagicPost_AdminApp.csproj", "{5C759E86-E667-443F-8D89-31503D9BDAEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPost_ApiIntergration", "MagicPost_ApiIntergration\MagicPost_ApiIntergration.csproj", "{B43FC3BB-D5F3-4CF0-B767-6C577BB86302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPost_ApiIntergration", "MagicPost_ApiIntergration\MagicPost_ApiIntergration.csproj", "{B43FC3BB-D5F3-4CF0-B767-6C577BB86302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPostUtilities.cs", "MagicPostUtilities.cs\MagicPostUtilities.cs.csproj", "{77CC989C-4518-433A-8182-374E9AF83AA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicPostUtilities.cs", "MagicPostUtilities.cs\MagicPostUtilities.cs.csproj", "{77CC989C-4518-433A-8182-374E9AF83AA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

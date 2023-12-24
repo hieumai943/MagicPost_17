@@ -67,6 +67,7 @@ builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IDiemGiaoDichApiClient, DiemGiaoDichApiClient>();
 builder.Services.AddTransient<IDiemTapKetApiClient, DiemTapKetApiClient>();
+builder.Services.AddTransient<ITransferApiClient, TransferApiClient>();
 
 var app = builder.Build();
 
