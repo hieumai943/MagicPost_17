@@ -7,7 +7,7 @@
     var culture = CultureInfo.CurrentCulture.Name;
 }
 @model HomeViewModel
-<div class="row" style="margin: 20px">
+<div class="row" style="margin: 10px">
 
     <div class="col-md-6 col-xs-12 offset-md-8">
         <form asp-action="About" method="get">
@@ -63,7 +63,7 @@
                         <td>
                             <form asp-controller="Order" asp-action="GetPdf" method="get">
                                 <input type="text" name="nameOfFile" placeholder="Enter file name" required>
-                                <button type="submit">Download PDF</button>
+                                <button class="dow-btn" type="submit">Download PDF</button>
                             </form>
                         </td>
                     }
