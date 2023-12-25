@@ -37,7 +37,7 @@
         </div>
 
         <div class="card-body">
-            <div class="col-md-8">
+            <div class="col-md-6 col-xs-12 offset-md-4">
                 <form asp-controller="Order" asp-action="Create" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -85,11 +85,7 @@
 </div>
 
 <style>
-    .card-body .col-md-8 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+
 
     .form-group {
         position: relative;
