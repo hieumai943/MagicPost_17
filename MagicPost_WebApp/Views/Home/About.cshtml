@@ -17,10 +17,10 @@
                     <input type="text" value="@ViewBag.Keyword" name="keyword" class="input" placeholder="Search" />
                 </div>
                 <select name="OrderStatusId" class="select">
-                    <option value="">Status</option>
+                    <option value= "">Status</option>
                     <option value=0>In Progress</option>
-                    <option value=1>Shipped</option>
-                    <option value=2>Canceled</option>
+                    <option value=1 >Shipped</option>
+                    <option value= 2>Canceled</option>
                 </select>
                 <div class="cold-md-3">
                     <button type="submit" class="button">
@@ -42,9 +42,9 @@
                 <th>Đồ Vật</th>
                 <th>Địa chỉ nhận</th>
                 @if (User.IsInRole("GiaoDichVien"))
-                {
-                    <th>Hóa đơn </th>
-                }
+    {
+                <th>Hóa đơn </th>
+    }
                 <th>Trạng thái</th>
             </tr>
         </thead>
@@ -53,13 +53,11 @@
             {
 
                 <tr>
+
                     <td>@order.SendName</td>
                     <td>@order.ReceiveName</td>
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
-                    <td>
-                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { OrderId = order.Id })
-                    </td >
                     @if (User.IsInRole("GiaoDichVien"))
                     {
                         <td>
@@ -97,7 +95,7 @@
         color: #fff;
     }
 
-    .ShowOrder {
+    .ShowOrder{
         height: 100vh;
     }
 
@@ -215,5 +213,6 @@
             transform: translateY(10px);
             transition: 100ms;
         }
+
 
 </style>
