@@ -1,5 +1,6 @@
 ﻿using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
+using MagicPost__Data.Enums;
 using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.Orders;
 using MagicPostUtilities.Exceptions;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,20 +24,19 @@ namespace MagicPost_Application.Transfer
         }
 
  
-        public async Task<int> Create(TransferCreateRequest request)
+        public async Task<int> Create(int id, TransferCreateRequest request)
         {
-
             var log = new Log()
             {
-                DateCreated = DateTime.Now,
-                OrderId = 1,
-                DiemGiaoDichFromId = request.FromDiemGd,
-                DiemGiaoDichToId = request.ToDiemGd,
-                DiemTapKetFromId = request.FromDiemTk,
+                //DiemGiaoDichToId = request.ToDiemGd,
                 DiemTapKetToId = request.ToDiemTk,
-                OrderStatus = request.Status
             };
-
+            log.OrderStatus = MagicPost__Data.Enums.OrderStatus.Success;
+            log.DateCreated = DateTime.Now;
+            var temp = await _context.Orders.FindAsync(request.OrderId);
+            log.DiemGiaoDichFromId = temp.DiemGiaoDichId;
+            log.DiemTapKetFromId = temp.DiemTapKetId;
+            log.OrderId = request.OrderId;
             _context.Logs.Add(log);
             await _context.SaveChangesAsync();
             return log.Id;

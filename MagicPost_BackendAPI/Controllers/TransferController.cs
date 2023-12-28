@@ -27,16 +27,17 @@ namespace MagicPost_BackendAPI.Controllers
             return Ok(product);
         }
 
-        [HttpPost]
+        [HttpPost("{idx}")]
         [Consumes("multipart/form-data")]
         //[Authorize(Roles ="GiaoDichVien, NhanVienTapKet")]
-        public async Task<IActionResult> Create([FromForm] TransferCreateRequest request)
+        public async Task<IActionResult> Create(int idx, [FromForm] TransferCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var transferId = await _TransferService.Create(request);
+            request.OrderId = idx;
+            var transferId = await _TransferService.Create(idx, request);
             if (transferId == 0)
                 return BadRequest();
 
