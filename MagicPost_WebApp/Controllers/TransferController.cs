@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using MagicPost__Data.Entities;
 using MagicPost_ApiIntergration;
 using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.Orders;
@@ -53,4 +54,4 @@ namespace MagicPost_WebApp.Controllers
                 return transferRequest;
             }
         }
- }
+}
