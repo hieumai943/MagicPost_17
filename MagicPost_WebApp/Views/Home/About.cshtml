@@ -2,14 +2,14 @@
 
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "OrderPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var culture = CultureInfo.CurrentCulture.Name;
 }
 @model HomeViewModel
 <div class="row" style="margin: 10px">
 
-    <div class="col-md-6 col-xs-12 offset-md-8">
+    <div class="search-view" style="margin-left: 75%">
         <form asp-action="About" method="get">
             <div class="row">
                 <div class="group">
@@ -20,7 +20,7 @@
                     <option value= "">Status</option>
                     <option value=0>In Progress</option>
                     <option value=1 >Shipped</option>
-                    <option value=2>Canceled</option>
+                    <option value= 2>Canceled</option>
                 </select>
                 <div class="cold-md-3">
                     <button type="submit" class="button">
@@ -46,6 +46,7 @@
                 <th>Hóa đơn </th>
     }
                 <th>Trạng thái</th>
+                <th>Transfer</th>
             </tr>
         </thead>
         <tbody>
@@ -58,19 +59,21 @@
                     <td>@order.ReceiveName</td>
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
-                    <td>
-                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
-                    </td>
                     @if (User.IsInRole("GiaoDichVien"))
                     {
                         <td>
                             <form asp-controller="Order" asp-action="GetPdf" method="get">
-                                <input type="text" name="nameOfFile" placeholder="Enter file name" required>
-                                <button class="dow-btn" type="submit">Download PDF</button>
+                                <input type="text" style="border-radius: 8px;" name="nameOfFile" placeholder="Enter file name" required>
+                                <button class="dow-btn" type="submit">
+                                    <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
+                                </button>
                             </form>
                         </td>
                     }
                     <td>@order.Status</td>
+                    <td>
+                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { OrderId = order.Id })
+                    </td>
                 </tr>
             }
             <!-- Thêm các hàng khác tùy vào số đơn hàng -->
@@ -80,11 +83,15 @@
 
 
 <style>
+    body{
+        
+    }
     /* CSS để tạo bảng */
     table {
         border-collapse: collapse;
         width: 100%;
         margin-top: 20px;
+
     }
 
     th, td {
@@ -130,9 +137,9 @@
 
         .input:focus, input:hover {
             outline: none;
-            border-color: rgba(234,76,137,0.4);
+            border-color: rgba(39, 109, 245, 0.8);
             background-color: #fff;
-            box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+            box-shadow: 0 0 0 4px rgb(34 154 240 / 10%);
         }
 
     .icon {
@@ -212,10 +219,39 @@
             letter-spacing: 3px;
             background-color: hsl(261deg 80% 48%);
             color: hsl(0, 0%, 100%);
-            box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+            box-shadow: rgb(34 154 240) 0px 0px 0px 0px;
             transform: translateY(10px);
             transition: 100ms;
         }
+
+
+    .dow-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: gray;
+  cursor: pointer;
+  position: relative;
+  transition-duration: .3s;
+
+}
+
+.svgIcon {
+  fill: rgb(34, 154, 240);
+}
+
+
+.dow-btn:hover .tooltip {
+  opacity: 1;
+  transition-duration: .3s;
+}
+
+.dow-btn:hover {
+  background-color: rgb(34, 154, 240);
+  transition-duration: .3s;
+}
+
 
 
 </style>
