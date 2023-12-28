@@ -18,8 +18,8 @@ namespace MagicPost__Data.Configurations
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.DateCreated).IsRequired();
             builder.HasOne(x => x.Order)
-            .WithOne()
-            .HasForeignKey<Log>(x => x.OrderId)
+            .WithMany()  // Đặt mối quan hệ là One-to-Many
+            .HasForeignKey(x => x.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
         }
     }

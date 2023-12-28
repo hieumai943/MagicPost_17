@@ -38,11 +38,11 @@ namespace MagicPost_ApiIntergration
 
             var requestContent = new MultipartFormDataContent();
 
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(id.ToString()) ? "" : id.ToString()), "Code");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(id.ToString()) ? "" : id.ToString()), "OrderId");
 
             requestContent.Add(new StringContent(request.ToDiemTk.ToString()), "ToDiemTk");
 
-            var response = await client.PostAsync($"/api/transfer/{id}", requestContent);
+            var response = await client.PostAsync($"/api/transfer", requestContent);
             return response.IsSuccessStatusCode;
         }
     }
