@@ -22,11 +22,12 @@ namespace MagicPost_WebApp.Controllers
             public async Task<IActionResult> Create(int id)
             {
                 var temp = await GetTransferRequest(id);
-                return View(temp);
+             ViewBag.orderId = id;
+            return View(temp);
             }
 
             [HttpPost]
-            [Consumes("multipart/form-data")]
+            //  [Consumes("multipart/form-data")]
             public async Task<IActionResult> Create([FromForm] TransferCreateRequest request)
             {
 

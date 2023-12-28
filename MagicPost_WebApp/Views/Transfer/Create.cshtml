@@ -36,6 +36,8 @@
         <div class="card-body">
             <div class="col-md-8">
                 <form asp-controller="Transfer" asp-action="Create" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="OrderId" value="@ViewBag.orderId" />
+
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="ToDiemTk" class="control-label"></label>

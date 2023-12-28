@@ -20,7 +20,7 @@
                     <option value= "">Status</option>
                     <option value=0>In Progress</option>
                     <option value=1 >Shipped</option>
-                    <option value= 2>Canceled</option>
+                    <option value=2>Canceled</option>
                 </select>
                 <div class="cold-md-3">
                     <button type="submit" class="button">
@@ -59,7 +59,7 @@
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
                     <td>
-                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { OrderId = order.Id })
+                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
                     </td>
                     @if (User.IsInRole("GiaoDichVien"))
                     {
