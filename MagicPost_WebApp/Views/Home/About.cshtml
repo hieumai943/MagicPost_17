@@ -58,6 +58,9 @@
                     <td>@order.ReceiveName</td>
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
+                    <td>
+                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { OrderId = order.Id })
+                    </td>
                     @if (User.IsInRole("GiaoDichVien"))
                     {
                         <td>

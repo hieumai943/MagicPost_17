@@ -11,7 +11,7 @@ namespace MagicPost_Application.Transfer
     public interface ITransferService
     {
         Task<LogVm> GetById(int transferId);
-        Task<int> Create(TransferCreateRequest request);
+        Task<int> Create(int id, TransferCreateRequest request);
 
     }
 }
