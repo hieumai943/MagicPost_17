@@ -37,7 +37,7 @@
                     <td>@order.Code</td>
                     <td>@order.ReceiveAddress</td>
                     <td>
-                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer" ,new { id = order.Id })
+                        @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { OrderId = order.Id })
                     </td>
                 </tr>
             }

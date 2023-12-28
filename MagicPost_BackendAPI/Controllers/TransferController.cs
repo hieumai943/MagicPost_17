@@ -27,7 +27,7 @@ namespace MagicPost_BackendAPI.Controllers
             return Ok(product);
         }
 
-        [HttpPut("{idx}")]
+        [HttpPost("{idx}")]
         [Consumes("multipart/form-data")]
         //[Authorize(Roles ="GiaoDichVien, NhanVienTapKet")]
         public async Task<IActionResult> Create(int idx, [FromForm] TransferCreateRequest request)

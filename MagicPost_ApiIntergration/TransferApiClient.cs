@@ -42,7 +42,7 @@ namespace MagicPost_ApiIntergration
 
             requestContent.Add(new StringContent(request.ToDiemTk.ToString()), "ToDiemTk");
 
-            var response = await client.PutAsync($"/api/transfer/{id}", requestContent);
+            var response = await client.PostAsync($"/api/transfer/{id}", requestContent);
             return response.IsSuccessStatusCode;
         }
     }
