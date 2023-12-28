@@ -275,7 +275,7 @@ namespace MagicPost_BackendAPI.Controllers
                 document.Save(ms);
                 response = ms.ToArray();
             }
-            string Filename = "Đơn hàng" + NameOfFile + ".pdf";
+            string Filename = "Đơn hàng" + NameOfFile + " .pdf";
             return File(response, "application/pdf", Filename);
         }
     }

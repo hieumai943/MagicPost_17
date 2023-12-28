@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MagicPost_Application.Logs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,7 @@ builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<IDiemGiaoDichService, DiemGiaoDichService>();
 builder.Services.AddTransient<IDiemTapKetService, DiemTapKetService>();
 builder.Services.AddTransient<ITransferService, TransferService>();
+builder.Services.AddTransient<ILogService, LogService>();
 
 /*
 builder.Services.AddTransient<ISlideService, SlideService>();*/
