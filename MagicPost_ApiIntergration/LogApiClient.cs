@@ -31,27 +31,39 @@ namespace shopCommerce_ApiIntergration
             _httpContextAccessor = httpContextAccessor;
         }
 
-
-        public async Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request)
+        public async Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDichGui(GetManageOrderPagingRequest request, int DiemGiaoDichId)
         {
             var data = await GetAsync<PageResult<OrderVm>>(
-                $"/api/Log/paging?keyword={request.Keyword}&OrderStatusId={request.OrderStatusId}&PageIndex={request.PageIndex}" +
-                $"&pageSize={request.PageSize}");
-
-
-            return data;
-        }
-        public async Task<PageResult<OrderVm>> GetPagingGui(GetManageOrderPagingRequest request)
-        {
-            var data = await GetAsync<PageResult<OrderVm>>(
-                $"/api/order/paging/?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                $"/api/Log/DiemGiaoDich/PagingSend/{DiemGiaoDichId}?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
                 $"&pageSize={request.PageSize}");
             return data;
         }
-        public async Task<PageResult<OrderVm>> GetPagingNhan(GetManageOrderPagingRequest request)
+
+        public async Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDichNhan(GetManageOrderPagingRequest request, int DiemGiaoDichId)
         {
-            throw new NotImplementedException();
+            var data = await GetAsync<PageResult<OrderVm>>(
+                 $"/api/Log/DiemGiaoDich/PagingReceive/{DiemGiaoDichId}?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                 $"&pageSize={request.PageSize}");
+            return data;
         }
+
+        public async Task<PageResult<OrderVm>> GetAllPagingDiemTapKetGui(GetManageOrderPagingRequest request, int DiemTapKetId)
+        {
+            var data = await GetAsync<PageResult<OrderVm>>(
+                $"/api/Log/DiemTapKet/PagingSend/{DiemTapKetId}?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}");
+            return data;
+        }
+
+        public async Task<PageResult<OrderVm>> GetAllPagingDiemTapKetNhan(GetManageOrderPagingRequest request, int DiemTapKetId)
+        {
+            var data = await GetAsync<PageResult<OrderVm>>(
+                 $"/api/Log/DiemTapKet/PagingSend/{DiemTapKetId}?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                 $"&pageSize={request.PageSize}");
+            return data;
+        }
+
+       
        
 
     }

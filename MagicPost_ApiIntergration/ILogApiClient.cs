@@ -12,11 +12,13 @@ namespace MagicPost_ApiIntergration
 {
     public interface ILogApiClient
     {
-        Task<PageResult<OrderVm>> GetPagings(GetManageOrderPagingRequest request);
-        Task<PageResult<OrderVm>> GetPagingNhan(GetManageOrderPagingRequest request);
-        Task<PageResult<OrderVm>> GetPagingGui(GetManageOrderPagingRequest request);
+        Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDichNhan(GetManageOrderPagingRequest request, int DiemGiaoDichId);
+        Task<PageResult<OrderVm>> GetAllPagingDiemTapKetNhan(GetManageOrderPagingRequest request, int DiemTapKetId);
 
-       
+        Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDichGui(GetManageOrderPagingRequest request, int DiemGiaoDichId);
+
+        Task<PageResult<OrderVm>> GetAllPagingDiemTapKetGui(GetManageOrderPagingRequest request, int DiemTapKetId);
+
 
     }
 }

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Localization;
 using MagicPost_WebApp.LocalizationResources;
 using MagicPost__Data.EF;
 using Microsoft.EntityFrameworkCore;
+using MagicPost__Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,9 +67,16 @@ builder.Services.AddDbContext<MagicPostDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MagicPostDb2"));
 });
+/*
+builder.Services.AddIdentity<AppUser, AppRole>()
+	.AddEntityFrameworkStores<MagicPostDbContext>()
+	.AddDefaultTokenProviders();
+builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();*/
+
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<ISlideApiClient, SlideApiClient>();
 builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
+builder.Services.AddTransient<ILogApiClient, LogApiClient>();
 
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IDiemGiaoDichApiClient, DiemGiaoDichApiClient>();
