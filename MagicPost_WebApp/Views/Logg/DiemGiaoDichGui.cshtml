@@ -1,4 +1,5 @@
 ﻿@using System.Globalization;
+@using MagicPost__Data.Enums;
 
 
 @{
@@ -70,7 +71,25 @@
                             </form>
                         </td>
                     }
-                    <td>@order.Status</td>
+                    <td>
+                        @if (order.Status == OrderStatus.InGD1 || order.Status == OrderStatus.InGD2)
+                        {
+                            <span>Đang ở điểm giao dịch</span>
+                        }
+                        @if (order.Status == OrderStatus.InTk1 || order.Status == OrderStatus.InTk2)
+                        {
+                            <span>Đang ở điểm tập kết</span>
+                        }
+                        @if (order.Status == OrderStatus.ToTk1 || order.Status == OrderStatus.ToTk2 || order.Status == OrderStatus.Shipping)
+                        {
+                            <span>Đang vận chuyển</span>
+                        }
+                        @if (order.Status == OrderStatus.Shipped)
+                        {
+                            <span>Giao thành công</span>
+                        }
+
+                    </td>
                     <td>
                         @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
                     </td>
