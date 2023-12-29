@@ -88,6 +88,7 @@ namespace MagicPost_Application.Orders
                     ReceiveAddress = x.p.ReceiveAddress,
                     Cuoc = x.p.Cuoc,
                     KhoiLuong = x.p.KhoiLuong,
+                    Status = x.p.Status,
                     // ThumbnailImage = x.pi.ImagePath
                 }).ToListAsync();
             var pageResult = new PageResult<OrderVm>()
@@ -127,6 +128,7 @@ namespace MagicPost_Application.Orders
                     ReceiveAddress = x.p.ReceiveAddress,
                     Cuoc = x.p.Cuoc,
                     KhoiLuong = x.p.KhoiLuong,
+                    Status = x.p.Status,
                     // ThumbnailImage = x.pi.ImagePath
                 }).ToListAsync();
             var pageResult = new PageResult<OrderVm>()
