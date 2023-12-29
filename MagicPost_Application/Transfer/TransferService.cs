@@ -36,6 +36,17 @@ namespace MagicPost_Application.Transfer
                 log.DiemTapKetToId = gd.DiemTapKetId;
                 temp.DiemTapKetId = log.DiemTapKetToId;
                 temp.DiemGiaoDichId = null;
+                temp.Status = OrderStatus.ToTk1;
+            }
+            else if(temp.Status == OrderStatus.ToTk1)
+            {
+                log.OrderStatus = OrderStatus.InTk1;
+                var nearestLog = _context.Logs
+                                .Where(log => log.OrderId == request.OrderId) 
+                                .OrderByDescending(log => log.DateCreated)
+                                .FirstOrDefault();
+                log.DiemGiaoDichFromId = nearestLog.DiemGiaoDichFromId;
+                log.DiemTapKetToId=nearestLog.DiemTapKetToId;
                 temp.Status = OrderStatus.InTk1;
             }
             else if(temp.Status == OrderStatus.InTk1)
@@ -44,7 +55,18 @@ namespace MagicPost_Application.Transfer
                 log.DiemTapKetFromId = temp.DiemTapKetId;
                 log.DiemTapKetToId = request.ToDiemTk;
                 temp.DiemTapKetId = request.ToDiemTk;
-                temp.Status = OrderStatus.InTk2;
+                temp.Status = OrderStatus.ToTk2;
+            }
+            else if (temp.Status == OrderStatus.ToTk2)
+            {
+                log.OrderStatus = OrderStatus.InTk2;
+                var nearestLog = _context.Logs
+                                .Where(log => log.OrderId == request.OrderId)
+                                .OrderByDescending(log => log.DateCreated)
+                                .FirstOrDefault();
+                log.DiemTapKetFromId = nearestLog.DiemTapKetFromId;
+                log.DiemTapKetToId = nearestLog.DiemTapKetToId;
+                temp.Status = OrderStatus.InTk1;
             }
             else if(temp.Status == OrderStatus.InTk2)
             {
@@ -53,6 +75,17 @@ namespace MagicPost_Application.Transfer
                 log.DiemGiaoDichToId = request.ToDiemGd;
                 temp.DiemGiaoDichId = log.DiemGiaoDichToId;
                 temp.DiemTapKetId = null;
+            }
+            else if (temp.Status == OrderStatus.ToGD2)
+            {
+                log.OrderStatus = OrderStatus.InGD2;
+                var nearestLog = _context.Logs
+                                .Where(log => log.OrderId == request.OrderId)
+                                .OrderByDescending(log => log.DateCreated)
+                                .FirstOrDefault();
+                log.DiemTapKetFromId = nearestLog.DiemTapKetFromId;
+                log.DiemGiaoDichToId = nearestLog.DiemGiaoDichToId;
+                temp.Status = OrderStatus.InTk1;
             }
             else if(temp.Status == OrderStatus.InGD2)
             {
