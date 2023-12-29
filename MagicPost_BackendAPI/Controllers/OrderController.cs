@@ -84,7 +84,22 @@ namespace MagicPost_BackendAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            if (userId != null)
+            {
+                var users = await _userService.GetById(Guid.Parse(userId));
+                if (users.ResultObj.DiemGiaoDichId.HasValue)
+                {
+                    var product1 = await _OrderService.CreateGd(request, users.ResultObj.DiemGiaoDichId.Value);
+                    return Ok(product1);
+                }
+                if (users.ResultObj.DiemTapKetId.HasValue)
+                {
+                    var product1 = await _OrderService.CreateTk(request, users.ResultObj.DiemTapKetId.Value);
+                    return Ok(product1);
+                }
+            }
             var orderId = await _OrderService.Create(request);
             if (orderId == 0)
                 return BadRequest();
@@ -111,9 +126,11 @@ namespace MagicPost_BackendAPI.Controllers
 
         }
         [HttpGet("generatepdf")]
-        public async Task<IActionResult> GeneratePDF(string NameOfFile)
+        public async Task<IActionResult> GeneratePDF(string NameOfFile , int orderId)
         {
             var document = new PdfDocument();
+            var product = await _OrderService.GetById(orderId);
+
             string HtmlContent = @"
     <style>
         body {
@@ -141,50 +158,40 @@ namespace MagicPost_BackendAPI.Controllers
     <table>
         <tr>
             <td>
-                <b>1. Họ tên địa chỉ người gửi</b>
+                <b>1. Họ tên người gửi:</b>
+"+ product.SendName 
+     +  @" <br>
+                <b>Điện thoại: </b>
+        "+ product.SendPhoneNumber
+        +"<br><b>Địa chỉ người gửi: </b>"+ product.SendAddress
+        +@"
                 <br>
-                <br>
-                <br>
-
-                <b>Điện thoại</b>
-                <br>
-                <b>Mã khách hàng:</b>
-
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <b>Mã bưu chính:</b>
+                <b>Mã đơn hàng:</b>
+"+ product.Code+
+               @"
             </td>
             <td>
-                <b>2. Họ tên địa chỉ người nhận</b><br><br><br>
-                <b>Mã ĐH:</b><br>
+                <b>2. Họ tên người nhận: </b>
+            "+product.ReceiveName
+           +"<br><b>Địa chỉ người nhận: </b>" + product.ReceiveAddress+
+
+            @"<br>
                 <b>Điện thoại:</b>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <b style=""margin-left: 30%;"">Mã bưu chính:</b>
+            " + product.ReceivePhoneNumber
+            +@"
             </td>
         </tr>
         <tr>
             <td>
                 <b>3. Loại hàng gửi</b><br>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tài liệu
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Hàng hoá
                 <br>
                 <b>4. Nội dung giá trị bưu gửi</b><br>
-                        <b>
-                            Nội dung
-                        </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>Số lượng</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>Trị giá</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>Giấy tờ đính kèm</b><br>
-                        <b>
-                            Tổng
-                        </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td></td>
+                       
             </td>
             <td>
-                <b>9. Cước</b><br>
+                <b>9. Cước: </b>
+" +product.Cuoc+@"<br>
                 a, Cước chính<br>
                 b, Phụ phí<br>
                 c, Cước GTGT<br>
@@ -206,7 +213,8 @@ namespace MagicPost_BackendAPI.Controllers
             </td>
 
             <td>
-                <b>10. Khối lượng</b><br>
+                <b>10. Khối lượng: </b>
+"+ product.KhoiLuong+ @"kg<br>
                 Khôi lượng  thực tế:<br>
                 Khối lượng quy đổi:<br>
             </td>
@@ -218,12 +226,7 @@ namespace MagicPost_BackendAPI.Controllers
             <td>
                 <b>6. Chỉ dẫn của người gửi khi không phát được bưu gửi</b><br>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chuyển hoàn ngay
-                Gọi điện cho người gửi/BC gửi
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Huỷ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               Chuyển hoàn trước ngày&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Chuyển hoàn khi hết thời gian lưu trữ
+               
             </td>
             <td>
                 <b>11. Thu của người nhận</b><br>
@@ -239,34 +242,32 @@ namespace MagicPost_BackendAPI.Controllers
                 <b>7. Cam kết của người gửi</b><br>
 
             </td>
-            <td>
-                <b>8. Ngày giờ gửi</b>
-                <b>Chữ kí người gửi</b><br><br><br>
+<td>
+                <b>13. Bưu cục chấp nhận</b>
+                <br><small>Chữ kí của GDV nhận</small>
             </td>
+            
 
         </tr>
         <tr>
 
             <td>
-                <b>13. Bưu cục chấp nhận</b>
-                <br><small>Chữ kí của GDV nhận</small>
+                <b>8. Ngày giờ gửi</b>
+<br>
+                <b>Chữ kí người gửi</b><br><br>
             </td>
             <td>
                 <b>14. Ngày giờ nhận</b><br>
-                &nbsp;&nbsp;&nbsp;h&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/20
                 <br>
                 <small style=""text-align: center;"">Người nhận/Người được<br>
                 uỷ quyền nhận<br>
                 (Ký, ghi rõ họ tên)</small><br><br><br><br>
             </td>
-
-       
-
         </tr>
     </table>
 
 </body>
-            "; ;
+            "; 
 
             PdfGenerator.AddPdfPages(document, HtmlContent, PageSize.A4);
             byte[]? response = null;

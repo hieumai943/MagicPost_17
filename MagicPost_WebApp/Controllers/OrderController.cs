@@ -53,9 +53,9 @@ namespace MagicPost_WebApp.Controllers
             return View(request);
         }
         [HttpGet("getpdf")]
-        public async Task<IActionResult> GetPdf(string nameOfFile)
+        public async Task<IActionResult> GetPdf(string nameOfFile, int OrderId)
         {
-            var fileBytes = await _orderApiClient.GetPdf(nameOfFile);
+            var fileBytes = await _orderApiClient.GetPdf(nameOfFile,OrderId);
 
             if (fileBytes != null)
             {

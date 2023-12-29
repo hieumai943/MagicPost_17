@@ -270,7 +270,7 @@
             <div class="col-lg-5">
                 <div class="location-form">
                     <h3>Tra cứu vận đơn</h3>
-                    <form>
+                    <form asp-action="About" method="get">
                         <div class="control-group">
                             <input type="text" class="form-control" placeholder="Tên" />
                         </div>
@@ -278,7 +278,7 @@
                             <input type="email" class="form-control" placeholder="SĐT" />
                         </div>
                         <div class="control-group">
-                            <input class="form-control" placeholder="Mã vận đơn" required="required"></input>
+                            <input class="form-control" placeholder="Mã vận đơn" required="required" value="@ViewBag.Keyword" name="keyword"></input>
                         </div>
                         <div>
                             <button class="btn btn-custom" type="submit">Tra cứu</button>

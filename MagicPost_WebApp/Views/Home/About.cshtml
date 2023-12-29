@@ -8,7 +8,9 @@
 }
 @model HomeViewModel
 <div class="container-fluid">
-    <div class="row" style="margin: 10px">
+    @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+    {
+        <div class="row" style="margin: 10px">
 
         <div class="search-view" style="margin-left: 75%">
             <form asp-action="About" method="get">
@@ -35,21 +37,24 @@
             </form>
         </div>
     </div>
-
+    }
     <div class="ShowOrder">
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Tên Người Gửi</th>
                     <th>Tên Người Nhận</th>
-                    <th>Đồ Vật</th>
+                    <th>Mã đơn</th>
                     <th>Địa chỉ nhận</th>
                     @if (User.IsInRole("GiaoDichVien"))
         {
                     <th>Hóa đơn </th>
         }
                     <th>Trạng thái</th>
+                     @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+                        {
                     <th>Transfer</th>
+                        }
                 </tr>
             </thead>
             <tbody>
@@ -66,7 +71,9 @@
                         {
                             <td>
                                 <form asp-controller="Order" asp-action="GetPdf" method="get">
-                                    <input type="text" style="border-radius: 8px;" name="nameOfFile" placeholder="Enter file name" required>
+                                    <input type="text" style="border-radius: 8px;" name="nameOfFile" placeholder="Điền tên cho hóa đơn" required>
+                                    <input type="hidden" name="OrderId" value="@order.Id" />
+
                                     <button class="dow-btn" type="submit">
                                         <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
                                     </button>
@@ -74,19 +81,23 @@
                             </td>
                         }
                         <td>@order.Status</td>
-                        <td>
-                            @if(order.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
-                            || order.Status  == MagicPost__Data.Enums.OrderStatus.ToTk2
-                            || order.Status == MagicPost__Data.Enums.OrderStatus.ToGD2
-                            || order.Status == MagicPost__Data.Enums.OrderStatus.Shipping)
-                            {
-                                @Html.ActionLink("Xác nhận", "Create", "Transfer", new { Id = order.Id })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
-                            }
-                        </td>
+                        @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+                        {
+                            <td>
+                                @if (order.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
+                   || order.Status == MagicPost__Data.Enums.OrderStatus.ToTk2
+                   || order.Status == MagicPost__Data.Enums.OrderStatus.ToGD2
+                   || order.Status == MagicPost__Data.Enums.OrderStatus.Shipping)
+                                {
+                                    @Html.ActionLink("Xác nhận", "Create", "Transfer", new { Id = order.Id })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
+                                }
+                            </td>
+                        }
+
                     </tr>
                 }
                 <!-- Thêm các hàng khác tùy vào số đơn hàng -->

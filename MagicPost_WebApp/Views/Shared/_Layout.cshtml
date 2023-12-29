@@ -40,7 +40,7 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="logo">
                         <a href="">
-                            <h1>Magic<span>Post</span></h1>
+                            <h1 style="font-size: 43px;">Magic<span>Post</span></h1>
                             <!-- <img src="img/logo.jpg" alt="Logo"> -->
                         </a>
                     </div>
@@ -53,8 +53,8 @@
                                     <i class="far fa-clock"></i>
                                 </div>
                                 <div class="top-bar-text">
-                                    <h3>Opening Hour</h3>
-                                    <p>Mon - Fri, 8am - 9pm</p>
+                                    <h3>Giờ mở cửa</h3>
+                                    <p>Thứ 2 - Thứ 7, 8h - 17h</p>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="top-bar-text">
                                     <h3>Liên hệ</h3>
-                                    <p>+012 345 6789</p>
+                                    <p>+84 559 694 069</p>
                                 </div>
                             </div>
                         </div>
@@ -99,28 +99,34 @@
                     <div class="navbar-nav mr-auto">
                         <a href="/" class="nav-item nav-link">Trang chủ</a>
                         
-                        <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
                         
                         @if (User.IsInRole("LanhDao"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/DiemTapKet/Index" class="nav-item nav-link">Quản lý các điểm</a>
                             <a href="/@culture/User/Index" class="nav-item nav-link">Quản lý tài khoản</a>
                             <a href="/@culture/Log/GetAllPaging" class="nav-item nav-link">Thống kê hàng hóa</a>
 
                         }
                         @if(User.IsInRole("TruongDiemGiaoDich")){
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/User/GetGiaoDichViens" class="nav-item nav-link">Quản lỷ tài khoản giao dịch viên</a>
                             <a href="/@culture/Log/GetAllPaging" class="nav-item nav-link">Thống kê hàng hóa</a>
 
                         }
                         @if (User.IsInRole("GiaoDichVien"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/Home/About/DiemGiaoDich/1" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
                             <a href="/@culture/Order/Create" class="nav-item nav-link">Tạo đơn hàng</a>
 
                         }
                         @if (User.IsInRole("TruongDiemTapKet"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
 
                             <a href="/@culture/User/GetNhanVienTapKet" class="nav-item nav-link">Quản lý tài khoản nhân viên tập kết</a>
                             <a href="/@culture/Log/GetAllPaging" class="nav-item nav-link">Thống kê hàng hóa</a>
@@ -128,6 +134,8 @@
                         }
                         @if (User.IsInRole("NhanVienTapKet"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/Home/AboutDiemTapKet/DiemTapKet/1" class="nav-item nav-link">Quản lý đơn hàng điểm tập kết</a>
                         }
                         @*<div class="nav-item dropdown">
@@ -148,8 +156,9 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <form action="/@culture/Account/Logout" method="post">
-                                <button type="submit"
+                            //<form action="/@culture/Account/Logout" method="post">
+                                <form>
+                                <button type="submit" onclick="showConfirmation()"
                                     style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
                                     <a class="btn btn-custom">
                                         <span>@User.Identity.Name</span>
@@ -157,6 +166,29 @@
                                     </a>
 
                                 </button>
+                                <div id="confirmationPopup">
+                                    <p>Bạn có chắc chắn muốn thực hiện hành động này?</p>
+                                    <button onclick="performAction()">OK</button>
+                                    <button onclick="hideConfirmation()">Hủy</button>
+                                </div>
+                                <script>
+                                    function showConfirmation() {
+                                        // Hiển thị popup
+                                        document.getElementById("confirmationPopup").style.display = "block";
+                                    }
+
+                                    function hideConfirmation() {
+                                        // Ẩn popup
+                                        document.getElementById("confirmationPopup").style.display = "none";
+                                    }
+
+                                    function performAction() {
+                                        // Thực hiện hành động tương ứng
+                                        alert("Hành động đã được thực hiện!");
+                                        // Sau khi thực hiện xong, ẩn popup
+                                        hideConfirmation();
+                                    }
+                                </script>
                             </form>
                         }
                         else
@@ -253,3 +285,18 @@
 </body>
 
 </html>
+
+<style>
+    #confirmationPopup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+</style>

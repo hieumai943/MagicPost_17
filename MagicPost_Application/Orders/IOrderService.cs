@@ -16,6 +16,9 @@ namespace MagicPost_Application.Orders
 
         Task<OrderVm> GetById(int orderId);
         Task<int> Create(OrderCreateRequest request);
+        Task<int> CreateGd(OrderCreateRequest request, int DiemGiaoDichId);
+        Task<int> CreateTk(OrderCreateRequest request, int DiemTapKetId);
+
         Task<int> Delete(int orderId);
 
     }
