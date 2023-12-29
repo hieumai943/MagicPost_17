@@ -73,7 +73,17 @@
                         }
                         <td>@order.Status</td>
                         <td>
-                            @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
+                            @if(order.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
+                            || order.Status  == MagicPost__Data.Enums.OrderStatus.ToTk2
+                            || order.Status == MagicPost__Data.Enums.OrderStatus.ToGD2
+                            || order.Status == MagicPost__Data.Enums.OrderStatus.Shipping)
+                            {
+                                @Html.ActionLink("Xác nhận", "Create", "Transfer", new { Id = order.Id })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
+                            }
                         </td>
                     </tr>
                 }
