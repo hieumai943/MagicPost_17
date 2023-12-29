@@ -15,7 +15,6 @@ namespace MagicPost__Data.Enums
         InTk2,
         ToGD2,
         InGD2,
-        ToUser,
         Shipped,
         Unshipped,
         Shipping

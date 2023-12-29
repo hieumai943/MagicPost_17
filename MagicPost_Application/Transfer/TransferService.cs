@@ -66,7 +66,7 @@ namespace MagicPost_Application.Transfer
                                 .FirstOrDefault();
                 log.DiemTapKetFromId = nearestLog.DiemTapKetFromId;
                 log.DiemTapKetToId = nearestLog.DiemTapKetToId;
-                temp.Status = OrderStatus.InTk1;
+                temp.Status = OrderStatus.InTk2;
             }
             else if(temp.Status == OrderStatus.InTk2)
             {
@@ -75,6 +75,7 @@ namespace MagicPost_Application.Transfer
                 log.DiemGiaoDichToId = request.ToDiemGd;
                 temp.DiemGiaoDichId = log.DiemGiaoDichToId;
                 temp.DiemTapKetId = null;
+                temp.Status = OrderStatus.ToGD2;
             }
             else if (temp.Status == OrderStatus.ToGD2)
             {
@@ -85,11 +86,18 @@ namespace MagicPost_Application.Transfer
                                 .FirstOrDefault();
                 log.DiemTapKetFromId = nearestLog.DiemTapKetFromId;
                 log.DiemGiaoDichToId = nearestLog.DiemGiaoDichToId;
-                temp.Status = OrderStatus.InTk1;
+                temp.Status = OrderStatus.InGD2;
             }
             else if(temp.Status == OrderStatus.InGD2)
             {
                 log.OrderStatus = OrderStatus.Shipping;
+                log.DiemGiaoDichFromId = temp.DiemGiaoDichId;
+                temp.Status = OrderStatus.Shipping;
+            }
+            else
+            {
+                temp.Status = OrderStatus.Shipped;
+                log.OrderStatus = OrderStatus.Shipped;
                 log.DiemGiaoDichFromId = temp.DiemGiaoDichId;
             }
             log.DateCreated = DateTime.Now;
