@@ -165,8 +165,8 @@ namespace MagicPost_Data.Extensions
 
            );
             modelBuilder.Entity<Log>().HasData(
-              new Log() { Id = 1, DiemGiaoDichFromId =1 , DiemTapKetToId = 1, DateCreated = DateTime.Now, OrderStatus = OrderStatus.InProgress, OrderId = 1},
-              new Log() { Id = 2, DiemGiaoDichFromId =2 , DiemTapKetToId = 2, DateCreated = DateTime.Now, OrderStatus = OrderStatus.Success, OrderId =2}
+              new Log() { Id = 1, DiemGiaoDichFromId =1 , DiemTapKetToId = 1, DateCreated = DateTime.Now, OrderStatus = OrderStatus.InGD1, OrderId = 1},
+              new Log() { Id = 2, DiemGiaoDichFromId =2 , DiemTapKetToId = 2, DateCreated = DateTime.Now, OrderStatus = OrderStatus.InTk1, OrderId =2}
 
           );
         }

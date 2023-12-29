@@ -26,16 +26,40 @@ namespace MagicPost_Application.Transfer
  
         public async Task<int> Create(int id, TransferCreateRequest request)
         {
-            var log = new Log()
-            {
-                //DiemGiaoDichToId = request.ToDiemGd,
-                DiemTapKetToId = request.ToDiemTk,
-            };
-            log.OrderStatus = MagicPost__Data.Enums.OrderStatus.Success;
-            log.DateCreated = DateTime.Now;
             var temp = await _context.Orders.FindAsync(request.OrderId);
-            log.DiemGiaoDichFromId = temp.DiemGiaoDichId;
-            log.DiemTapKetFromId = temp.DiemTapKetId;
+            var log = new Log();
+            if(temp.Status == OrderStatus.InGD1)
+            {
+                log.OrderStatus = OrderStatus.ToTk1;
+                var gd = await _context.DiemGiaoDichs.FindAsync(temp.DiemGiaoDichId);
+                log.DiemGiaoDichFromId = temp.DiemGiaoDichId;
+                log.DiemTapKetToId = gd.DiemTapKetId;
+                temp.DiemTapKetId = log.DiemTapKetToId;
+                temp.DiemGiaoDichId = null;
+                temp.Status = OrderStatus.InTk1;
+            }
+            else if(temp.Status == OrderStatus.InTk1)
+            {
+                log.OrderStatus = OrderStatus.ToTk2;
+                log.DiemTapKetFromId = temp.DiemTapKetId;
+                log.DiemTapKetToId = request.ToDiemTk;
+                temp.DiemTapKetId = request.ToDiemTk;
+                temp.Status = OrderStatus.InTk2;
+            }
+            else if(temp.Status == OrderStatus.InTk2)
+            {
+                log.OrderStatus = OrderStatus.ToGD2;
+                log.DiemTapKetFromId = temp.DiemTapKetId;
+                log.DiemGiaoDichToId = request.ToDiemGd;
+                temp.DiemGiaoDichId = log.DiemGiaoDichToId;
+                temp.DiemTapKetId = null;
+            }
+            else if(temp.Status == OrderStatus.InGD2)
+            {
+                log.OrderStatus = OrderStatus.Shipping;
+                log.DiemGiaoDichFromId = temp.DiemGiaoDichId;
+            }
+            log.DateCreated = DateTime.Now;
             log.OrderId = request.OrderId;
             _context.Logs.Add(log);
             await _context.SaveChangesAsync();

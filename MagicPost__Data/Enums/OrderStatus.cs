@@ -8,10 +8,16 @@ namespace MagicPost__Data.Enums
 {
     public enum OrderStatus
     {
-        InProgress,
-        Confirmed,
-        Shipping,
-        Success,
-        Canceled
+        InGD1,
+        ToTk1,
+        InTk1,
+        ToTk2,
+        InTk2,
+        ToGD2,
+        InGD2,
+        ToUser,
+        Shipped,
+        Unshipped,
+        Shipping
     }
 }

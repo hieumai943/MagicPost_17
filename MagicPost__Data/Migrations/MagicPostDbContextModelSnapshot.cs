@@ -478,8 +478,8 @@ namespace MagicPost__Data.Migrations
 
                     b.HasIndex("DiemTapKetToId");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
+                        
 
                     b.ToTable("Logs", (string)null);
 

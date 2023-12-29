@@ -37,11 +37,11 @@ namespace MagicPost_Application.Orders
 			  ReceivePhoneNumber = request.ReceivePhoneNumber,
 			  Cuoc = request.Cuoc,
 			  KhoiLuong = request.KhoiLuong,
-			  Status = request.Status,
+			  //Status = request.Status,
 			 
             };
             //Save image
-           
+            order.Status = MagicPost__Data.Enums.OrderStatus.InGD1;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             return order.Id;

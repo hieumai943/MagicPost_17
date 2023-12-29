@@ -165,8 +165,7 @@ namespace MagicPost__Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Logs_OrderId",
                 table: "Logs",
-                column: "OrderId",
-                unique: true);
+                column: "OrderId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Orders_Logs_LogId1",
