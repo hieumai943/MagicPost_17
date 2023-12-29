@@ -16,6 +16,9 @@ namespace MagicPost_ViewModel.Orders
         public int? FromDiemTk { set; get; }
         public int? ToDiemGd { set; get; }
         public int? ToDiemTk { set; get; }
+
+        public string? ToGD { set; get; }
+        public string? ToTk { set; get; }
         public OrderStatus? Status { set; get; }
     }
 }

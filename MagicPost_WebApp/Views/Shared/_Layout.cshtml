@@ -98,28 +98,34 @@
                     <div class="navbar-nav mr-auto">
                         <a href="/" class="nav-item nav-link">Trang chủ</a>
                         
-                        <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
                         
                         @if (User.IsInRole("LanhDao"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/DiemTapKet/Index" class="nav-item nav-link">Quản lý các điểm</a>
                             <a href="/@culture/User/Index" class="nav-item nav-link">Quản lý tài khoản</a>
                             <a href="/@culture/Log/GetAllPaging" class="nav-item nav-link">Thống kê hàng hóa</a>
 
                         }
                         @if(User.IsInRole("TruongDiemGiaoDich")){
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/User/GetGiaoDichViens" class="nav-item nav-link">Quản lỷ tài khoản giao dịch viên</a>
                             <a href="/@culture/Log/GetAllPaging" class="nav-item nav-link">Thống kê hàng hóa</a>
 
                         }
                         @if (User.IsInRole("GiaoDichVien"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/Home/About/DiemGiaoDich/1" class="nav-item nav-link">Quản lý đơn hàng điểm giao dịch</a>
                             <a href="/@culture/Order/Create" class="nav-item nav-link">Tạo đơn hàng</a>
 
                         }
                         @if (User.IsInRole("TruongDiemTapKet"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
 
                             <a href="/@culture/User/GetNhanVienTapKet" class="nav-item nav-link">Quản lý tài khoản nhân viên tập kết</a>
                             <a href="/@culture/Log/GetAllPaging" class="nav-item nav-link">Thống kê hàng hóa</a>
@@ -127,6 +133,8 @@
                         }
                         @if (User.IsInRole("NhanVienTapKet"))
                         {
+                            <a href="/@culture/Home/About" class="nav-item nav-link">Tất cả đơn hàng</a>
+
                             <a href="/@culture/Home/AboutDiemTapKet/DiemTapKet/1" class="nav-item nav-link">Quản lý đơn hàng điểm tập kết</a>
                         }
                         @*<div class="nav-item dropdown">

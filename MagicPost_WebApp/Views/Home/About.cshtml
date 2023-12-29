@@ -8,7 +8,9 @@
 }
 @model HomeViewModel
 <div class="container-fluid">
-    <div class="row" style="margin: 10px">
+    @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+    {
+        <div class="row" style="margin: 10px">
 
         <div class="search-view" style="margin-left: 75%">
             <form asp-action="About" method="get">
@@ -35,7 +37,7 @@
             </form>
         </div>
     </div>
-
+    }
     <div class="ShowOrder">
         <table class="table table-bordered">
             <thead>
@@ -49,7 +51,10 @@
                     <th>Hóa đơn </th>
         }
                     <th>Trạng thái</th>
+                     @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+                        {
                     <th>Transfer</th>
+                        }
                 </tr>
             </thead>
             <tbody>
@@ -76,19 +81,23 @@
                             </td>
                         }
                         <td>@order.Status</td>
-                        <td>
-                            @if(order.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
-                            || order.Status  == MagicPost__Data.Enums.OrderStatus.ToTk2
-                            || order.Status == MagicPost__Data.Enums.OrderStatus.ToGD2
-                            || order.Status == MagicPost__Data.Enums.OrderStatus.Shipping)
-                            {
-                                @Html.ActionLink("Xác nhận", "Create", "Transfer", new { Id = order.Id })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
-                            }
-                        </td>
+                        @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+                        {
+                            <td>
+                                @if (order.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
+                   || order.Status == MagicPost__Data.Enums.OrderStatus.ToTk2
+                   || order.Status == MagicPost__Data.Enums.OrderStatus.ToGD2
+                   || order.Status == MagicPost__Data.Enums.OrderStatus.Shipping)
+                                {
+                                    @Html.ActionLink("Xác nhận", "Create", "Transfer", new { Id = order.Id })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
+                                }
+                            </td>
+                        }
+
                     </tr>
                 }
                 <!-- Thêm các hàng khác tùy vào số đơn hàng -->
