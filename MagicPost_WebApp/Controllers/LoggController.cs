@@ -11,13 +11,13 @@ using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace MagicPost_WebApp.Controllers
 {
-    public class LogController : Controller
+    public class LoggController : Controller
     {
         private readonly ILogApiClient _logApiClient;
        //   private readonly UserManager<AppUser> _userManager;
 
 
-        public LogController(ILogApiClient logApiClient)
+        public LoggController(ILogApiClient logApiClient)
         {
             _logApiClient = logApiClient;
         }

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\MagicPost__Data\MagicPost__Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

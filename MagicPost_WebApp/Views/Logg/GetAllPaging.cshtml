@@ -1,0 +1,40 @@
+﻿@using System.Globalization;
+
+
+@{
+    ViewData["Title"] = "OrderPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var culture = CultureInfo.CurrentCulture.Name;
+}
+@model HomeViewModel
+@if (User.IsInRole("TruongDiemGiaoDich"))
+{
+    <a href="/vi/Log/DiemGiaoDichNhan/2" class="my-button">Hàng nhận</a>
+    <a href="/vi/Log/DiemGiaoDichGui/2" class="my-button">Hàng gửi</a>
+}
+@if (User.IsInRole("TruongDiemTapKet"))
+{
+    <a href="/vi/Log/DiemTapKetNhan/2" class="my-button">Hàng nhận</a>
+    <a href="/vi/Log/DiemTapKetGui/2" class="my-button">Hàng gửi</a>
+}
+@if (User.IsInRole("LanhDao"))
+{
+    <a href="/vi/Log/PagingReceive" class="my-button">Hàng nhận</a>
+    <a href="/vi/Log/PagingSend" class="my-button">Hàng gửi</a>
+}
+<style>
+    .my-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .my-button:hover {
+            background-color: #0056b3;
+        }
+</style>
