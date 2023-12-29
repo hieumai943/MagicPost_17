@@ -63,8 +63,20 @@ namespace shopCommerce_ApiIntergration
             return data;
         }
 
-       
-       
+        public async Task<PageResult<OrderVm>> GetAllPagingGui(GetManageOrderPagingRequest request)
+        {
+            var data = await GetAsync<PageResult<OrderVm>>(
+                $"/api/Log/PagingSend/?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+                $"&pageSize={request.PageSize}");
+            return data;
+        }
 
+        public async Task<PageResult<OrderVm>> GetAllPagingNhan(GetManageOrderPagingRequest request)
+        {
+            var data = await GetAsync<PageResult<OrderVm>>(
+               $"/api/Log/PagingReceive/?keyword={request.Keyword}&PageIndex={request.PageIndex}" +
+               $"&pageSize={request.PageSize}");
+            return data;
+        }
     }
 }

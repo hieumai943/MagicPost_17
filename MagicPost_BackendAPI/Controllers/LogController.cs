@@ -52,8 +52,24 @@ namespace MagicPost_BackendAPI.Controllers
             var products = await _LogService.GetAllPaging(request);
             return Ok(products);
         }
+        [HttpGet("PagingSend")]
+        // [Authorize(Roles ="GiaoDichVien")]
 
+        public async Task<IActionResult> GetAllPagingGui([FromQuery] GetManageOrderPagingRequest request)
+        {
 
+            var products = await _LogService.GetAllPagingGui(request);
+            return Ok(products);
+        }
+        [HttpGet("PagingReceive")]
+        // [Authorize(Roles ="GiaoDichVien")]
+
+        public async Task<IActionResult> GetAllPagingNhan([FromQuery] GetManageOrderPagingRequest request)
+        {
+
+            var products = await _LogService.GetAllPagingGui(request);
+            return Ok(products);
+        }
         [HttpGet("DiemGiaoDich/PagingSend/{DiemGiaoDichId}")]
         // [Authorize(Roles ="GiaoDichVien")]
 

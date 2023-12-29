@@ -18,7 +18,8 @@ namespace MagicPost_ApiIntergration
         Task<PageResult<OrderVm>> GetAllPagingDiemGiaoDichGui(GetManageOrderPagingRequest request, int DiemGiaoDichId);
 
         Task<PageResult<OrderVm>> GetAllPagingDiemTapKetGui(GetManageOrderPagingRequest request, int DiemTapKetId);
-
+        Task<PageResult<OrderVm>> GetAllPagingGui(GetManageOrderPagingRequest request);
+        Task<PageResult<OrderVm>> GetAllPagingNhan(GetManageOrderPagingRequest request);
 
     }
 }
