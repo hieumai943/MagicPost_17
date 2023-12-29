@@ -42,7 +42,7 @@
                 <tr>
                     <th>Tên Người Gửi</th>
                     <th>Tên Người Nhận</th>
-                    <th>Đồ Vật</th>
+                    <th>Mã đơn</th>
                     <th>Địa chỉ nhận</th>
                     @if (User.IsInRole("GiaoDichVien"))
         {
@@ -66,7 +66,9 @@
                         {
                             <td>
                                 <form asp-controller="Order" asp-action="GetPdf" method="get">
-                                    <input type="text" style="border-radius: 8px;" name="nameOfFile" placeholder="Enter file name" required>
+                                    <input type="text" style="border-radius: 8px;" name="nameOfFile" placeholder="Điền tên cho hóa đơn" required>
+                                    <input type="hidden" name="OrderId" value="@order.Id" />
+
                                     <button class="dow-btn" type="submit">
                                         <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
                                     </button>
