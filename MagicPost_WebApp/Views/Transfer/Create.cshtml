@@ -39,17 +39,80 @@
             <div class="col-md-8 offset-md-4">
                 <form asp-controller="Transfer" asp-action="Create" enctype="multipart/form-data" method="post">
                     <input type="hidden" name="OrderId" value="@ViewBag.orderId" />
+                    @if(ViewBag.Status == MagicPost__Data.Enums.OrderStatus.InTk1)
+                    {
+                        <div class="form-group">
+                            <label asp-for="ToTk" class="control-label">Tới điểm tập kết</label>
+                            <select asp-for="ToTk" asp-items="@(new SelectList(ViewBag.ListTK))" class="form-control">
+                                <option value="">-- Chọn điểm tập kết --</option>
+                            </select>
+                            <span asp-validation-for="ToTk" class="text-danger"></span>
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Chuyển hàng" class="btn btn-primary" />
+                        </div>
+                    }
 
-                    <div class="form-group">
-                        <span asp-validation-for="ToDiemTk" class="text-danger">Tới điểm tập kết</span>
-                        <input asp-for="ToDiemTk" class="form-control" />
-                    </div>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    else if (ViewBag.Status == MagicPost__Data.Enums.OrderStatus.InTk2)
+                    {
+                        <div class="form-group">
+                            <label asp-for="ToGD" class="control-label">Tới điểm giao dịch</label>
+                            <select>
+                                @foreach(string temp in ViewBag.ListGD)
+                                {
+                                    <option value="1">temp</option>
+                                }
+                                <option value="">-- Chọn điểm giao dịch --</option>
+                            </select>
+                            <span asp-validation-for="ToGD" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Chuyển hàng" class="btn btn-primary" />
+                        </div>
+                    }
 
+                    else if (ViewBag.Status == MagicPost__Data.Enums.OrderStatus.InGD1)
+                    {
+                        <li class="breadcrumb-item active">Bạn muốn chuyển hàng tới điểm tập kết</li>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Chuyển hàng" class="btn btn-primary" />
+                        </div>
+                    }
 
-                    <div class="form-group">
-                        <input type="submit" value="Chuyển hàng" class="btn btn-primary" />
-                    </div>
+                    else if (ViewBag.Status == MagicPost__Data.Enums.OrderStatus.InGD2)
+                    {
+                        <li class="breadcrumb-item active">Bạn muốn chuyển hàng đến người nhận?</li>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Chuyển hàng" class="btn btn-primary" />
+                        </div>
+                    }
+
+                    else if (ViewBag.Status == MagicPost__Data.Enums.OrderStatus.ToGD2
+                    || ViewBag.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
+                    || ViewBag.Status == MagicPost__Data.Enums.OrderStatus.ToTk2)
+                    {
+                        <li class="breadcrumb-item active">Xác nhận đơn hàng đã đến điểm</li>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                        </div>
+                    }
+
+                    else if (ViewBag.Status == MagicPost__Data.Enums.OrderStatus.Shipping)
+                    {
+                        <li class="breadcrumb-item active">Xác nhận đơn hàng đã giao thành công</li>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Đã giao thành công" class="btn btn-primary" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Chưa giao thành công" class="btn btn-primary" />
+                        </div>
+
+                    }
                 </form>
             </div>
         </div>
