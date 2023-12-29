@@ -36,7 +36,7 @@
         </div>
 
         <div class="card-body">
-            <div class="col-md-8 offset-md-4">
+            <div class="col-md-8">
                 <form asp-controller="Transfer" asp-action="Create" enctype="multipart/form-data" method="post">
                     <input type="hidden" name="OrderId" value="@ViewBag.orderId" />
                     @if(ViewBag.Status == MagicPost__Data.Enums.OrderStatus.InTk1)
