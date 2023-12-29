@@ -11,25 +11,27 @@
     <div class="row">
         @if (User.IsInRole("TruongDiemGiaoDich"))
         {
-            <button><a href="/vi/Log/DiemGiaoDichNhan/2" class="my-button">Hàng nhận</a></button>
-            <button><a href="/vi/Log/DiemGiaoDichGui/2" class="my-button">Hàng gửi</a></button>
+            <button class="button"><a href="/vi/Log/DiemGiaoDichNhan/2" style="color:white">Hàng nhận</a></button>
+            <button class="button"><a href="/vi/Log/DiemGiaoDichGui/2" style="color:white">Hàng gửi</a></button>
         }
         @if (User.IsInRole("TruongDiemTapKet"))
         {
-             <button>
-                <a href="/vi/Log/DiemTapKetNhan/2" class="my-button">Hàng nhận</a>
-             </button>  
-             <button>
-                <a href="/vi/Log/DiemTapKetGui/2" class="my-button">Hàng gửi</a>
+            <button class="button">
+                <a href="/vi/Log/DiemTapKetNhan/2" style="color:white">Hàng nhận</a>
+             </button>
+            <button class="button">
+                <a href="/vi/Log/DiemTapKetGui/2" style="color:white">Hàng gửi</a>
             </button>
         }
         @if (User.IsInRole("LanhDao"))
         {
-            <button>
-                <a href="/vi/Log/PagingReceive">Hàng nhận</a>
+            <button class="button">
+                <a href="/vi/Log/PagingReceive" style="color:white">Hàng nhận</a>
+                
             </button>
-            <button>
-                <a href="/vi/Log/PagingSend">Hàng gửi</a>
+            <button class="button">
+                <a href="/vi/Log/PagingSend" style="color:white">Hàng gửi</a>
+                
             </button>
         }
     </div>
@@ -41,9 +43,9 @@
         justify-content: center;
     }
 
-    button {
+    .button {
         display: flex;
-        height: 3em;
+        height: 3.5em;
         width: 100px;
         align-items: center;
         justify-content: center;
@@ -57,19 +59,9 @@
         margin: 50px;
     }
 
-
-    .my-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        margin: 5px;
-        transition: background-color 0.3s ease;
+    .button:hover {
+        transform: scale(1.2)
     }
 
-        .my-button:hover {
-            background-color: #0056b3;
-        }
+
 </style>
