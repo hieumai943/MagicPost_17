@@ -41,7 +41,6 @@
                     <div class="logo">
                         <a href="">
                             <h1 style="font-size: 43px;">Magic<span>Post</span></h1>
-                            <!-- <img src="img/logo.jpg" alt="Logo"> -->
                         </a>
                     </div>
                 </div>
@@ -148,9 +147,9 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            //<form action="/@culture/Account/Logout" method="post">
-                                <form>
-                                <button type="submit" onclick="showConfirmation()"
+                            <form action="/@culture/Account/Logout" method="post">
+
+                                <button type="button" onclick="showConfirmation()"
                                     style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
                                     <a class="btn btn-custom">
                                         <span>@User.Identity.Name</span>
@@ -160,8 +159,8 @@
                                 </button>
                                 <div id="confirmationPopup">
                                     <p>Bạn có chắc chắn muốn thực hiện hành động này?</p>
-                                    <button onclick="performAction()">OK</button>
-                                    <button onclick="hideConfirmation()">Hủy</button>
+                                    <button class="btn btn-primary" onclick="performAction()">OK</button>
+                                    <button class="btn btn-danger" onclick="hideConfirmation()">Hủy</button>
                                 </div>
                                 <script>
                                     function showConfirmation() {
@@ -175,9 +174,6 @@
                                     }
 
                                     function performAction() {
-                                        // Thực hiện hành động tương ứng
-                                        alert("Hành động đã được thực hiện!");
-                                        // Sau khi thực hiện xong, ẩn popup
                                         hideConfirmation();
                                     }
                                 </script>
@@ -205,10 +201,10 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-contact">
-                        <h2>Get In Touch</h2>
-                        <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
-                        <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope"></i>info@example.com</p>
+                        <h2>Magic Post</h2>
+                        <p><i class="fa fa-map-marker-alt"></i>144 Xuân Thuỷ, Cầu Giấy, Hà Nội</p>
+                        <p><i class="fa fa-phone-alt"></i>+84 559 694 069</p>
+                        <p><i class="fa fa-envelope"></i>nhom17@gmail.com</p>
                         <div class="footer-social">
                             <a class="btn" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn" href=""><i class="fab fa-facebook-f"></i></a>
@@ -220,30 +216,18 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-link">
-                        <h2>Popular Links</h2>
-                        <a href="">About Us</a>
-                        <a href="">Contact Us</a>
-                        <a href="">Our Service</a>
-                        <a href="">Service Points</a>
-                        <a href="">Pricing Plan</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-link">
-                        <h2>Useful Links</h2>
-                        <a href="">Terms of use</a>
-                        <a href="">Privacy policy</a>
-                        <a href="">Cookies</a>
-                        <a href="">Help</a>
-                        <a href="">FQAs</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-newsletter">
-                        <h2>Newsletter</h2>
+                        <h2>Góp ý</h2>
                         <form>
-                            <input class="form-control" placeholder="Full Name">
                             <input class="form-control" placeholder="Email">
+                            <input class="form-control" placeholder="Ý kiến" >
                             <button class="btn btn-custom">Submit</button>
                         </form>
                     </div>
