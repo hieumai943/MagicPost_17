@@ -84,7 +84,22 @@ namespace MagicPost_BackendAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            if (userId != null)
+            {
+                var users = await _userService.GetById(Guid.Parse(userId));
+                if (users.ResultObj.DiemGiaoDichId.HasValue)
+                {
+                    var product1 = await _OrderService.CreateGd(request, users.ResultObj.DiemGiaoDichId.Value);
+                    return Ok(product1);
+                }
+                if (users.ResultObj.DiemTapKetId.HasValue)
+                {
+                    var product1 = await _OrderService.CreateTk(request, users.ResultObj.DiemTapKetId.Value);
+                    return Ok(product1);
+                }
+            }
             var orderId = await _OrderService.Create(request);
             if (orderId == 0)
                 return BadRequest();

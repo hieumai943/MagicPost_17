@@ -206,5 +206,57 @@ namespace MagicPost_Application.Orders
 			};
 			return orderViewModel;
 		}
-	}
+
+        public async Task<int> CreateGd(OrderCreateRequest request, int DiemGiaoDichId)
+        {
+            var order = new Order()
+            {
+                OrderDate = request.OrderDate,
+                UserId = request.UserId,
+                Code = request.Code,
+                SendName = request.SendName,
+                ReceiveName = request.ReceiveName,
+                SendAddress = request.SendAddress,
+                ReceiveAddress = request.ReceiveAddress,
+                SendPhoneNumber = request.SendPhoneNumber,
+                ReceivePhoneNumber = request.ReceivePhoneNumber,
+                Cuoc = request.Cuoc,
+                KhoiLuong = request.KhoiLuong,
+                DiemGiaoDichId = DiemGiaoDichId
+                //Status = request.Status,
+
+            };
+            //Save image
+            order.Status = MagicPost__Data.Enums.OrderStatus.InGD1;
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            return order.Id;
+        }
+
+        public async Task<int> CreateTk(OrderCreateRequest request, int DiemTapKetId)
+        {
+            var order = new Order()
+            {
+                OrderDate = request.OrderDate,
+                UserId = request.UserId,
+                Code = request.Code,
+                SendName = request.SendName,
+                ReceiveName = request.ReceiveName,
+                SendAddress = request.SendAddress,
+                ReceiveAddress = request.ReceiveAddress,
+                SendPhoneNumber = request.SendPhoneNumber,
+                ReceivePhoneNumber = request.ReceivePhoneNumber,
+                Cuoc = request.Cuoc,
+                KhoiLuong = request.KhoiLuong,
+                DiemTapKetId = DiemTapKetId
+                //Status = request.Status,
+
+            };
+            //Save image
+            order.Status = MagicPost__Data.Enums.OrderStatus.InGD1;
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+            return order.Id;
+        }
+    }
 }
