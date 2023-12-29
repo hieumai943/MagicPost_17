@@ -1,5 +1,9 @@
 This project was bootstrapped with [ASP.NET Core 6](https://dotnet.microsoft.com/en-us/apps/aspnet).
-Link github: https://github.com/hieumai943/MagicPost_17
+
+## Demo
+
+[Demo Video](https://youtu.be/VqOV5JlAhkY)
+
 ## Thành viên
 
 21020314-Nguyễn Hoàng Hào\
