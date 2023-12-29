@@ -47,7 +47,7 @@
                     <th>Hóa đơn </th>
                 }
                 <th>Trạng thái</th>
-                <th>Transfer</th>
+            @*    <th>Transfer</th>*@
             </tr>
         </thead>
         <tbody>
@@ -90,9 +90,9 @@
                         }
 
                     </td>
-                    <td>
+                    @*<td>
                         @Html.ActionLink("Chuyển hàng", "Create", "Transfer", new { Id = order.Id })
-                    </td>
+                    </td>*@
                 </tr>
             }
             <!-- Thêm các hàng khác tùy vào số đơn hàng -->
