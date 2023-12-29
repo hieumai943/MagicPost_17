@@ -52,7 +52,7 @@
                     <th>Hóa đơn </th>
         }
                     <th>Trạng thái</th>
-                     @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+                     @if ( User.IsInRole("GiaoDichVien") ||  User.IsInRole("NhanVienTapKet"))
                         {
                     <th>Transfer</th>
                         }
@@ -100,7 +100,7 @@
                             }
 
                         </td>
-                        @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
+                        @if (User.IsInRole("GiaoDichVien") || User.IsInRole("NhanVienTapKet"))
                         {
                             <td>
                                 @if (order.Status == MagicPost__Data.Enums.OrderStatus.ToTk1
