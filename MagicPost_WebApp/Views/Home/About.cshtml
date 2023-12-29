@@ -1,4 +1,5 @@
 ﻿@using System.Globalization;
+@using MagicPost__Data.Enums;
 
 
 @{
@@ -22,10 +23,11 @@
                     <select name="OrderStatusId" class="select">
                         <option value= "">Status</option>
                         <option value=0>
-                            In GD1
+                            Đang vận chuyển
                         </option>
-                        <option value=1 >InTK1</option>
-                        <option value=2>Canceled</option>
+                            <option value=1>Đang ở điểm giao dịch</option>
+                            <option value=2>Đang ở điểm tập kết</option>
+                            <option value=3>Đang vận chuyển</option>
                     </select>
                     <div class="cold-md-3">
                         <button type="submit" class="button">
@@ -80,7 +82,25 @@
                                 </form>
                             </td>
                         }
-                        <td>@order.Status</td>
+                        <td>
+                            @if (order.Status == OrderStatus.InGD1 || order.Status == OrderStatus.InGD2)
+                            {
+                                <span>Đang ở điểm giao dịch</span>
+                            }
+                            @if (order.Status == OrderStatus.InTk1 || order.Status == OrderStatus.InTk2)
+                            {
+                                <span>Đang ở điểm tập kết</span>
+                            }
+                            @if (order.Status == OrderStatus.ToTk1 || order.Status == OrderStatus.ToTk2 || order.Status == OrderStatus.Shipping)
+                            {
+                                <span>Đang vận chuyển</span>
+                            }
+                            @if (order.Status == OrderStatus.Shipped)
+                            {
+                                <span>Giao thành công</span>
+                            }
+
+                        </td>
                         @if (User.IsInRole("LanhDao") || User.IsInRole("TruongDiemGiaoDich") || User.IsInRole("GiaoDichVien") || User.IsInRole("TruongDiemTapKet") || User.IsInRole("NhanVienTapKet"))
                         {
                             <td>
