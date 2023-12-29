@@ -58,16 +58,18 @@ namespace MagicPost_WebApp.Controllers
                 if (!ModelState.IsValid)
                     return View(request);
                 
-                if(ViewBag.ListGD != null)
+                if(request.ToGD != null)
                 {
-                var diemGiaoDich = await _context.DiemGiaoDichs.FindAsync(request.ToGD);
-                request.ToDiemGd = diemGiaoDich.Id;
-                    
-                }
+                var diemTapKet = _context.DiemGiaoDichs
+                                        .Where(d => d.Address == request.ToGD).FirstOrDefault();
+                request.ToDiemGd = diemTapKet.Id;
 
-                if (ViewBag.ListTK != null)
+            }
+
+                if (request.ToTk != null)
                 {
-                var diemTapKet = await _context.DiemTapKets.FindAsync(request.ToTk);
+                var diemTapKet =  _context.DiemTapKets
+                                        .Where(d => d.Address == request.ToTk).FirstOrDefault();
                 request.ToDiemTk = diemTapKet.Id;
 
                 }

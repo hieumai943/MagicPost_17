@@ -1,5 +1,6 @@
 ﻿using MagicPost__Data.EF;
 using MagicPost__Data.Entities;
+using MagicPost__Data.Enums;
 using MagicPost_ViewModel.Common;
 using MagicPost_ViewModel.Orders;
 using MagicPostUtilities.Exceptions;
@@ -68,6 +69,8 @@ namespace MagicPost_Application.Orders
                         join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                         from pi in ppi.DefaultIfEmpty()
                         where p.DiemGiaoDichId.Value == DiemGiaoDichId
+                        where p.Status != OrderStatus.Shipped
+
                         select new { p, pi };
             // filter
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -108,6 +111,7 @@ namespace MagicPost_Application.Orders
                         join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                         from pi in ppi.DefaultIfEmpty()
                         where p.DiemTapKetId.Value == DiemTapKetId
+                        where p.Status != OrderStatus.Shipped
                         select new { p, pi };
             // filter
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -144,9 +148,9 @@ namespace MagicPost_Application.Orders
 		{
 			
 			var query = from p in _context.Orders
-						
 						join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
 						from pi in ppi.DefaultIfEmpty()
+                        where p.Status != OrderStatus.Shipped
 						select new { p, pi };
 			// filter
 			if (!string.IsNullOrEmpty(request.Keyword))

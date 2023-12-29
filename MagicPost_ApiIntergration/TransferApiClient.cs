@@ -42,6 +42,7 @@ namespace MagicPost_ApiIntergration
 
             requestContent.Add(new StringContent(request.ToDiemTk.ToString()), "ToDiemTk");
 
+            requestContent.Add(new StringContent(request.ToDiemGd.ToString()), "ToDiemGD");
             var response = await client.PostAsync($"/api/transfer", requestContent);
             return response.IsSuccessStatusCode;
         }
