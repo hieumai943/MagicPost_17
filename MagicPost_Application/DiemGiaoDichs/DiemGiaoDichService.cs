@@ -58,7 +58,7 @@ namespace MagicPost_Application.DiemGiaoDichs
                 .Select(x => new DiemGiaoDichVm()
                 {
                     Id = x.p.Id,
-                    DiemTapKetId = 1,
+                    //DiemTapKetId = 1,
                     Name = x.p.Name,
                     Address = x.p.Address,
                     UserId = x.p.UserId,
