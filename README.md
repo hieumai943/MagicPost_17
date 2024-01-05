@@ -1,4 +1,4 @@
-This project was bootstrapped with [ASP.NET Core 6](https://dotnet.microsoft.com/en-us/apps/aspnet).
+Dự án được phát triển trên ASP.NET Core 6, sử dụng ngôn ngữ C#
 
 ## Demo
 
