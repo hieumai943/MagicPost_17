@@ -17,15 +17,13 @@ namespace MagicPost_WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 		private readonly ISharedCultureLocalizer _loc;
-        private readonly ISlideApiClient _slideApiClient;
 
         private readonly IOrderApiClient _orderApiClient;
 
-		public HomeController(ILogger<HomeController> logger, ISharedCultureLocalizer loc, ISlideApiClient slideApiClient, IOrderApiClient orderApiClient)
+		public HomeController(ILogger<HomeController> logger, ISharedCultureLocalizer loc,  IOrderApiClient orderApiClient)
         {
             _logger = logger;
 			_loc = loc;
-            _slideApiClient = slideApiClient;
 
             _orderApiClient = orderApiClient;
 		}
@@ -35,9 +33,9 @@ namespace MagicPost_WebApp.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Slides = await _slideApiClient.GetAll(),
                Orders = await _orderApiClient.GetPagings(new GetManageOrderPagingRequest() { 
                      Keyword="",
+                     OrderStatusId =0,
                      PageIndex = 1,
                      PageSize =10
                })
@@ -58,7 +56,6 @@ namespace MagicPost_WebApp.Controllers
             };
             var viewModel = new HomeViewModel
             {
-                Slides = await _slideApiClient.GetAll(),
                 Orders = await _orderApiClient.GetPagings(request)
 
             };
@@ -72,7 +69,6 @@ namespace MagicPost_WebApp.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Slides = await _slideApiClient.GetAll(),
                 Orders = await _orderApiClient.GetPagingDiemGiaoDich(new GetManageOrderPagingRequest()
                 {
                     Keyword = "",
@@ -89,7 +85,6 @@ namespace MagicPost_WebApp.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Slides = await _slideApiClient.GetAll(),
                 Orders = await _orderApiClient.GetPagingDiemGiaoDich(new GetManageOrderPagingRequest()
                 {
                     Keyword = "",

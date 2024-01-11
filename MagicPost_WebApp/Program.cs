@@ -74,7 +74,7 @@ builder.Services.AddIdentity<AppUser, AppRole>()
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();*/
 
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
-builder.Services.AddTransient<ISlideApiClient, SlideApiClient>();
+ // builder.Services.AddTransient<ISlideApiClient, SlideApiClient>();
 builder.Services.AddTransient<IRoleApiClient, RoleApiClient>();
 builder.Services.AddTransient<ILogApiClient, LogApiClient>();
 

@@ -24,7 +24,11 @@ namespace MagicPost_ApiIntergration
 
 		protected async Task<TResponse> GetAsync<TResponse>(string url)
 		{
-			var sessions = _httpContextAccessor
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("URL cannot be null or empty", nameof(url));
+            }
+            var sessions = _httpContextAccessor
 				.HttpContext
 				.Session
 				.GetString(SystemConstants.AppSettings.Token);
